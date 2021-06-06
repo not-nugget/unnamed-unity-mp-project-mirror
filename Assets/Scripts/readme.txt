@@ -1,0 +1,1 @@
+Keep this folder clean by having subfolders all with their own assembly definitions
