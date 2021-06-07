@@ -26,7 +26,7 @@ public class PlayerController : NetworkBehaviour
 	/// </summary>
 	public PlayerAnimationController ThirdPersonAnimationController { get => thirdPersonAnimationController; }
 
-	[Tooltip("Instace of this player's 3D motor")]
+	[Tooltip("Instace of this player's 3D motor. Does not need to be set in the inspector when the motor exists on the same object as the controller")]
 	[SerializeField] private PlayerMotor motor = null;
 	[Tooltip("Instace of this player's animation controller for first person animations")]
 	[SerializeField] private PlayerAnimationController firstPersonAnimationController = null;
