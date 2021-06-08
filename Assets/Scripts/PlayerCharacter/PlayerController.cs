@@ -40,12 +40,11 @@ public class PlayerController : NetworkBehaviour
 		if (motor == null) TryGetComponent(out motor); //Only attempt to get the motor if one does not exist
 
 		//TODO this should only be created when Mirror sends an RPC to the client
-		InputHandler = new PlayerInputHandler();
-		InputHandler.GetInputData(ref inputData);
+		inputData = (InputHandler = new PlayerInputHandler()).InputDataReference;
 	}
 
 	private void Update()
 	{
-		Motor.ProccessInputData(inputData);
+		Motor.ProccessInputData(inputData); //TODO temporary...will only be executed on the local authorative client
 	}
 }

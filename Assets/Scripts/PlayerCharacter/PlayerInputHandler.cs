@@ -9,15 +9,21 @@ using static InputControls;
 /// </summary>
 public class PlayerInputHandler : IDefaultControlsActions
 {
+	/// <summary>
+	/// Get a reference to this input handler's <see cref="InputData"/> instace
+	/// </summary>
+	public ref InputData InputDataReference { get => ref inputData; }
 	private InputData inputData = new InputData();
 
-	/// <summary>
-	/// Get a reference to this object's <see cref="InputData"/> instace. Only needs to be called once
-	/// </summary>
-	/// <param name="data">Reference to this handler's instace of <see cref="InputData"/></param>
-	public void GetInputData(ref InputData data) => data = ref inputData;
+	private readonly InputControls controls;
 
-	// Implementation
+	public PlayerInputHandler()
+	{
+		(controls = new InputControls()).DefaultControls.SetCallbacks(this); //Create the controls and set the callbacks
+		controls.Enable(); //Enable the controls asset
+	}
+
+	// Interface Implementation
 
 	public void OnLook(InputAction.CallbackContext context)
 	{
