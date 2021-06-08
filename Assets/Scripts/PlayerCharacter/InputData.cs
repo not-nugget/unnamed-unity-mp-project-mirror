@@ -7,6 +7,9 @@ public struct InputData
 {
 	public bool InputChanged { get; private set; }
 
-	public Vector2 MoveDelta { get => MoveDelta; set { InputChanged = true; MoveDelta = value; } }
-	public Vector2 LookDelta { get => LookDelta; set { InputChanged = true; LookDelta = value; } }
+	private Vector2 moveDelta;
+	public Vector2 MoveDelta { get => moveDelta; set { InputChanged = true; moveDelta = value; } }
+
+	private Vector2 lookDelta;
+	public Vector2 LookDelta { get => lookDelta; set { InputChanged = true; lookDelta = value; } }
 }

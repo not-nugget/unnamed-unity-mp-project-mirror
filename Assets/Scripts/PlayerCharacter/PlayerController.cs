@@ -7,6 +7,7 @@ using UnityEngine;
 /// Responsible for controlling the player in the world. Stores all necessary information and ensures the local controller instances are in sync with the
 /// instances the server is replicating
 /// </summary>
+[ExecuteAlways]
 public class PlayerController : NetworkBehaviour
 {
 	/// <summary>

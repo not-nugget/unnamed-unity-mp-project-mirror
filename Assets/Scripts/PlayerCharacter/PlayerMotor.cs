@@ -7,6 +7,7 @@ using UnityEngine;
 /// Responsible for moving the character in 3D space based on provided inputs. Can be forced to roll back to specific positions, rotations,
 /// and velocities either immediately or over time
 /// </summary>
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMotor : MonoBehaviour
 {
 	public struct MotorState
