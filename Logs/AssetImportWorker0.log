@@ -2104,3 +2104,4 @@ Received Import Request.
   path: Assets/Presets/Defaults/DirectionalLight_Default.preset
   artifactKey: Guid(463065d4f17d1d94d848aa127b94dd43) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
 Start importing Assets/Presets/Defaults/DirectionalLight_Default.preset using Guid(463065d4f17d1d94d848aa127b94dd43) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)  -> (artifact id: 'ecd9ceac6cc69da1eb2a34e37987da6d') in 0.006635 seconds 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
