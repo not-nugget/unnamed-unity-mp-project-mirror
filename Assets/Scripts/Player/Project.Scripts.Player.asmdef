@@ -1,5 +1,6 @@
 {
     "name": "Project.Scripts.Player",
+    "rootNamespace": "Nugget.Project.Scripts",
     "references": [
         "GUID:30817c1a0e6d646d99c048fc403f5979",
         "GUID:dfb0bf073fac4ed4f9ca839c57986324",

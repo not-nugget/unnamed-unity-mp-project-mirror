@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : Manager
+namespace Nugget.Project.Scripts.Game
 {
-	private void Awake()
-	{
-		if (!Managers.RegisterManager(this)) Destroy(this);
-	}
+    public class GameManager : Manager
+    {
+        private void Awake()
+        {
+            if (!Managers.RegisterManager(this)) Destroy(this);
+        }
+    }
 }

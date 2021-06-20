@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// Container for easy transfer of input data from object to object
-/// </summary>
-public struct InputData
+namespace Nugget.Project.Scripts.Player
 {
-	public bool InputChanged { get; private set; }
+    /// <summary>
+    /// Container for easy transfer of input data from object to object
+    /// </summary>
+    public struct InputData
+    {
+        private Vector2 moveDelta;
+        public Vector2 MoveDelta { get => moveDelta; set => moveDelta = value; }
 
-	private Vector2 moveDelta;
-	public Vector2 MoveDelta { get => moveDelta; set { InputChanged = true; moveDelta = value; } }
-
-	private Vector2 lookDelta;
-	public Vector2 LookDelta { get => lookDelta; set { InputChanged = true; lookDelta = value; } }
+        private Vector2 lookDelta;
+        public Vector2 LookDelta { get => lookDelta; set => lookDelta = value; }
+    }
 }
