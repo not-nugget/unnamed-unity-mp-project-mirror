@@ -69,21 +69,13 @@ namespace Nugget.Project.Scripts.Player
 
         #region Unity Messages
 
-        private void Awake()
-        {
-            if (isLocalPlayer)
-            {
-                cameraController.SetCameraTargetTransform(cameraTarget);
-                cameraController.SetRotationDegreeClamp(rotationClamp);
-            }
-        }
-
         private void Update()
         {
             if (isLocalPlayer)
             {
                 Motor.MoveMotor(inputData.MoveDelta);
-                cameraController.RotateCamera(inputData.LookDelta);
+                Motor.RotateMotor(inputData.LookDelta.y);
+                cameraController.PitchCamera(inputData.LookDelta.x);
             }
         }
 
@@ -102,14 +94,13 @@ namespace Nugget.Project.Scripts.Player
         #endregion
 
         #region Mirror overrides
-
         public override void OnStartLocalPlayer()
         {
             motor = GetComponent<PlayerMotor>();
             inputData = (InputHandler = new PlayerInputHandler()).InputDataReference;
             cameraController.SetCameraTargetTransform(cameraTarget);
+            cameraController.SetRotationDegreeClamp(rotationClamp);
         }
-
         #endregion
     }
 }

@@ -47,5 +47,10 @@ namespace Nugget.Project.Scripts.Player
 
             body.AddForce(finalMoveDelta, ForceMode.VelocityChange);
         }
+
+        public void RotateMotor(float yawDelta)
+        {
+            transform.Rotate(0, yawDelta, 0);
+        }
     }
 }
