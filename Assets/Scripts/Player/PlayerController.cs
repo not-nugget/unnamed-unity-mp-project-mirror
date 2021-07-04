@@ -2,6 +2,7 @@
 using Nugget.Project.Scripts.Camera;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Zenject;
 
 namespace Nugget.Project.Scripts.Player
 {
@@ -50,8 +51,8 @@ namespace Nugget.Project.Scripts.Player
         [SerializeField] private Vector2 rotationClamp = Vector2.zero;
 
         [Tooltip("The camera controller instance this player will set the target transform of")]
-        [HorizontalGroup("camera_group", 0, 5, 5)]
-        [SerializeField] private CameraController cameraController = null;
+        [HorizontalGroup("camera_group", 0, 5, 5), ReadOnly]
+        [SerializeField, Inject] private CameraController cameraController = null;
 
         [Tooltip("Instace of this player's animation controller for first person animations")]
         [SerializeField] private PlayerAnimationController firstPersonAnimationController = null;
@@ -96,10 +97,13 @@ namespace Nugget.Project.Scripts.Player
         #region Mirror overrides
         public override void OnStartLocalPlayer()
         {
-            motor = GetComponent<PlayerMotor>();
-            inputData = (InputHandler = new PlayerInputHandler()).InputDataReference;
-            cameraController.SetCameraTargetTransform(cameraTarget);
-            cameraController.SetRotationDegreeClamp(rotationClamp);
+            motor = GetComponent<PlayerMotor>(); //The server should do motor calculations too and correct the client if the client diverges...need to look for a way to send client inputs to the host
+            if (isLocalPlayer) //The server doesn't need to do any camera things, that will end up being client authorative for now
+            {
+                inputData = (InputHandler = new PlayerInputHandler()).InputDataReference;
+                cameraController.SetCameraTargetTransform(cameraTarget);
+                cameraController.SetRotationDegreeClamp(rotationClamp);
+            }
         }
         #endregion
     }
