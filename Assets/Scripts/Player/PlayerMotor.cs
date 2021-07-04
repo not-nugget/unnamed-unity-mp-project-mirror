@@ -20,6 +20,9 @@ namespace Nugget.Project.Scripts.Player
             public Vector3 AngularVelocity { get; set; }
         }
 
+        [SerializeField, Tooltip("The total amount of time it will take for the player's speed to reach the desired value in seconds")]
+        private float speedRampTime = .8f;
+
         public ref MotorState MotorStateReference { get => ref motorState; }
         private MotorState motorState;
 
@@ -38,11 +41,11 @@ namespace Nugget.Project.Scripts.Player
             motorState.AngularVelocity = body.angularVelocity;
         }
 
-        public void ProccessMoveInputData(InputData inputData)
+        public void MoveMotor(Vector2 moveDelta)
         {
-            Vector3 moveDelta = inputData.MoveDelta;
+            Vector3 finalMoveDelta = Vector3.Lerp(body.velocity, moveDelta, speedRampTime * Time.deltaTime);
 
-
+            body.AddForce(finalMoveDelta, ForceMode.VelocityChange);
         }
     }
 }

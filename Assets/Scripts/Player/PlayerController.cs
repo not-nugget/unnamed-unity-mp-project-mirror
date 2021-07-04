@@ -41,12 +41,16 @@ namespace Nugget.Project.Scripts.Player
         [Tooltip("Instace of this player's 3D motor. Does not need to be set in the inspector when the motor exists on the same object as the controller")]
         [SerializeField] private PlayerMotor motor = null;
 
-        [HorizontalGroup("camera_group", 0, 5, 5)]
         [Tooltip("The camera target transform"), Required]
+        [HorizontalGroup("camera_group", 0, 5, 5)]
         [SerializeField] private Transform cameraTarget = null;
 
+        [Tooltip("Total number of degrees the player is allowed to look on the positive and negative X an Y axis respectively")]
         [HorizontalGroup("camera_group", 0, 5, 5)]
+        [SerializeField] private Vector2 rotationClamp = Vector2.zero;
+
         [Tooltip("The camera controller instance this player will set the target transform of")]
+        [HorizontalGroup("camera_group", 0, 5, 5)]
         [SerializeField] private CameraController cameraController = null;
 
         [Tooltip("Instace of this player's animation controller for first person animations")]
@@ -65,12 +69,21 @@ namespace Nugget.Project.Scripts.Player
 
         #region Unity Messages
 
+        private void Awake()
+        {
+            if (isLocalPlayer)
+            {
+                cameraController.SetCameraTargetTransform(cameraTarget);
+                cameraController.SetRotationDegreeClamp(rotationClamp);
+            }
+        }
+
         private void Update()
         {
             if (isLocalPlayer)
             {
-                Motor.ProccessMoveInputData(inputData);
-                ProcessLookInputData(inputData);
+                Motor.MoveMotor(inputData.MoveDelta);
+                cameraController.RotateCamera(inputData.LookDelta);
             }
         }
 
@@ -84,14 +97,7 @@ namespace Nugget.Project.Scripts.Player
 
         #region Private Methods
 
-        void ProcessLookInputData(InputData inputData)
-        {
-            //Be sure to take sensitivity into account
 
-            //need to re-research the clamp deal
-            //then rotate the transform
-            //profit?
-        }
 
         #endregion
 
@@ -101,7 +107,7 @@ namespace Nugget.Project.Scripts.Player
         {
             motor = GetComponent<PlayerMotor>();
             inputData = (InputHandler = new PlayerInputHandler()).InputDataReference;
-            cameraController.SetSynchronizeTransform(cameraTarget);
+            cameraController.SetCameraTargetTransform(cameraTarget);
         }
 
         #endregion
