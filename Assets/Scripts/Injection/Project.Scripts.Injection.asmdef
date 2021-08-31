@@ -1,12 +1,10 @@
 {
-    "name": "Project.Scripts.Player",
+    "name": "Project.Scripts.Injection",
     "rootNamespace": "Nugget.Project.Scripts",
     "references": [
         "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:30817c1a0e6d646d99c048fc403f5979",
-        "GUID:dfb0bf073fac4ed4f9ca839c57986324",
         "GUID:eb3f1ee5919268b4d82526c445640e02",
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:e3988f781aa5de14187b84275b5e9b89"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

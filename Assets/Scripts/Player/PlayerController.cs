@@ -52,7 +52,7 @@ namespace Nugget.Project.Scripts.Player
 
         [Tooltip("The camera controller instance this player will set the target transform of")]
         [HorizontalGroup("camera_group", 0, 5, 5), ReadOnly]
-        [SerializeField, Inject] private CameraController cameraController = null;
+        [SerializeField] private CameraController cameraController = null;
 
         [Tooltip("Instace of this player's animation controller for first person animations")]
         [SerializeField] private PlayerAnimationController firstPersonAnimationController = null;
@@ -72,11 +72,13 @@ namespace Nugget.Project.Scripts.Player
 
         private void Update()
         {
+            if (!cameraController) { Debug.LogError("camera controller not injected!"); return; }
+
             if (isLocalPlayer)
             {
                 Motor.MoveMotor(inputData.MoveDelta);
                 Motor.RotateMotor(inputData.LookDelta.y);
-                cameraController.PitchCamera(inputData.LookDelta.x);
+                cameraController.Pitch(inputData.LookDelta.x);
             }
         }
 
@@ -104,6 +106,14 @@ namespace Nugget.Project.Scripts.Player
                 cameraController.SetCameraTargetTransform(cameraTarget);
                 cameraController.SetRotationDegreeClamp(rotationClamp);
             }
+        }
+        #endregion
+
+        #region Injection
+        [Inject]
+        public void Inject(CameraController cameraController)
+        {
+            this.cameraController = cameraController;
         }
         #endregion
     }

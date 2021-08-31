@@ -1,14 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Nugget.Project.Scripts.Game
 {
-    public class GameManager : Manager
+    public class GameManager : MonoBehaviour
     {
-        private void Awake()
-        {
-            if (!Managers.RegisterManager(this)) Destroy(this);
-        }
+        
     }
 }

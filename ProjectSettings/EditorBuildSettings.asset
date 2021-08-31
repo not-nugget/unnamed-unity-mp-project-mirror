@@ -5,7 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Common/GameContext.unity
+    guid: 62d9e2d7a40df8a4585c19b365d4a21b
+  - enabled: 1
+    path: Assets/Scenes/DevSceneAlpha/DevScene_World.unity
+    guid: 28a6f5395307467408d524a32cf1ce1d
+  - enabled: 1
+    path: Assets/Scenes/DevSceneAlpha/DevScene_Metadata.unity
+    guid: c7ca981fe451e7a43a0d39e361716bb2
+  - enabled: 1
+    path: Assets/Scenes/DevSceneAlpha/DevScene_Environment.unity
+    guid: 45a0dba656452074ca3b46a3a5f4aac0
   m_configObjects: {}

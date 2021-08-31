@@ -43,9 +43,9 @@ namespace Nugget.Project.Scripts.Player
 
         public void MoveMotor(Vector2 moveDelta)
         {
-            Vector3 finalMoveDelta = Vector3.Lerp(body.velocity, moveDelta, speedRampTime * Time.deltaTime);
+            //Vector3 finalMoveDelta = Vector3.Lerp(body.velocity, moveDelta, speedRampTime * Time.deltaTime);
 
-            body.AddForce(finalMoveDelta, ForceMode.VelocityChange);
+            body.AddForce(moveDelta, ForceMode.VelocityChange);
         }
 
         public void RotateMotor(float yawDelta)

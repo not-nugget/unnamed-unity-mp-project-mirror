@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using static InputControls;
 
 namespace Nugget.Project.Scripts.Player
 {
     /// <summary>
-    /// Responsible for handling player inputs that the new Input System captures and sending the information to the controller
+    /// Responsible for handling player inputs and building the data the controller uses
     /// </summary>
     public class PlayerInputHandler : IDefaultControlsActions
     {
@@ -25,8 +23,7 @@ namespace Nugget.Project.Scripts.Player
             controls.Enable(); //Enable the controls asset
         }
 
-        // Interface Implementation
-
+        #region Interface Implementation
         public void OnLook(InputAction.CallbackContext context)
         {
             inputData.LookDelta = context.ReadValue<Vector2>();
@@ -36,5 +33,6 @@ namespace Nugget.Project.Scripts.Player
         {
             inputData.MoveDelta = context.ReadValue<Vector2>();
         }
+        #endregion
     }
 }
