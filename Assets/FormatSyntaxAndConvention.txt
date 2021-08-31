@@ -1,0 +1,42 @@
+MonoBehavior and any other classes:
+	Assembly Definitions:
+		For the sake of clean code, quick compilation, and an organized project, assembly definitions should be added when a new code subject is
+		being added (i.e. vehicles get their own AD). When an existing AD gets quite large, subdivide the project with subfolders, NOT new ADs
+		
+		When naming ADs, the syntax for the .asmdef is as follows: Project.Scripts.<new code subject> (i.e. Project.Scripts.Vehicles)
+			The root namespace of the AD should be Nugget.Project.Scripts.<new code subject> (i.e. Nugget.Project.Scripts.Vehicles)
+	
+	Naming conventions:
+		//TODO
+
+	Regions:
+		Region split MonoBehavior and other files
+			Region order:
+				Properties and public accesors/mutators
+				Public fields*
+				Serialized fields
+				Private fields
+				Injection methods
+				Unity messages
+				Method overrides/implementations**
+				Public methods
+				Private/Helper methods
+				Object overrides, operator overloading, and some implementations**
+				*  Public fields should rarely exist (if ever). Always prefer private serialized fields and wrap data that needs to be publically accesible with a readonly property
+				** many interfaces should be implemented within the above region, with the notable exception of many System interfaces such as IEquatable<T> or IComparable<T>, etc.
+				   These implementations should exist within the last region, as these are almost synonymous to the Object override of Equal and CompareTo (and should also use these
+				   methods when possible)
+
+			When a region exists without content, they can be removed
+
+			Subregions allowed and should be highly specific to the contents of the subregion
+				Subregioning single-methods is only allowed within InputActionCallback interface implementations
+				i.e. when creating input action callbacks, sub-regioning helper methods is perferred and the region should be named the action the
+					 code within is responsible for
+
+	Code Syntax:
+		//TODO
+
+	Code Comments:
+		Optional. Comments help when future developers come and have no idea what a method or procedure is doing.
+		Documentation comments (///) are greatly appreciated and highly recommended for publically accessible methods and properties.
