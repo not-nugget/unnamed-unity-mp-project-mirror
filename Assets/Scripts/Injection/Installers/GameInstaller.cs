@@ -1,5 +1,6 @@
 using Nugget.Project.Scripts.Camera;
 using Nugget.Project.Scripts.Game;
+using System;
 using Zenject;
 
 namespace Nugget.Project.Scripts.Injection
@@ -10,6 +11,7 @@ namespace Nugget.Project.Scripts.Injection
         public override void InstallBindings()
         {
             InstallGameManager();
+            InstallRootCamera();
             InstallCameraController();
         }
         #endregion
@@ -18,6 +20,11 @@ namespace Nugget.Project.Scripts.Injection
         private void InstallGameManager()
         {
             Container.Bind<GameManager>().FromComponentInHierarchy().AsSingle().CopyIntoAllSubContainers().NonLazy().IfNotBound();
+        }
+
+        private void InstallRootCamera()
+        {
+            Container.Bind<RootCamera>().FromComponentInHierarchy().AsSingle().CopyIntoAllSubContainers().NonLazy().IfNotBound();
         }
 
         private void InstallCameraController()

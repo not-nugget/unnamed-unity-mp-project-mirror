@@ -13,7 +13,6 @@ namespace Nugget.Project.Scripts.Networking
     public class NewNetworkManager : NetworkManager
     {
         #region Unity Callbacks
-
         public override void OnValidate()
         {
             base.OnValidate();
@@ -52,11 +51,9 @@ namespace Nugget.Project.Scripts.Networking
         {
             base.OnDestroy();
         }
-
         #endregion
 
         #region Start & Stop
-
         /// <summary>
         /// Set the frame rate for a headless server.
         /// <para>Override if you wish to disable the behavior or set your own tick rate.</para>
@@ -73,11 +70,9 @@ namespace Nugget.Project.Scripts.Networking
         {
             base.OnApplicationQuit();
         }
-
         #endregion
 
         #region Scene Management
-
         /// <summary>
         /// This causes the server to switch scenes and sets the networkSceneName.
         /// <para>Clients that connect to this server will automatically switch to this scene. This is called automatically if onlineScene or offlineScene are set, but it can be called from user code to switch scenes again while the game is in progress. This automatically sets clients to be not-ready. The clients must call NetworkClient.Ready() again to participate in the new scene.</para>
@@ -119,11 +114,9 @@ namespace Nugget.Project.Scripts.Networking
         {
             base.OnClientSceneChanged(conn);
         }
-
         #endregion
 
         #region Server System Callbacks
-
         /// <summary>
         /// Called on the server when a new client connects.
         /// <para>Unity calls this on the Server when a Client connects to the Server. Use an override to tell the NetworkManager what to do when a client connects to the server.</para>
@@ -160,11 +153,9 @@ namespace Nugget.Project.Scripts.Networking
         {
             base.OnServerDisconnect(conn);
         }
-
         #endregion
 
         #region Client System Callbacks
-
         /// <summary>
         /// Called on the client when connected to a server.
         /// <para>The default implementation of this function sets the client as ready and adds a player. Override the function to dictate what happens when the client connects.</para>
@@ -191,11 +182,9 @@ namespace Nugget.Project.Scripts.Networking
         /// </summary>
         /// <param name="conn">Connection to the server.</param>
         public override void OnClientNotReady(NetworkConnection conn) { }
-
         #endregion
 
         #region Start & Stop Callbacks
-
         // Since there are multiple versions of StartServer, StartClient and StartHost, to reliably customize
         // their functionality, users would need override all the versions. Instead these callbacks are invoked
         // from all versions, so users only need to implement this one case.
@@ -231,7 +220,6 @@ namespace Nugget.Project.Scripts.Networking
         /// This is called when a client is stopped.
         /// </summary>
         public override void OnStopClient() { }
-
         #endregion
     }
 }
