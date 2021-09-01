@@ -13,7 +13,6 @@ namespace Nugget.Project.Scripts.Player
     public class PlayerController : NetworkBehaviour
     {
         #region Public Properties
-
         /// <summary>
         /// Instace of this player's 3D motor
         /// </summary>
@@ -34,11 +33,9 @@ namespace Nugget.Project.Scripts.Player
         /// Instace of this player's animation controller for third person animations
         /// </summary>
         public PlayerAnimationController ThirdPersonAnimationController { get => thirdPersonAnimationController; }
-
         #endregion
 
         #region Serialized Fields
-
         [Tooltip("Instace of this player's 3D motor. Does not need to be set in the inspector when the motor exists on the same object as the controller")]
         [SerializeField] private PlayerMotor motor = null;
 
@@ -59,17 +56,22 @@ namespace Nugget.Project.Scripts.Player
 
         [Tooltip("Instace of this player's animation controller for third person animations")]
         [SerializeField] private PlayerAnimationController thirdPersonAnimationController = null;
-
         #endregion
 
         #region Private Fields
-
         private InputData inputData;
+        private PlayerMotor.MotorState motorState;
+        #endregion
 
+        #region Injection
+        [Inject]
+        public void Inject(CameraController cameraController)
+        {
+            this.cameraController = cameraController;
+        }
         #endregion
 
         #region Unity Messages
-
         private void Update()
         {
             if (!cameraController) { Debug.LogError("camera controller not injected!"); return; }
@@ -81,40 +83,37 @@ namespace Nugget.Project.Scripts.Player
                 cameraController.Pitch(inputData.LookDelta.x);
             }
         }
-
         #endregion
 
         #region Public Methods
 
-
-
         #endregion
 
         #region Private Methods
+        [Command]
+        private void SendCumulativeMovementInputs()
+        {
 
-
-
+        }
         #endregion
 
         #region Mirror overrides
-        public override void OnStartLocalPlayer()
+        public override void OnStartClient()
         {
             motor = GetComponent<PlayerMotor>(); //The server should do motor calculations too and correct the client if the client diverges...need to look for a way to send client inputs to the host
-            if (isLocalPlayer) //The server doesn't need to do any camera things, that will end up being client authorative for now
-            {
-                inputData = (InputHandler = new PlayerInputHandler()).InputDataReference;
-                cameraController.SetCameraTargetTransform(cameraTarget);
-                cameraController.SetRotationDegreeClamp(rotationClamp);
-            }
+            motorState = motor.MotorStateReference;
+        }
+
+        public override void OnStartLocalPlayer()
+        {
+            inputData = (InputHandler = new PlayerInputHandler()).InputDataReference;
+            cameraController.SetCameraTargetTransform(cameraTarget);
+            cameraController.SetRotationDegreeClamp(rotationClamp);
         }
         #endregion
 
-        #region Injection
-        [Inject]
-        public void Inject(CameraController cameraController)
-        {
-            this.cameraController = cameraController;
-        }
+        #region Factory Subclass (Necessary for runtime creation injection)
+        public class Factory : PlaceholderFactory<PlayerController> { }
         #endregion
     }
 }

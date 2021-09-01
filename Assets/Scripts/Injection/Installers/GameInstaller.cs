@@ -1,6 +1,5 @@
 using Nugget.Project.Scripts.Camera;
 using Nugget.Project.Scripts.Game;
-using System;
 using Zenject;
 
 namespace Nugget.Project.Scripts.Injection
@@ -29,7 +28,7 @@ namespace Nugget.Project.Scripts.Injection
 
         private void InstallCameraController()
         {
-            Container.Bind<CameraController>().FromNewComponentOnNewGameObject().AsCached().NonLazy().IfNotBound();
+            Container.Bind<CameraController>().FromNewComponentOnNewGameObject().AsCached().CopyIntoAllSubContainers().NonLazy().IfNotBound();
         }
         #endregion
     }

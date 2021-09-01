@@ -20,8 +20,8 @@ namespace Nugget.Project.Scripts.Player
             public Vector3 AngularVelocity { get; set; }
         }
 
-        [SerializeField, Tooltip("The total amount of time it will take for the player's speed to reach the desired value in seconds")]
-        private float speedRampTime = .8f;
+        //[SerializeField, Tooltip("The total amount of time it will take for the player's speed to reach the desired value in seconds")]
+        //private float speedRampTime = .8f;
 
         public ref MotorState MotorStateReference { get => ref motorState; }
         private MotorState motorState;

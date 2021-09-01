@@ -14,7 +14,9 @@ GameObject:
   - component: {fileID: 9133156373883904366}
   - component: {fileID: 1396897897485237644}
   - component: {fileID: 1317425963337946713}
-  - component: {fileID: 539563439209092072}
+  - component: {fileID: 1311988484945552167}
+  - component: {fileID: 4885935746345946626}
+  - component: {fileID: 2134907050208900046}
   - component: {fileID: 449983839838201643}
   m_Layer: 0
   m_Name: DevPlayer
@@ -135,7 +137,50 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
---- !u!114 &539563439209092072
+--- !u!114 &1311988484945552167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5419793007366406950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  localPositionSensitivity: 0.01
+  localRotationSensitivity: 0.01
+  localScaleSensitivity: 0.01
+  compressRotation: 0
+  interpolateScale: 0
+  syncScale: 0
+--- !u!114 &4885935746345946626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5419793007366406950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83392ae5c1b731446909f252fd494ae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  target: {fileID: 1396897897485237644}
+  clientAuthority: 0
+  syncVelocity: 1
+  clearVelocity: 0
+  velocitySensitivity: 0.1
+  syncAngularVelocity: 1
+  clearAngularVelocity: 0
+  angularVelocitySensitivity: 0.1
+--- !u!114 &2134907050208900046
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,6 +196,7 @@ MonoBehaviour:
   syncInterval: 0.1
   motor: {fileID: 449983839838201643}
   cameraTarget: {fileID: 6808008604088698430}
+  rotationClamp: {x: 0, y: 0}
   cameraController: {fileID: 0}
   firstPersonAnimationController: {fileID: 0}
   thirdPersonAnimationController: {fileID: 0}
