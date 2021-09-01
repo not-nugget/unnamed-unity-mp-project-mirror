@@ -71,7 +71,7 @@ namespace Nugget.Project.Scripts.Camera
         public void Pitch(float pitchDelta)
         {
             pitchDelta = -pitchDelta + cameraTarget.rotation.eulerAngles.x; //Save the camera's current pitch (around X)
-            
+
             if (perAxisClamp.x != 0f)
             {
                 pitchDelta -= (pitchDelta > 180f) ? 360f : 0f; //Convert the pitch from a 0-360 value to a -180 to 180 value if necessary
@@ -115,6 +115,10 @@ namespace Nugget.Project.Scripts.Camera
         }
 
         public void SetRotationDegreeClamp(Vector3 perAxisClamp) => this.perAxisClamp = perAxisClamp;
-        public void SetCameraTargetTransform(Transform transform) => cameraTarget = transform;
+        public void SetCameraTargetTransform(Transform transform)
+        {
+            Debug.LogFormat("Setting camera target transform from {0} to {1}", cameraTarget, transform);
+            cameraTarget = transform;
+        }
     }
 }

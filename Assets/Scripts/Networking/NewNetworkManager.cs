@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-using Mirror;
+﻿using Mirror;
+using Nugget.Project.Scripts.Player;
+using UnityEngine;
+using Zenject;
 
 namespace Nugget.Project.Scripts.Networking
 {
@@ -12,6 +13,16 @@ namespace Nugget.Project.Scripts.Networking
 
     public class NewNetworkManager : NetworkManager
     {
+        PlayerController.Factory playerFactory = null;
+
+        #region Injection
+        [Inject]
+        public void Inject(PlayerController.Factory playerFactory)
+        {
+            this.playerFactory = playerFactory;
+        }
+        #endregion
+
         #region Unity Callbacks
         public override void OnValidate()
         {
@@ -141,7 +152,12 @@ namespace Nugget.Project.Scripts.Networking
         /// <param name="conn">Connection from client.</param>
         public override void OnServerAddPlayer(NetworkConnection conn)
         {
-            base.OnServerAddPlayer(conn);
+            //base.OnServerAddPlayer(conn);
+
+            //Because we are creating from a factory now, the created object will have it's dependencies injected
+            GameObject player = playerFactory.Create().gameObject;
+            player.name = player.name.Replace("(Clone)", $"[connId={conn.connectionId}]");
+            NetworkServer.AddPlayerForConnection(conn, player);
         }
 
         /// <summary>
@@ -163,7 +179,14 @@ namespace Nugget.Project.Scripts.Networking
         /// <param name="conn">Connection to the server.</param>
         public override void OnClientConnect(NetworkConnection conn)
         {
-            base.OnClientConnect(conn);
+            //base.OnClientConnect(conn);
+
+            if (!clientLoadedScene)
+            {
+                if (!NetworkClient.ready) NetworkClient.Ready();
+
+                NetworkClient.AddPlayer();
+            }
         }
 
         /// <summary>
