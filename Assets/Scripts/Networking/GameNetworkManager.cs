@@ -11,7 +11,10 @@ namespace Nugget.Project.Scripts.Networking
         API Reference: https://mirror-networking.com/docs/api/Mirror.NetworkManager.html
     */
 
-    public class NewNetworkManager : NetworkManager
+    /// <summary>
+    /// Custom network manager. Intended to be used with Injection
+    /// </summary>
+    public class GameNetworkManager : NetworkManager
     {
         PlayerController.Factory playerFactory = null;
 
