@@ -10,6 +10,14 @@ namespace Nugget.Project.Scripts.Camera
     /// </summary>
     public class CameraController : MonoBehaviour
     {
+        #region Public properties
+        /// <summary>
+        /// RootCamera object this controller is repsonsible for
+        /// </summary>
+        public RootCamera Camera => controlledCamera;
+        #endregion
+
+
         #region Serialized Fields
         [Tooltip("The camera to control. Multiple controller instances can exist and can control their own cameras")]
         [SerializeField] private RootCamera controlledCamera = null;
@@ -58,8 +66,8 @@ namespace Nugget.Project.Scripts.Camera
                 return;
             }
 
-            cameraTarget.rotation = Quaternion.Euler(Pitch(rotateDelta.x), Yaw(-rotateDelta.y), Roll(rotateDelta.z));
-            controlledCamera.transform.rotation = cameraTarget.rotation;
+            //cameraTarget.rotation = Quaternion.Euler(Pitch(rotateDelta.x), Yaw(-rotateDelta.y), Roll(rotateDelta.z));
+            controlledCamera.transform.rotation = Quaternion.Euler(Pitch(rotateDelta.x), Yaw(-rotateDelta.y), Roll(rotateDelta.z));
         }
 
         public void SetCameraTargetTransform(Transform transform, bool setActiveIfInactive = true)
@@ -77,7 +85,7 @@ namespace Nugget.Project.Scripts.Camera
         #region Private methods
         private float Pitch(float pitchDelta)
         {
-            float newPitch = pitchDelta + cameraTarget.rotation.eulerAngles.x;
+            float newPitch = pitchDelta + controlledCamera.transform.rotation.eulerAngles.x;
 
             if (perAxisClamp.x != 0f)
             {
@@ -90,7 +98,7 @@ namespace Nugget.Project.Scripts.Camera
 
         private float Yaw(float yawDelta)
         {
-            float newYaw = yawDelta + cameraTarget.rotation.eulerAngles.y;
+            float newYaw = yawDelta + controlledCamera.transform.rotation.eulerAngles.y;
 
             if (perAxisClamp.y != 0f)
             {
@@ -103,7 +111,7 @@ namespace Nugget.Project.Scripts.Camera
 
         private float Roll(float rollDelta)
         {
-            float newRoll = rollDelta + cameraTarget.rotation.eulerAngles.z;
+            float newRoll = rollDelta + controlledCamera.transform.rotation.eulerAngles.z;
 
             if (perAxisClamp.z != 0f)
             {

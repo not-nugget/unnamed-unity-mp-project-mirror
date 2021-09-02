@@ -14,9 +14,6 @@ namespace Nugget.Project.Scripts.Player
     public class PlayerController : NetworkBehaviour
     {
         #region Serialized Fields
-        [Tooltip("Instace of this player's 3D motor. Does not need to be set in the inspector when the motor exists on the same object as the controller")]
-        [SerializeField] private PlayerMotor motor = null;
-
         [Tooltip("Child model transform"), Required]
         [SerializeField] private Transform modelTransform = null;
 
@@ -36,8 +33,9 @@ namespace Nugget.Project.Scripts.Player
         #region Private Fields
         private PlayerInputHandler inputHandler;
         private PlayerInputHandler.InputData inputData;
+        private PlayerMotor motor;
         private PlayerMotor.MotorState motorState;
-        private CameraController cameraController = null;
+        private CameraController cameraController;
         #endregion
 
         #region Injection
@@ -55,8 +53,10 @@ namespace Nugget.Project.Scripts.Player
 
             if (isLocalPlayer)
             {
+                //print($"input: {inputData.LookDelta} // {inputData.MoveDelta}");
+
                 cameraController.RotateCamera(inputData.LookDelta * lookSensitivity);
-                RotateModelTransform();
+                RotateTransform();
             }
         }
 
@@ -80,15 +80,9 @@ namespace Nugget.Project.Scripts.Player
         #endregion
 
         #region Private Methods
-        [Command]
-        private void SendCumulativeMovementInputs()
+        private void RotateTransform()
         {
-
-        }
-
-        private void RotateModelTransform()
-        {
-            transform.localRotation = Quaternion.Euler(0, cameraTarget.localRotation.eulerAngles.y, 0);
+            transform.localRotation = Quaternion.Euler(0, cameraController.Camera.transform.localRotation.eulerAngles.y, 0);
         }
 
         private void OnInputDataChanged(PlayerInputHandler.InputData inputData) => this.inputData = inputData;
