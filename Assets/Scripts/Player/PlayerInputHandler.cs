@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using static InputControls;
 
@@ -9,29 +10,70 @@ namespace Nugget.Project.Scripts.Player
     /// </summary>
     public class PlayerInputHandler : IDefaultControlsActions
     {
+        #region InputDataSubclass
         /// <summary>
-        /// Get a reference to this input handler's <see cref="InputData"/> instace
+        /// Container for easy transfer of input data from object to object
         /// </summary>
-        public ref InputData InputDataReference { get => ref inputData; }
-        private InputData inputData = new InputData();
+        public struct InputData
+        {
+            private Vector3 moveDelta;
+            public Vector3 MoveDelta 
+            {
+                get => moveDelta;
+                set
+                {
+                    moveDelta.x = value.x;
+                    moveDelta.z = value.y;
+                }
+            }
+
+            private Vector2 lookDelta;
+            public Vector2 LookDelta
+            {
+                get => lookDelta;
+                set
+                {
+                    lookDelta.x = value.y;
+                    lookDelta.y = value.x;
+                }
+            }
+        }
+        #endregion
+
+        public event Action<InputData> OnInputDataChanged;
 
         private readonly InputControls controls;
+        private InputData inputData;
 
         public PlayerInputHandler()
         {
-            (controls = new InputControls()).DefaultControls.SetCallbacks(this); //Create the controls and set the callbacks
-            controls.Enable(); //Enable the controls asset
+            inputData = new InputData();
+
+            (controls = new InputControls()).DefaultControls.SetCallbacks(this);
+            controls.Enable();
         }
 
         #region Interface Implementation
         public void OnLook(InputAction.CallbackContext context)
         {
             inputData.LookDelta = context.ReadValue<Vector2>();
+
+            OIDC();
         }
 
         public void OnMove(InputAction.CallbackContext context)
         {
-            inputData.MoveDelta = context.ReadValue<Vector2>();
+            Vector2 moveDelta = context.ReadValue<Vector2>();
+            inputData.MoveDelta = new Vector3(moveDelta.x, 0, moveDelta.y);
+
+            OIDC();
+        }
+        #endregion
+
+        #region Private methods
+        private void OIDC() //"OnInputDataChanged"
+        {
+            OnInputDataChanged?.Invoke(inputData);
         }
         #endregion
     }

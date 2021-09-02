@@ -21,7 +21,7 @@ namespace Nugget.Project.Scripts
         #region PrivateMethods
         private void InstallPlayerFactory()
         {
-            Container.BindFactory<PlayerController, PlayerController.Factory>().FromComponentInNewPrefab(playerPrefab).AsCached().CopyIntoAllSubContainers().NonLazy();
+            Container.BindFactory<PlayerController, PlayerController.Factory>().FromComponentInNewPrefab(playerPrefab).AsSingle().CopyIntoAllSubContainers().NonLazy().IfNotBound();
         }
         #endregion
     }

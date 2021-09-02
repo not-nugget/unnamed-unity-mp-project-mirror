@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Nugget.Project.Scripts.Player
@@ -15,18 +13,19 @@ namespace Nugget.Project.Scripts.Player
         public struct MotorState
         {
             public Vector3 Position { get; set; }
-            public Quaternion Rotation { get; set; }
             public Vector3 Velocity { get; set; }
-            public Vector3 AngularVelocity { get; set; }
         }
+
+        public event Action<MotorState> OnMotorStateChanged;
+
+        [SerializeField, Tooltip("Maximum velocity this body can achieve on the XZ plane")]
+        private float maxHorizontalVelocity = 12f;
 
         //[SerializeField, Tooltip("The total amount of time it will take for the player's speed to reach the desired value in seconds")]
         //private float speedRampTime = .8f;
 
-        public ref MotorState MotorStateReference { get => ref motorState; }
-        private MotorState motorState;
-
         private Rigidbody body;
+        private MotorState state;
 
         private void Awake()
         {
@@ -35,22 +34,32 @@ namespace Nugget.Project.Scripts.Player
 
         private void Update()
         {
-            motorState.Position = body.position;
-            motorState.Rotation = body.rotation;
-            motorState.Velocity = body.velocity;
-            motorState.AngularVelocity = body.angularVelocity;
+            if (body.IsSleeping()) return; //no need to update the motor's state if the motor is asleep
+
+            state.Position = body.position;
+            state.Velocity = body.velocity;
+
+            OnMotorStateChanged?.Invoke(state);
         }
 
         public void MoveMotor(Vector2 moveDelta)
         {
             //Vector3 finalMoveDelta = Vector3.Lerp(body.velocity, moveDelta, speedRampTime * Time.deltaTime);
 
-            body.AddForce(moveDelta, ForceMode.VelocityChange);
+            body.AddForce(moveDelta * 3f, ForceMode.VelocityChange);
+            ClampXZVelocity();
         }
 
-        public void RotateMotor(float yawDelta)
+        private void ClampXZVelocity()
         {
-            transform.Rotate(0, yawDelta, 0);
+            Vector3 velocity = body.velocity;
+            float y = velocity.y;
+
+            velocity.y = 0f;
+            velocity = Vector3.ClampMagnitude(velocity, maxHorizontalVelocity);
+            velocity.y = y;
+
+            body.velocity = velocity;
         }
     }
 }
