@@ -28,10 +28,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 6808008604088698430}
+  m_Children: []
   m_Father: {fileID: 6808008603435349845}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1346521470453196615
 MeshFilter:
@@ -117,6 +116,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 6808008604088698430}
   - {fileID: 3793795937859584798}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -228,10 +228,6 @@ MonoBehaviour:
   motor: {fileID: 449983839838201643}
   modelTransform: {fileID: 3793795937859584798}
   cameraTarget: {fileID: 6808008604088698430}
-  rotationClamp: {x: 0, y: 0}
-  cameraController: {fileID: 0}
-  firstPersonAnimationController: {fileID: 0}
-  thirdPersonAnimationController: {fileID: 0}
 --- !u!114 &449983839838201643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +268,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.635, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3793795937859584798}
+  m_Father: {fileID: 6808008603435349845}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

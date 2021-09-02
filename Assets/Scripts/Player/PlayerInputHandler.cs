@@ -35,6 +35,7 @@ namespace Nugget.Project.Scripts.Player
                 {
                     lookDelta.x = value.y;
                     lookDelta.y = value.x;
+                    lookDelta = -lookDelta;
                 }
             }
         }
@@ -63,8 +64,7 @@ namespace Nugget.Project.Scripts.Player
 
         public void OnMove(InputAction.CallbackContext context)
         {
-            Vector2 moveDelta = context.ReadValue<Vector2>();
-            inputData.MoveDelta = new Vector3(moveDelta.x, 0, moveDelta.y);
+            inputData.MoveDelta = context.ReadValue<Vector2>();
 
             OIDC();
         }

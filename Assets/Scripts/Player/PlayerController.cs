@@ -20,9 +20,11 @@ namespace Nugget.Project.Scripts.Player
         [Tooltip("Child model transform"), Required]
         [SerializeField] private Transform modelTransform = null;
 
-        [Tooltip("The camera target transform"), Required]
-        [HorizontalGroup("camera_group", 0, 5, 5)]
+        [Tooltip("The camera target transform"), HorizontalGroup("camera_group", 0, 5, 5), Required]
         [SerializeField] private Transform cameraTarget = null;
+
+        [SerializeField, HorizontalGroup("camera_group", 0, 5, 5), Tooltip("Camera turn sensitivity")]
+        private float lookSensitivity = .2f;
 
         //[Tooltip("Instace of this player's animation controller for first person animations")]
         //[SerializeField] private PlayerAnimationController firstPersonAnimationController = null;
@@ -53,8 +55,8 @@ namespace Nugget.Project.Scripts.Player
 
             if (isLocalPlayer)
             {
-                cameraController.RotateCamera(inputData.LookDelta);
-                //RotateModelTransform();
+                cameraController.RotateCamera(inputData.LookDelta * lookSensitivity);
+                RotateModelTransform();
             }
         }
 
@@ -86,7 +88,7 @@ namespace Nugget.Project.Scripts.Player
 
         private void RotateModelTransform()
         {
-            modelTransform.localRotation = Quaternion.Euler(0, cameraTarget.rotation.eulerAngles.y, 0);
+            transform.localRotation = Quaternion.Euler(0, cameraTarget.localRotation.eulerAngles.y, 0);
         }
 
         private void OnInputDataChanged(PlayerInputHandler.InputData inputData) => this.inputData = inputData;

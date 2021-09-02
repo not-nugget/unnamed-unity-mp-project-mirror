@@ -42,12 +42,18 @@ namespace Nugget.Project.Scripts.Player
             OnMotorStateChanged?.Invoke(state);
         }
 
-        public void MoveMotor(Vector2 moveDelta)
+        public void MoveMotor(Vector3 moveDelta)
         {
             //Vector3 finalMoveDelta = Vector3.Lerp(body.velocity, moveDelta, speedRampTime * Time.deltaTime);
 
-            body.AddForce(moveDelta * 3f, ForceMode.VelocityChange);
-            ClampXZVelocity();
+            //TODO remove magic numbers and also look for different/more preferable ways to do this (maybe with moveposition)
+            //body.AddRelativeForce(moveDelta * 3f, ForceMode.VelocityChange);
+
+            if (moveDelta.sqrMagnitude > 0f)
+            {
+                body.MovePosition(body.position + transform.TransformDirection(3f * Time.fixedDeltaTime * moveDelta));
+                ClampXZVelocity();
+            }
         }
 
         private void ClampXZVelocity()

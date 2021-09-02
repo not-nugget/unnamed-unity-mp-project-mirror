@@ -45,7 +45,7 @@ namespace Nugget.Project.Scripts.Camera
                 return;
             }
 
-            controlledCamera.SetPositionAndRotation(cameraTarget.position, cameraTarget.rotation);
+            controlledCamera.transform.position = cameraTarget.position;
         }
         #endregion
 
@@ -58,7 +58,8 @@ namespace Nugget.Project.Scripts.Camera
                 return;
             }
 
-            cameraTarget.localRotation = Quaternion.Euler(Pitch(rotateDelta.x), Yaw(-rotateDelta.y), Roll(rotateDelta.z));
+            cameraTarget.rotation = Quaternion.Euler(Pitch(rotateDelta.x), Yaw(-rotateDelta.y), Roll(rotateDelta.z));
+            controlledCamera.transform.rotation = cameraTarget.rotation;
         }
 
         public void SetCameraTargetTransform(Transform transform, bool setActiveIfInactive = true)
@@ -76,7 +77,7 @@ namespace Nugget.Project.Scripts.Camera
         #region Private methods
         private float Pitch(float pitchDelta)
         {
-            float newPitch = pitchDelta + cameraTarget.localRotation.eulerAngles.x;
+            float newPitch = pitchDelta + cameraTarget.rotation.eulerAngles.x;
 
             if (perAxisClamp.x != 0f)
             {
@@ -89,7 +90,7 @@ namespace Nugget.Project.Scripts.Camera
 
         private float Yaw(float yawDelta)
         {
-            float newYaw = yawDelta + cameraTarget.localRotation.eulerAngles.y;
+            float newYaw = yawDelta + cameraTarget.rotation.eulerAngles.y;
 
             if (perAxisClamp.y != 0f)
             {
@@ -102,7 +103,7 @@ namespace Nugget.Project.Scripts.Camera
 
         private float Roll(float rollDelta)
         {
-            float newRoll = rollDelta + cameraTarget.localRotation.eulerAngles.z;
+            float newRoll = rollDelta + cameraTarget.rotation.eulerAngles.z;
 
             if (perAxisClamp.z != 0f)
             {
