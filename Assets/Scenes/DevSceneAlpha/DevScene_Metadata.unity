@@ -133,9 +133,9 @@ GameObject:
   m_Component:
   - component: {fileID: 555546786}
   - component: {fileID: 555546785}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SceneContext
-  m_TagString: Untagged
+  m_TagString: InjectionContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

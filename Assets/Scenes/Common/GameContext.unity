@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 327695354}
   - component: {fileID: 327695353}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,9 +176,9 @@ GameObject:
   m_Component:
   - component: {fileID: 362100692}
   - component: {fileID: 362100691}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GameDIContainer
-  m_TagString: Untagged
+  m_TagString: InjectionContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -376,13 +376,13 @@ GameObject:
   m_Component:
   - component: {fileID: 695937543}
   - component: {fileID: 695937542}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DebugSceneLoadOnStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &695937542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,7 +426,7 @@ GameObject:
   m_Component:
   - component: {fileID: 962992820}
   - component: {fileID: 962992819}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GameInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -472,7 +472,7 @@ GameObject:
   - component: {fileID: 1323336995}
   - component: {fileID: 1323336994}
   - component: {fileID: 1323336993}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: NetworkManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -590,7 +590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1613643263}
   - component: {fileID: 1613643262}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,9 +633,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1649269867}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Managers
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

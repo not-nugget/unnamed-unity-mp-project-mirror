@@ -16,7 +16,9 @@ namespace Nugget.Project.Scripts.Networking
     /// </summary>
     public class GameNetworkManager : NetworkManager
     {
+        #region Private Fields
         PlayerController.Factory playerFactory = null;
+        #endregion
 
         #region Injection
         [Inject]
