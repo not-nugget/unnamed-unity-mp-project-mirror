@@ -17,7 +17,6 @@ namespace Nugget.Project.Scripts.Camera
         public RootCamera Camera => controlledCamera;
         #endregion
 
-
         #region Serialized Fields
         [Tooltip("The camera to control. Multiple controller instances can exist and can control their own cameras")]
         [SerializeField] private RootCamera controlledCamera = null;

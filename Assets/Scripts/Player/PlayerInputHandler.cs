@@ -10,7 +10,7 @@ namespace Nugget.Project.Scripts.Player
     /// </summary>
     public class PlayerInputHandler : IDefaultControlsActions
     {
-        #region InputDataSubclass
+        #region InputData Subclass
         /// <summary>
         /// Container for easy transfer of input data from object to object
         /// </summary>

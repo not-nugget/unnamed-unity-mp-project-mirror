@@ -1,4 +1,5 @@
-﻿using Mirror;
+﻿using Cinemachine;
+using Mirror;
 using Nugget.Project.Scripts.Camera;
 using Sirenix.OdinInspector;
 using System;
@@ -14,14 +15,15 @@ namespace Nugget.Project.Scripts.Player
     public class PlayerController : NetworkBehaviour
     {
         #region Serialized Fields
-        [Tooltip("Child model transform"), Required]
-        [SerializeField] private Transform modelTransform = null;
+        //[Tooltip("Child model transform"), Required]
+        //[SerializeField] private Transform modelTransform = null;
 
-        [Tooltip("The camera target transform"), HorizontalGroup("camera_group", 0, 5, 5), Required]
-        [SerializeField] private Transform cameraTarget = null;
+        //[Tooltip("The camera target transform"), HorizontalGroup("camera_group", 0, 5, 5), Required]
+        //[SerializeField] private Transform cameraTarget = null;
 
-        [SerializeField, HorizontalGroup("camera_group", 0, 5, 5), Tooltip("Camera turn sensitivity")]
-        private float lookSensitivity = .2f;
+        //TODO should probably be done elsewhere (like the input handler maybe)
+        //[SerializeField, HorizontalGroup("camera_group", 0, 5, 5), Tooltip("Camera turn sensitivity")]
+        //private float lookSensitivity = .2f;
 
         //[Tooltip("Instace of this player's animation controller for first person animations")]
         //[SerializeField] private PlayerAnimationController firstPersonAnimationController = null;
@@ -30,23 +32,33 @@ namespace Nugget.Project.Scripts.Player
         //[SerializeField] private PlayerAnimationController thirdPersonAnimationController = null;
         #endregion
 
+        //TODO some of these dependencies are filled using a GetComponent call of sorts...either use Zenject or create a DependencyRequester mb that children "subscribe" themselves to and this object queries when it needs its dependencies
         #region Private Fields
+        private PlayerVisuals modelTransform;
+        private CinemachineVirtualCamera cameraTarget;
         private PlayerInputHandler inputHandler;
         private PlayerInputHandler.InputData inputData;
         private PlayerMotor motor;
         private PlayerMotor.MotorState motorState;
-        private CameraController cameraController;
+        private PlayerCameraController cameraController;
+        //private CameraController cameraController;
         #endregion
 
         #region Injection
         [Inject]
-        public void Inject(CameraController cameraController)
+        public void Inject()
         {
-            this.cameraController = cameraController;
+            //this.cameraController = cameraController;
         }
         #endregion
 
         #region Unity Messages
+        private void Start()
+        {
+            modelTransform = GetComponentInChildren<PlayerVisuals>();
+            cameraTarget = GetComponentInChildren<CinemachineVirtualCamera>();
+        }
+
         private void Update()
         {
             if (!cameraController) { Debug.LogError("camera controller not injected!"); return; }
@@ -55,7 +67,7 @@ namespace Nugget.Project.Scripts.Player
             {
                 //print($"input: {inputData.LookDelta} // {inputData.MoveDelta}");
 
-                cameraController.RotateCamera(inputData.LookDelta * lookSensitivity);
+                //cameraController.RotateCamera(inputData.LookDelta * lookSensitivity);
                 RotateTransform();
             }
         }
@@ -82,7 +94,7 @@ namespace Nugget.Project.Scripts.Player
         #region Private Methods
         private void RotateTransform()
         {
-            transform.localRotation = Quaternion.Euler(0, cameraController.Camera.transform.localRotation.eulerAngles.y, 0);
+            //transform.localRotation = Quaternion.Euler(0, cameraController.Camera.transform.localRotation.eulerAngles.y, 0);
         }
 
         private void OnInputDataChanged(PlayerInputHandler.InputData inputData) => this.inputData = inputData;
@@ -102,11 +114,11 @@ namespace Nugget.Project.Scripts.Player
             inputHandler = new PlayerInputHandler();
             inputHandler.OnInputDataChanged += OnInputDataChanged;
 
-            cameraController.SetCameraTargetTransform(cameraTarget);
+            //cameraController.SetCameraTargetTransform(cameraTarget);
         }
         #endregion
 
-        #region Factory Subclass (Necessary for runtime creation injection)
+        #region Factory Subclass (Necessary for runtime injection)
         public class Factory : PlaceholderFactory<PlayerController> { }
         #endregion
     }
