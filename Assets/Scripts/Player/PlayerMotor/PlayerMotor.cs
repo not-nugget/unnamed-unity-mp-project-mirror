@@ -3,41 +3,38 @@ using UnityEngine;
 
 namespace Nugget.Project.Scripts.Player
 {
+    //TODO will likely develop a complete overhaul that maintains a state machine depending on parameters
+
     /// <summary>
     /// Responsible for moving the character in 3D space based on provided inputs. Can be forced to roll back to specific positions, rotations,
     /// and velocities either immediately or over time
     /// </summary>
-    public class PlayerMotor
+    public class PlayerMotor : MonoBehaviour
     {
-        public struct MotorState
+        /// <summary>
+        /// Structure defining the state of the motor
+        /// </summary>
+        public struct MotorData
         {
             public Vector3 Position { get; set; }
+            public Quaternion Rotation { get; set; }
             public Vector3 Velocity { get; set; }
         }
 
-        public event Action<MotorState> OnMotorStateChanged;
+        private Rigidbody body;
+        private MotorData data;
 
-        //[SerializeField, Tooltip("The total amount of time it will take for the player's speed to reach the desired value in seconds")]
-        //private float speedRampTime = .8f;
-
-        private readonly Transform transform;
-        private readonly Rigidbody body;
-        private MotorState state;
-
-        public PlayerMotor(Rigidbody body)
+        private void Start()
         {
-            this.body = body;
-            transform = body.transform;
+            body = GetComponent<Rigidbody>();
         }
 
-        public void OnUpdate()
+        private void Update()
         {
             if (body.IsSleeping()) return; //no need to update the motor's state if the motor is asleep
 
-            state.Position = body.position;
-            state.Velocity = body.velocity;
-
-            OnMotorStateChanged?.Invoke(state);
+            data.Position = body.position;
+            data.Velocity = body.velocity;
         }
 
         /// <summary>
@@ -57,9 +54,14 @@ namespace Nugget.Project.Scripts.Player
             }
         }
 
-        public void ResetMotor(Vector3 resetPosition, Quaternion resetOrientation)
+        public void ResetMotor(Vector3 resetPosition, Quaternion resetOrientation, Vector3 resetVelocity)
         {
             body.transform.SetPositionAndRotation(resetPosition, resetOrientation);
+            body.velocity = resetVelocity;
+
+            data.Position = body.position;
+            data.Rotation = body.rotation;
+            data.Velocity = body.velocity;
         }
     }
 }

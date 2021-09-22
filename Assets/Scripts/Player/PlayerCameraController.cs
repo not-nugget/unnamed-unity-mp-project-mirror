@@ -3,9 +3,34 @@ using UnityEngine;
 
 namespace Nugget.Project.Scripts.Player
 {
+    //TODO i dont think we need the virtual camera unless the player camera controller can alter the current live camera
     [RequireComponent(typeof(CinemachineVirtualCamera)), DisallowMultipleComponent]
     public class PlayerCameraController : MonoBehaviour
     {
+        #region Private Fields
+        private PlayerInputHandler inputHandler;
+        private NetworkInputHandler networkInput;
+        #endregion
+
+        #region Manual Dependency Construction
+        public void Construct(PlayerInputHandler inputHandler, NetworkInputHandler networkInput)
+        {
+            this.inputHandler = inputHandler;
+            this.networkInput = networkInput;
+        }
+        #endregion
+
+        private void Update()
+        {
+            if (networkInput.ReceiveMouseInput)
+            {
+                //rotate based on network input (should only be the pitch)
+                return;
+            }
+
+            //rotate based on local player input
+        }
+
         /// <summary>
         /// Rotate the virtual camera's transform to this angle on the x axis immediately
         /// </summary>

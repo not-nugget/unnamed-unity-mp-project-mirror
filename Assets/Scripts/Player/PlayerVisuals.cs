@@ -2,20 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Nugget.Project.Scripts
+namespace Nugget.Project.Scripts.Player
 {
     public class PlayerVisuals : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        #region Private Fields
+        private PlayerMotor motor;
+        #endregion
 
-        // Update is called once per frame
-        void Update()
+        #region Manual Dependency Construction
+        public void Construct(PlayerMotor motor)
         {
-        
+            this.motor = motor;
         }
+        #endregion
     }
 }

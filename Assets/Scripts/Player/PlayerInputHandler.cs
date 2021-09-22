@@ -5,19 +5,16 @@ using static InputControls;
 
 namespace Nugget.Project.Scripts.Player
 {
-    /// <summary>
-    /// Responsible for handling player inputs and building the data the controller uses
-    /// </summary>
     public class PlayerInputHandler : IDefaultControlsActions
     {
-        #region InputData Subclass
+        #region InputState Scruct
         /// <summary>
         /// Container for easy transfer of input data from object to object
         /// </summary>
-        public struct InputData
+        public struct InputState
         {
             private Vector3 moveDelta;
-            public Vector3 MoveDelta 
+            public Vector3 MoveDelta
             {
                 get => moveDelta;
                 set
@@ -41,40 +38,48 @@ namespace Nugget.Project.Scripts.Player
         }
         #endregion
 
-        public event Action<InputData> OnInputDataChanged;
+        #region Public Properties
+        /// <summary>
+        /// Get the current state of the input system
+        /// </summary>
+        public InputState State => inputState;
 
+        /// <summary>
+        /// Get or set the enabled state of the underlying <see cref="InputActionAsset"/>
+        /// </summary>
+        public bool Enabled
+        {
+            get => controls.asset.enabled;
+            set
+            {
+                if (value)
+                {
+                    controls.Enable();
+                    return;
+                }
+
+                controls.Disable();
+            }
+        }
+        #endregion
+
+        #region Private Fields
         private readonly InputControls controls;
-        private InputData inputData;
+        private InputState inputState;
+        #endregion
 
         public PlayerInputHandler()
         {
-            inputData = new InputData();
+            inputState = new InputState();
 
             (controls = new InputControls()).DefaultControls.SetCallbacks(this);
             controls.Enable();
         }
 
         #region Interface Implementation
-        public void OnLook(InputAction.CallbackContext context)
-        {
-            inputData.LookDelta = context.ReadValue<Vector2>();
+        public void OnLook(InputAction.CallbackContext context) => inputState.LookDelta = context.ReadValue<Vector2>();
 
-            OIDC();
-        }
-
-        public void OnMove(InputAction.CallbackContext context)
-        {
-            inputData.MoveDelta = context.ReadValue<Vector2>();
-
-            OIDC();
-        }
-        #endregion
-
-        #region Private methods
-        private void OIDC() //"OnInputDataChanged"
-        {
-            OnInputDataChanged?.Invoke(inputData);
-        }
+        public void OnMove(InputAction.CallbackContext context) => inputState.MoveDelta = context.ReadValue<Vector2>();
         #endregion
     }
 }

@@ -31,12 +31,6 @@ namespace Nugget.Project.Scripts.Camera
             children = GetComponentsInChildren<UnityEngine.Camera>(true).Where(cam => cam != main).ToArray();
         }
 
-        //TODO this is something we will control on a per-virtual camera basis i believe
-        //public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
-        //{
-        //    transform.SetPositionAndRotation(position, rotation);
-        //}
-
         //If we are in the editor, we want to ensure the children are completely up to date. In a build, it is safe to assume that all children will be assigned to this object on awake. This is not the case in the editor
 #if UNITY_EDITOR
         private void Update()

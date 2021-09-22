@@ -11,7 +11,6 @@ namespace Nugget.Project.Scripts.Injection
         {
             InstallGameManager();
             InstallRootCamera();
-            InstallCameraController();
         }
         #endregion
 
@@ -26,10 +25,10 @@ namespace Nugget.Project.Scripts.Injection
             Container.Bind<RootCamera>().FromComponentInHierarchy().AsSingle().CopyIntoAllSubContainers().NonLazy().IfNotBound();
         }
 
-        private void InstallCameraController()
-        {
-            Container.Bind<CameraController>().FromNewComponentOnNewGameObject().AsCached().CopyIntoAllSubContainers().NonLazy().IfNotBound();
-        }
+        //private void InstallCameraController()
+        //{
+        //    Container.Bind<CameraController>().FromNewComponentOnNewGameObject().AsCached().CopyIntoAllSubContainers().NonLazy().IfNotBound();
+        //}
         #endregion
     }
 }
