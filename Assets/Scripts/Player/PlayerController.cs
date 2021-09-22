@@ -14,8 +14,6 @@ namespace Nugget.Project.Scripts.Player
     /// </summary>
     public class PlayerController : NetworkBehaviour
     {
-        //     V this is stupid...theres no issue letting the player controller find some of its dependencies on start
-        //TODO some of these dependencies are filled using a GetComponent call of sorts...either use Zenject or create a DependencyRequester mb that children "subscribe" themselves to and this object queries when it needs its dependencies
         #region Private Fields
         private PlayerVisuals modelTransform;
         private PlayerCameraController cameraController;

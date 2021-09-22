@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 2054918783593258632}
   - component: {fileID: 8189881793616180141}
   m_Layer: 0
-  m_Name: CameraTarget
+  m_Name: PlayerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 67.14456
+    FieldOfView: 73.73979
     OrthographicSize: 5
     NearClipPlane: 0.01
     FarClipPlane: 1000
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ApplyAfter: 2
-  m_ChannelMask: 1
+  m_ChannelMask: 6
   m_Gain: 1
   m_Use2DDistance: 0
 --- !u!1 &7936839020367331980

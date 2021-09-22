@@ -8,17 +8,25 @@ namespace Nugget.Project.Scripts.Player
     public class PlayerCameraController : MonoBehaviour
     {
         #region Private Fields
+        private CinemachineVirtualCamera virtualCamera;
         private PlayerInputHandler inputHandler;
         private NetworkInputHandler networkInput;
         #endregion
 
         #region Manual Dependency Construction
-        public void Construct(PlayerInputHandler inputHandler, NetworkInputHandler networkInput)
+        public void Construct(PlayerInputHandler inputHandler, NetworkInputHandler networkInput, bool isLocalPlayer = false)
         {
             this.inputHandler = inputHandler;
             this.networkInput = networkInput;
+            virtualCamera.enabled = isLocalPlayer;
         }
         #endregion
+
+        #region Unity Messages
+        private void Start()
+        {
+            virtualCamera = GetComponent<CinemachineVirtualCamera>();
+        }
 
         private void Update()
         {
@@ -30,13 +38,17 @@ namespace Nugget.Project.Scripts.Player
 
             //rotate based on local player input
         }
+        #endregion
+
+        #region Public Methods
+        //TODO methods that actually incrementally rotate the camera
 
         /// <summary>
         /// Rotate the virtual camera's transform to this angle on the x axis immediately
         /// </summary>
         /// <param name="pitchAngle">Angle to set the x rotation of the transform to. Should be a
         /// valid value between 0 and 360, and clamping should be done elsewhere</param>
-        public void PitchCamera(float pitchAngle)
+        public void SetCameraPitch(float pitchAngle)
         {
             transform.rotation = Quaternion.Euler(pitchAngle, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         }
@@ -46,7 +58,7 @@ namespace Nugget.Project.Scripts.Player
         /// </summary>
         /// <param name="tiltAngle">Angle to set the y rotation of the transform to. Should be a
         /// valid value between 0 and 360, and clamping should be done elsewhere</param>
-        public void YawCamera(float yawAngle)
+        public void SetCameraYaw(float yawAngle)
         {
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, yawAngle, transform.rotation.eulerAngles.z);
         }
@@ -56,7 +68,7 @@ namespace Nugget.Project.Scripts.Player
         /// </summary>
         /// <param name="rollAngle">Angle to set the z rotation of the transform to. Should be a
         /// valid value between 0 and 360, and clamping should be done elsewhere</param>
-        public void RollCamera(float rollAngle)
+        public void SetCameraRoll(float rollAngle)
         {
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, rollAngle);
         }
@@ -66,7 +78,7 @@ namespace Nugget.Project.Scripts.Player
         /// </summary>
         /// <param name="eulers">Eulers to set the transform to. Each component should be a
         /// valid value between 0 and 360, and clamping should be done elsewhere</param>
-        public void RotateCamera(Vector3 eulers)
+        public void SetCameraRotation(Vector3 eulers)
         {
             transform.rotation = Quaternion.Euler(eulers);
         }
@@ -76,9 +88,10 @@ namespace Nugget.Project.Scripts.Player
         /// </summary>
         /// <param name="eulers">Eulers to set the transform to. Each component should be a
         /// valid value between 0 and 360, and clamping should be done elsewhere</param>
-        public void RotateCamera(float x, float y, float z)
+        public void SetCameraRotation(float x, float y, float z)
         {
             transform.rotation = Quaternion.Euler(x, y, z);
         }
+        #endregion
     }
 }
