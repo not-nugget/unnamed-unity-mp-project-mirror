@@ -14,7 +14,7 @@ namespace Nugget.Project.Scripts.Player
         public struct SyncInput
         {
             public Vector3 move;
-            public float dt;
+            public float dt; // i dont need to send the delta time, as I can just calculate it based on the total number of frames elapsed and the send interval, but it might be smart to send it for undeniable determinism between the client and server
 
             public SyncInput(PlayerInputHandler.InputData input, float dt)
             {
