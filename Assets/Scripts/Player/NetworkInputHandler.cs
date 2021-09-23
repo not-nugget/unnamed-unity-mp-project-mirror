@@ -1,4 +1,5 @@
 using Mirror;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Nugget.Project.Scripts.Player
@@ -9,23 +10,31 @@ namespace Nugget.Project.Scripts.Player
         //the rest I might want to set up with Commands(client -> server) and RPCs(server -> client)
         //or....just use a network transfrorm child?
 
-        public bool ReceiveMouseInput { get => !isLocalPlayer; }
-        public bool NewDataReceived { get; private set; }
+        //we don't need to worry about the mouse movement, only the per-frame instructions to move the character
+        public struct SyncInput
+        {
+            public Vector3 move;
+            public float dt;
+
+            public SyncInput(PlayerInputHandler.InputData input, float dt)
+            {
+                move = input.MoveDelta;
+                this.dt = dt;
+            }
+        }
 
         public Transform clientRotationTransform = null;
 
         [SerializeField, Tooltip("Time to pause after sending an input event to the server")]
         private float inputSendInterval = .2f;
 
-        //this object likely wont need to handle the parent rotation as the network transform and rigidbody will make sure those don't go out of sync, so we will likely be able to send just a pitch float
-        public Quaternion ServerParentRotation { get; private set; }
-        public Quaternion ServerCameraRotation { get; private set; }
-
         private PlayerInputHandler playerInput;
         private PlayerCameraController cameraController;
         private PlayerMotor motor;
 
+        private readonly Queue<SyncInput> inputQueue = new Queue<SyncInput>();
         private float inputSendIntervalTimer = 0;
+        private int framesSinceLastInputCommandSent = 0;
 
         public void Construct(PlayerInputHandler playerInput, PlayerCameraController cameraController, PlayerMotor motor)
         {
@@ -38,47 +47,68 @@ namespace Nugget.Project.Scripts.Player
         {
             if (playerInput is null) return;
 
-            //inputSendIntervalTimer -= Time.deltaTime;
-            ////move this to a coroutine that executes every x frames or every y seconds
-            //if (inputSendIntervalTimer <= 0)
-            //{
-            //    InputMoveCommand(playerInput.State.MoveDelta);
+            inputSendIntervalTimer -= Time.deltaTime;
+            framesSinceLastInputCommandSent++;
 
-            //    inputSendIntervalTimer = inputSendInterval;
-            //}
+            if (playerInput.Data.MoveDelta.sqrMagnitude > 0f)
+                inputQueue.Enqueue(new SyncInput(playerInput.Data, Time.deltaTime));
 
-            cameraController.RotateCameraPitch(playerInput.State.LookDelta.x);
-            clientRotationTransform.Rotate(clientRotationTransform.up, -playerInput.State.LookDelta.y);
-            //motor.RotateMotor(-playerInput.State.LookDelta.y);
+            cameraController.RotateCameraPitch(playerInput.Data.LookDelta.x);
+            clientRotationTransform.Rotate(clientRotationTransform.up, -playerInput.Data.LookDelta.y);
+
+            if (inputSendIntervalTimer <= 0f)
+            {
+                print("Sending input queue command to server");
+                Cmd_InputQueue(framesSinceLastInputCommandSent, inputQueue.ToArray(), motor.transform.position);
+
+                inputSendIntervalTimer = inputSendInterval;
+                framesSinceLastInputCommandSent = 0;
+                inputQueue.Clear();
+            }
         }
 
         private void FixedUpdate()
         {
             if (playerInput is null) return;
 
-            Vector3 moveDelta = 5f * Time.fixedDeltaTime * playerInput.State.MoveDelta;
-            InputMoveCommand(moveDelta); //Queue the command to be sent
+            Vector3 moveDelta = 5f * Time.fixedDeltaTime * playerInput.Data.MoveDelta;
             motor.MoveMotor(moveDelta); //Move the motor locally
         }
 
-        private void LateUpdate()
-        {
-            //Assume data has been handled when LateUpdate is invoked (probably not smart, should look into a better way to do this)
-            NewDataReceived = false;
-        }
-
         [Command]
-        public void InputMoveCommand(Vector3 moveDelta)
+        public void Cmd_InputQueue(int totalInputFramesSinceLastCommand, SyncInput[] inputQueue, Vector3 currentBodyPosition)
         {
-            //if i understand commands correctly, when this is called on the local client, the vector3 will be passed to the server and the method body will only be executed on the server
-            motor.MoveMotor(moveDelta);
+            print("Received input command");
+            print($"Current player position on server: {motor.transform.position}");
+            print($"Current player position on client: {currentBodyPosition}");
 
-            //check if a reset state should occur, and if one should, send an RPC call to the client with the reset data
+            if (totalInputFramesSinceLastCommand > 0)
+            {
+                Vector3 finalBodyPosition = motor.transform.position;
+                print($"Motor position on server: {finalBodyPosition}");
+
+                foreach (SyncInput input in inputQueue)
+                {
+                    finalBodyPosition += (5f * input.dt * input.move);
+                }
+
+                if (Vector3.Distance(finalBodyPosition, currentBodyPosition) > .3f)
+                {
+                    print("Sending motor correction to client");
+
+                    //issue a correction
+                    PlayerMotor.MotorData motorState = new PlayerMotor.MotorData { Position = finalBodyPosition, Velocity = motor.Data.Velocity };
+                    Rpc_ResetMotorToState(motorState);
+                    motor.ResetMotor(motorState);
+                }
+            }
         }
 
         [ClientRpc]
-        public void ResetMotorToState(PlayerMotor.MotorData resetState)
+        public void Rpc_ResetMotorToState(PlayerMotor.MotorData resetState)
         {
+            print("Motor correction received");
+
             //if i understand rpc calls correctly, when this is called on the server the motor state will be sent to the coresponding object on the client and it will execute its method body
             motor.ResetMotor(resetState);
         }

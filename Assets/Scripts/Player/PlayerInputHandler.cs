@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using static InputControls;
 
@@ -10,7 +11,7 @@ namespace Nugget.Project.Scripts.Player
         /// <summary>
         /// Container for easy transfer of input data from object to object
         /// </summary>
-        public struct InputState
+        public struct InputData
         {
             private Vector3 moveDelta;
             public Vector3 MoveDelta
@@ -41,7 +42,7 @@ namespace Nugget.Project.Scripts.Player
         /// <summary>
         /// Get the current state of the input system
         /// </summary>
-        public InputState State => inputState;
+        public InputData Data => inputData;
 
         /// <summary>
         /// Get or set the enabled state of the underlying <see cref="InputActionAsset"/>
@@ -64,21 +65,21 @@ namespace Nugget.Project.Scripts.Player
 
         #region Private Fields
         private readonly InputControls controls;
-        private InputState inputState;
+        private InputData inputData;
         #endregion
 
         public PlayerInputHandler()
         {
-            inputState = new InputState();
+            inputData = new InputData();
 
             (controls = new InputControls()).DefaultControls.SetCallbacks(this);
             controls.Enable();
         }
 
         #region Interface Implementation
-        public void OnLook(InputAction.CallbackContext context) => inputState.LookDelta = context.ReadValue<Vector2>();
+        public void OnLook(InputAction.CallbackContext context) => inputData.LookDelta = context.ReadValue<Vector2>();
 
-        public void OnMove(InputAction.CallbackContext context) => inputState.MoveDelta = context.ReadValue<Vector2>();
+        public void OnMove(InputAction.CallbackContext context) => inputData.MoveDelta = context.ReadValue<Vector2>();
         #endregion
     }
 }
