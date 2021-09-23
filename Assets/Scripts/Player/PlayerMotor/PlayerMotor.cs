@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Nugget.Project.Scripts.Player
 {
@@ -21,6 +20,8 @@ namespace Nugget.Project.Scripts.Player
             public Vector3 Velocity { get; set; }
         }
 
+        public MotorData Data => data;
+
         private Rigidbody body;
         private MotorData data;
 
@@ -31,10 +32,17 @@ namespace Nugget.Project.Scripts.Player
 
         private void Update()
         {
-            if (body.IsSleeping()) return; //no need to update the motor's state if the motor is asleep
+            //Why not always update the motor?
+            //if (body.IsSleeping()) return; //no need to update the motor's state if the motor is asleep
 
             data.Position = body.position;
+            data.Rotation = body.rotation;
             data.Velocity = body.velocity;
+        }
+
+        public void RotateMotor(float rotation)
+        {
+            transform.Rotate(Vector3.up, rotation, Space.Self);
         }
 
         /// <summary>
@@ -43,15 +51,20 @@ namespace Nugget.Project.Scripts.Player
         /// <param name="moveDelta"></param>
         public void MoveMotor(Vector3 moveDelta)
         {
+            if (moveDelta.sqrMagnitude == 0f) return;
+
             //Vector3 finalMoveDelta = Vector3.Lerp(body.velocity, moveDelta, speedRampTime * Time.deltaTime);
 
             //TODO remove magic numbers and also look for different/more preferable ways to do this (maybe with moveposition)
             //body.AddRelativeForce(moveDelta * 3f, ForceMode.VelocityChange);
 
-            if (moveDelta.sqrMagnitude != 0f) //Need to investigate a more elaborate solution that isnt as jolting as this one, and that uses a state machine of sorts
-            {
-                body.MovePosition(body.position + transform.TransformDirection(3f * Time.fixedDeltaTime * moveDelta));
-            }
+            //HACK this needs to be more proper, BUT the forward vector needs to be based off the child which is rotated, NOT the parent's rotation
+            body.MovePosition(body.position + transform.GetChild(0).TransformDirection(moveDelta));
+        }
+
+        public void ResetMotor(MotorData resetState)
+        {
+            ResetMotor(resetState.Position, resetState.Rotation, resetState.Velocity);
         }
 
         public void ResetMotor(Vector3 resetPosition, Quaternion resetOrientation, Vector3 resetVelocity)

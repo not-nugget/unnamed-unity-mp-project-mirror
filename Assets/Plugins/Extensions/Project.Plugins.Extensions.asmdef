@@ -1,0 +1,14 @@
+{
+    "name": "Project.Plugins.Extensions",
+    "rootNamespace": "Nugget.Project.Plugins",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

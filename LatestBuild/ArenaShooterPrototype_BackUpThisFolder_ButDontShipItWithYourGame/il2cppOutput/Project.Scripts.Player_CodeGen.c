@@ -1,0 +1,512 @@
+﻿#include "pch-c.h"
+#ifndef _MSC_VER
+# include <alloca.h>
+#else
+# include <malloc.h>
+#endif
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+// 0x00000001 System.Void Nugget.Project.Scripts.PlayerComponent::.ctor()
+extern void PlayerComponent__ctor_m1DB2C57B85B375723309FB193A71C86B3DAC0053 (void);
+// 0x00000002 System.Boolean Nugget.Project.Scripts.Player.NetworkInputHandler::get_ReceiveMouseInput()
+extern void NetworkInputHandler_get_ReceiveMouseInput_m992B19B9F6CADF6C9978E2F16C6FFF2F3620E5A2 (void);
+// 0x00000003 System.Boolean Nugget.Project.Scripts.Player.NetworkInputHandler::get_NewDataReceived()
+extern void NetworkInputHandler_get_NewDataReceived_m66C11451EE3F7A15824F4EE199F42112A9EA6820 (void);
+// 0x00000004 System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::set_NewDataReceived(System.Boolean)
+extern void NetworkInputHandler_set_NewDataReceived_m51C8DB022EE3D5E090F9DE4C3E4252C104BB8AE8 (void);
+// 0x00000005 UnityEngine.Quaternion Nugget.Project.Scripts.Player.NetworkInputHandler::get_ServerParentRotation()
+extern void NetworkInputHandler_get_ServerParentRotation_m165F758826411AFEBF567971270FD7BEBF1AC087 (void);
+// 0x00000006 System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::set_ServerParentRotation(UnityEngine.Quaternion)
+extern void NetworkInputHandler_set_ServerParentRotation_m61CE2B702EFAE8950E00DD7FE939004EA6716DE5 (void);
+// 0x00000007 UnityEngine.Quaternion Nugget.Project.Scripts.Player.NetworkInputHandler::get_ServerCameraRotation()
+extern void NetworkInputHandler_get_ServerCameraRotation_m4A1656B0EF307F62E1FBB16DBA1AD33BCE32B853 (void);
+// 0x00000008 System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::set_ServerCameraRotation(UnityEngine.Quaternion)
+extern void NetworkInputHandler_set_ServerCameraRotation_m36B1FF9E71526D48516A80883E073921EBA9E43C (void);
+// 0x00000009 System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::Construct(Nugget.Project.Scripts.Player.PlayerInputHandler,Nugget.Project.Scripts.Player.PlayerCameraController,Nugget.Project.Scripts.Player.PlayerMotor)
+extern void NetworkInputHandler_Construct_m63C8726D5C8A3CE761DE88F2AD5D1FDB691A9BD7 (void);
+// 0x0000000A System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::Update()
+extern void NetworkInputHandler_Update_m069167E8BBB3B344417982BE804A2E0465977741 (void);
+// 0x0000000B System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::FixedUpdate()
+extern void NetworkInputHandler_FixedUpdate_m74A33FDCD0579425E254A4BFB8005B6FF9D4B04F (void);
+// 0x0000000C System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::LateUpdate()
+extern void NetworkInputHandler_LateUpdate_m2A8BF0619481C354C4B9C5843CCC755631A5C0D3 (void);
+// 0x0000000D System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::InputMoveCommand(UnityEngine.Vector3)
+extern void NetworkInputHandler_InputMoveCommand_mB177E8DE269F510360651B615CCC288A55AFE22E (void);
+// 0x0000000E System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::ResetMotorToState(Nugget.Project.Scripts.Player.PlayerMotor/MotorData)
+extern void NetworkInputHandler_ResetMotorToState_m4F5FF4562927F9A87F7580846AED53B1149A451A (void);
+// 0x0000000F System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::.ctor()
+extern void NetworkInputHandler__ctor_mEE9B97CA371337BD4A6694294E552AC12902FCAD (void);
+// 0x00000010 System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::MirrorProcessed()
+extern void NetworkInputHandler_MirrorProcessed_m7DEF75B51C80C40ED803A28C10EC169DFC2E0555 (void);
+// 0x00000011 System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::UserCode_InputMoveCommand(UnityEngine.Vector3)
+extern void NetworkInputHandler_UserCode_InputMoveCommand_m7BCCD688C76B016033203A1BD47BE26410DA9ACA (void);
+// 0x00000012 System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::InvokeUserCode_InputMoveCommand(Mirror.NetworkBehaviour,Mirror.NetworkReader,Mirror.NetworkConnectionToClient)
+extern void NetworkInputHandler_InvokeUserCode_InputMoveCommand_m5438A884750910B9E1CB6FE6638CDA06313B7F0E (void);
+// 0x00000013 System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::UserCode_ResetMotorToState(Nugget.Project.Scripts.Player.PlayerMotor/MotorData)
+extern void NetworkInputHandler_UserCode_ResetMotorToState_mEF49C61AE0B30AEFF2BE1269763547179305D2BA (void);
+// 0x00000014 System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::InvokeUserCode_ResetMotorToState(Mirror.NetworkBehaviour,Mirror.NetworkReader,Mirror.NetworkConnectionToClient)
+extern void NetworkInputHandler_InvokeUserCode_ResetMotorToState_mB3D84537A630A67950C935379ED14BB43D0A3C02 (void);
+// 0x00000015 System.Void Nugget.Project.Scripts.Player.NetworkInputHandler::.cctor()
+extern void NetworkInputHandler__cctor_m5CD7212F682A0CA711964720C1FC25E4385755EE (void);
+// 0x00000016 System.Boolean Nugget.Project.Scripts.Player.PlayerCameraController::get_CameraEnabled()
+extern void PlayerCameraController_get_CameraEnabled_m0ECF2E61E60D371D222924B0E5A09758F2795B80 (void);
+// 0x00000017 System.Void Nugget.Project.Scripts.Player.PlayerCameraController::Construct(Nugget.Project.Scripts.Player.NetworkInputHandler,System.Boolean)
+extern void PlayerCameraController_Construct_m6C4DB68BD5E550E4E09A19FB547D39585BA494B2 (void);
+// 0x00000018 System.Void Nugget.Project.Scripts.Player.PlayerCameraController::Awake()
+extern void PlayerCameraController_Awake_m3F802DD9024DE9E9A477B157FE97043183B10D92 (void);
+// 0x00000019 System.Void Nugget.Project.Scripts.Player.PlayerCameraController::SetCameraAxisArcClamp(UnityEngine.Vector3)
+extern void PlayerCameraController_SetCameraAxisArcClamp_m7C06164651744EF2A3DEEB3A0931ED9E01F51E06 (void);
+// 0x0000001A System.Void Nugget.Project.Scripts.Player.PlayerCameraController::RotateCameraPitch(System.Single)
+extern void PlayerCameraController_RotateCameraPitch_m72CED4AD45110EBE309F4710E7BC1F2E5BDC17C6 (void);
+// 0x0000001B System.Void Nugget.Project.Scripts.Player.PlayerCameraController::RotateCameraYaw(System.Single)
+extern void PlayerCameraController_RotateCameraYaw_m6D11538331D7650146208DD204F6BF1597BC8D22 (void);
+// 0x0000001C System.Void Nugget.Project.Scripts.Player.PlayerCameraController::RotateCameraRoll(System.Single)
+extern void PlayerCameraController_RotateCameraRoll_m1445AAC50BA06FE17813C059670B5A8F384C45FB (void);
+// 0x0000001D System.Void Nugget.Project.Scripts.Player.PlayerCameraController::RotateCamera(UnityEngine.Vector3)
+extern void PlayerCameraController_RotateCamera_m45B0B495C77C10A751CA4DA83FA501C6E5DC247A (void);
+// 0x0000001E System.Void Nugget.Project.Scripts.Player.PlayerCameraController::RotateCamera(System.Single,System.Single,System.Single)
+extern void PlayerCameraController_RotateCamera_m7C45643937D8B7F08D8C83351589C082A3FFC204 (void);
+// 0x0000001F System.Void Nugget.Project.Scripts.Player.PlayerCameraController::SetCameraPitch(System.Single)
+extern void PlayerCameraController_SetCameraPitch_m8158C4106D4ABB0EBCBB59E80D174C03B391DA1E (void);
+// 0x00000020 System.Void Nugget.Project.Scripts.Player.PlayerCameraController::SetCameraYaw(System.Single)
+extern void PlayerCameraController_SetCameraYaw_m85BA7C21FD503B9D3007DB3110C546C898589B12 (void);
+// 0x00000021 System.Void Nugget.Project.Scripts.Player.PlayerCameraController::SetCameraRoll(System.Single)
+extern void PlayerCameraController_SetCameraRoll_mE2BC5A2BD99032C123D8FDCA8CCB237C7EDDB887 (void);
+// 0x00000022 System.Void Nugget.Project.Scripts.Player.PlayerCameraController::SetCameraRotation(UnityEngine.Vector3)
+extern void PlayerCameraController_SetCameraRotation_m6FF49A94BBB1718A366079CC127A16E7AC200C06 (void);
+// 0x00000023 System.Void Nugget.Project.Scripts.Player.PlayerCameraController::SetCameraRotation(System.Single,System.Single,System.Single)
+extern void PlayerCameraController_SetCameraRotation_mFD3227E4F3D22F6581DB671E4266CBAFA7318232 (void);
+// 0x00000024 System.Void Nugget.Project.Scripts.Player.PlayerCameraController::ClampRotation(UnityEngine.Transform)
+extern void PlayerCameraController_ClampRotation_m8E7C20A8374F7E988488BE4D8C8709407B0448D5 (void);
+// 0x00000025 UnityEngine.Quaternion Nugget.Project.Scripts.Player.PlayerCameraController::ClampRotation(UnityEngine.Quaternion)
+extern void PlayerCameraController_ClampRotation_m7A641A17A7A9A3B7016AED1948703B7E5465760D (void);
+// 0x00000026 UnityEngine.Vector3 Nugget.Project.Scripts.Player.PlayerCameraController::ClampRotation(UnityEngine.Vector3)
+extern void PlayerCameraController_ClampRotation_m02BEA0E763DCC86E54B1941A7DEC2BB4C3069C0D (void);
+// 0x00000027 System.Void Nugget.Project.Scripts.Player.PlayerCameraController::ClampRotation(System.Single&,System.Single&,System.Single&)
+extern void PlayerCameraController_ClampRotation_m5371D121774BF6D90716149CFF570B924B6DDF6E (void);
+// 0x00000028 System.Void Nugget.Project.Scripts.Player.PlayerCameraController::.ctor()
+extern void PlayerCameraController__ctor_m917C4562CBDC548C789D1E12E67514BB9B0834D3 (void);
+// 0x00000029 System.Void Nugget.Project.Scripts.Player.PlayerController::Start()
+extern void PlayerController_Start_m8DB5AF43E8A639ACAB639DC1787D150231DBCFB4 (void);
+// 0x0000002A System.Void Nugget.Project.Scripts.Player.PlayerController::OnGUI()
+extern void PlayerController_OnGUI_m6078E858026C2D011637C90375C285B8BF77DBB0 (void);
+// 0x0000002B System.Void Nugget.Project.Scripts.Player.PlayerController::OnStartClient()
+extern void PlayerController_OnStartClient_mAB8CB6B04E7420DC8CD9F6E513CAFDD81EAE76CC (void);
+// 0x0000002C System.Void Nugget.Project.Scripts.Player.PlayerController::OnStartLocalPlayer()
+extern void PlayerController_OnStartLocalPlayer_mD63CD0FE269E5834B22FE1504BD4D76C39E7A610 (void);
+// 0x0000002D System.Void Nugget.Project.Scripts.Player.PlayerController::.ctor()
+extern void PlayerController__ctor_mA1EEAEDFCFF50BB2C6643511930A8280588FC236 (void);
+// 0x0000002E System.Void Nugget.Project.Scripts.Player.PlayerController::MirrorProcessed()
+extern void PlayerController_MirrorProcessed_m96F0B3323B37F57EB695EF3C1180CDBE21C11BE9 (void);
+// 0x0000002F System.Void Nugget.Project.Scripts.Player.PlayerController/Factory::.ctor()
+extern void Factory__ctor_mCE5CE58FE03081818321BFD0E3C230B45DF5533C (void);
+// 0x00000030 Nugget.Project.Scripts.Player.PlayerInputHandler/InputState Nugget.Project.Scripts.Player.PlayerInputHandler::get_State()
+extern void PlayerInputHandler_get_State_m843C095E0B8B721FA944EE8067BB3212B872623B (void);
+// 0x00000031 System.Boolean Nugget.Project.Scripts.Player.PlayerInputHandler::get_Enabled()
+extern void PlayerInputHandler_get_Enabled_m8BFCD058532DFF40B58C7D5C41127B95FDEE0274 (void);
+// 0x00000032 System.Void Nugget.Project.Scripts.Player.PlayerInputHandler::set_Enabled(System.Boolean)
+extern void PlayerInputHandler_set_Enabled_m8A5EA585EAD1A620E4B69100C609D98B7EE0E8E4 (void);
+// 0x00000033 System.Void Nugget.Project.Scripts.Player.PlayerInputHandler::.ctor()
+extern void PlayerInputHandler__ctor_m17797BB44CB6E98DDC3D8B527506DA4754836B0F (void);
+// 0x00000034 System.Void Nugget.Project.Scripts.Player.PlayerInputHandler::OnLook(UnityEngine.InputSystem.InputAction/CallbackContext)
+extern void PlayerInputHandler_OnLook_m8559BC67687D8E63157561DC6529300E823BAEF4 (void);
+// 0x00000035 System.Void Nugget.Project.Scripts.Player.PlayerInputHandler::OnMove(UnityEngine.InputSystem.InputAction/CallbackContext)
+extern void PlayerInputHandler_OnMove_m8773AAECC719805CB075EB4F40D6C4A0012B4D20 (void);
+// 0x00000036 UnityEngine.Vector3 Nugget.Project.Scripts.Player.PlayerInputHandler/InputState::get_MoveDelta()
+extern void InputState_get_MoveDelta_m23428603CF05AA41C07120F06C0A921F6DA5FB47 (void);
+// 0x00000037 System.Void Nugget.Project.Scripts.Player.PlayerInputHandler/InputState::set_MoveDelta(UnityEngine.Vector3)
+extern void InputState_set_MoveDelta_m2EBC0AA8847118DFA44087B0CEB95B2793F45935 (void);
+// 0x00000038 UnityEngine.Vector2 Nugget.Project.Scripts.Player.PlayerInputHandler/InputState::get_LookDelta()
+extern void InputState_get_LookDelta_mD05F7D4DB77BA3B27400F9C2B5946B397198ABA3 (void);
+// 0x00000039 System.Void Nugget.Project.Scripts.Player.PlayerInputHandler/InputState::set_LookDelta(UnityEngine.Vector2)
+extern void InputState_set_LookDelta_m97F613CEE4B36DF83FED70ABEE3D98369ADBA588 (void);
+// 0x0000003A Nugget.Project.Scripts.Player.PlayerMotor/MotorData Nugget.Project.Scripts.Player.PlayerMotor::get_Data()
+extern void PlayerMotor_get_Data_m8660FCA73BD0941B08EFEDC4DC7DA627B7A5C246 (void);
+// 0x0000003B System.Void Nugget.Project.Scripts.Player.PlayerMotor::Start()
+extern void PlayerMotor_Start_mA446582FBE490C4917302C9DF6CDC7C47640EFA3 (void);
+// 0x0000003C System.Void Nugget.Project.Scripts.Player.PlayerMotor::Update()
+extern void PlayerMotor_Update_m882BE381C2E7990B9AEEC44F0679E53DCF02FBDC (void);
+// 0x0000003D System.Void Nugget.Project.Scripts.Player.PlayerMotor::RotateMotor(System.Single)
+extern void PlayerMotor_RotateMotor_m22136848B2C804A83D9C90382AAC00B550C55250 (void);
+// 0x0000003E System.Void Nugget.Project.Scripts.Player.PlayerMotor::MoveMotor(UnityEngine.Vector3)
+extern void PlayerMotor_MoveMotor_mD0CB55754E800FF0B5BDC436803150E71B0D7EE2 (void);
+// 0x0000003F System.Void Nugget.Project.Scripts.Player.PlayerMotor::ResetMotor(Nugget.Project.Scripts.Player.PlayerMotor/MotorData)
+extern void PlayerMotor_ResetMotor_m6D397B09E46EBBED3C38DFC25708C5C10C46A9E4 (void);
+// 0x00000040 System.Void Nugget.Project.Scripts.Player.PlayerMotor::ResetMotor(UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Vector3)
+extern void PlayerMotor_ResetMotor_m9E63EC0B4B94C821434928D9BF47C17DE5FDAB8D (void);
+// 0x00000041 System.Void Nugget.Project.Scripts.Player.PlayerMotor::.ctor()
+extern void PlayerMotor__ctor_mAB639699E388B7A0FC7485AC529802712A04EC80 (void);
+// 0x00000042 UnityEngine.Vector3 Nugget.Project.Scripts.Player.PlayerMotor/MotorData::get_Position()
+extern void MotorData_get_Position_mFF581197BB222EAA9755CD37A0C58ED74BF6DC6C (void);
+// 0x00000043 System.Void Nugget.Project.Scripts.Player.PlayerMotor/MotorData::set_Position(UnityEngine.Vector3)
+extern void MotorData_set_Position_mEBC1B1472C20D3A7D494559F7F8F4AD6BF3A3647 (void);
+// 0x00000044 UnityEngine.Quaternion Nugget.Project.Scripts.Player.PlayerMotor/MotorData::get_Rotation()
+extern void MotorData_get_Rotation_m220AA476930C4450356C553BCB934C059859D430 (void);
+// 0x00000045 System.Void Nugget.Project.Scripts.Player.PlayerMotor/MotorData::set_Rotation(UnityEngine.Quaternion)
+extern void MotorData_set_Rotation_m7B71AF6052398A3E7C34AB27EDB14EFF830FB9C1 (void);
+// 0x00000046 UnityEngine.Vector3 Nugget.Project.Scripts.Player.PlayerMotor/MotorData::get_Velocity()
+extern void MotorData_get_Velocity_mD6F2B02C836EAE72B34451E7EC01DD79029F94FB (void);
+// 0x00000047 System.Void Nugget.Project.Scripts.Player.PlayerMotor/MotorData::set_Velocity(UnityEngine.Vector3)
+extern void MotorData_set_Velocity_m4F6DD30B9479947E3A36B8A01281ED73A9445388 (void);
+// 0x00000048 System.Void Nugget.Project.Scripts.Player.PlayerVisuals::Construct(Nugget.Project.Scripts.Player.PlayerMotor)
+extern void PlayerVisuals_Construct_m2443FB6BA117507CDF375907640E339AA5E8F9E0 (void);
+// 0x00000049 System.Void Nugget.Project.Scripts.Player.PlayerVisuals::.ctor()
+extern void PlayerVisuals__ctor_mCD732700DEF9D423E0E7D2926F21B0418797856C (void);
+// 0x0000004A System.Void Nugget.Project.Scripts.Player.Motor.IMotorState::MoveMotor(UnityEngine.Vector3)
+// 0x0000004B System.Void Nugget.Project.Scripts.Player.Motor.MotorState::MoveMotor(UnityEngine.Vector3)
+// 0x0000004C System.Void Nugget.Project.Scripts.Player.Motor.MotorState::.ctor()
+extern void MotorState__ctor_mF86EE255B0F463AE663F8570C3C3C6EF7BB8403F (void);
+// 0x0000004D System.Void Nugget.Project.Scripts.Player.Motor.MotorStateMachine::MoveMotor(UnityEngine.Vector3)
+extern void MotorStateMachine_MoveMotor_m6ACED7937CD13602E01321C86D83246B2F6895CC (void);
+// 0x0000004E System.Boolean Nugget.Project.Scripts.Player.Motor.MotorStateMachine::SetState(Nugget.Project.Scripts.Player.Motor.IMotorState)
+extern void MotorStateMachine_SetState_m12CFBE4E47D59A1BD0D4E7DB302E9D7CBDA45DE0 (void);
+// 0x0000004F System.Void Nugget.Project.Scripts.Player.Motor.MotorStateMachine::.ctor()
+extern void MotorStateMachine__ctor_m53C7EFEF29B65F5A755733FEFA52ECF2F17691FB (void);
+// 0x00000050 Mirror.ReadyMessage Mirror.GeneratedNetworkCode::_Read_Mirror.ReadyMessage(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_ReadyMessage_m9F2A069DB593B8C81402ED5C0F5881033EDB054E (void);
+// 0x00000051 System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.ReadyMessage(Mirror.NetworkWriter,Mirror.ReadyMessage)
+extern void GeneratedNetworkCode__Write_Mirror_ReadyMessage_m5733C3FE4F33E7A988349C32924A68943F90092C (void);
+// 0x00000052 Mirror.NotReadyMessage Mirror.GeneratedNetworkCode::_Read_Mirror.NotReadyMessage(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_NotReadyMessage_m9EA6FA145BD008EC6A1A185D4B76ADCFE2789A2D (void);
+// 0x00000053 System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.NotReadyMessage(Mirror.NetworkWriter,Mirror.NotReadyMessage)
+extern void GeneratedNetworkCode__Write_Mirror_NotReadyMessage_m355BD32BBEC7B8C0C744EC3F1F259ECC4B025829 (void);
+// 0x00000054 Mirror.AddPlayerMessage Mirror.GeneratedNetworkCode::_Read_Mirror.AddPlayerMessage(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_AddPlayerMessage_m009488FE28250A243E88FFDCB6EAD10B02C6C4CE (void);
+// 0x00000055 System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.AddPlayerMessage(Mirror.NetworkWriter,Mirror.AddPlayerMessage)
+extern void GeneratedNetworkCode__Write_Mirror_AddPlayerMessage_m067C8093F25E75802BD813075800D0E1034CE1EC (void);
+// 0x00000056 Mirror.SceneMessage Mirror.GeneratedNetworkCode::_Read_Mirror.SceneMessage(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_SceneMessage_mB9BD3FA580778FEE290613FF5011B8BC2B3076A0 (void);
+// 0x00000057 Mirror.SceneOperation Mirror.GeneratedNetworkCode::_Read_Mirror.SceneOperation(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_SceneOperation_mB4ACC7B90EB04DB4C390E76499CF24FFC7806AB2 (void);
+// 0x00000058 System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.SceneMessage(Mirror.NetworkWriter,Mirror.SceneMessage)
+extern void GeneratedNetworkCode__Write_Mirror_SceneMessage_mF6F8B0DD96871D8D2F40CBA83A1E5739D1A06923 (void);
+// 0x00000059 System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.SceneOperation(Mirror.NetworkWriter,Mirror.SceneOperation)
+extern void GeneratedNetworkCode__Write_Mirror_SceneOperation_m8DB13E4DC4466CB1A08B245F8B687A44F17905CC (void);
+// 0x0000005A Mirror.CommandMessage Mirror.GeneratedNetworkCode::_Read_Mirror.CommandMessage(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_CommandMessage_m137EF4BE0A4397BD7541833AB7176D8D46B97346 (void);
+// 0x0000005B System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.CommandMessage(Mirror.NetworkWriter,Mirror.CommandMessage)
+extern void GeneratedNetworkCode__Write_Mirror_CommandMessage_m0F70DB66113D6AE17FBD7A686B905DB595096FBE (void);
+// 0x0000005C Mirror.RpcMessage Mirror.GeneratedNetworkCode::_Read_Mirror.RpcMessage(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_RpcMessage_m083E42738E7AE013E44A69AF633591993D90572E (void);
+// 0x0000005D System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.RpcMessage(Mirror.NetworkWriter,Mirror.RpcMessage)
+extern void GeneratedNetworkCode__Write_Mirror_RpcMessage_m6513279CF4A47976BC00C2BE1C0D544B7EAECB63 (void);
+// 0x0000005E Mirror.SpawnMessage Mirror.GeneratedNetworkCode::_Read_Mirror.SpawnMessage(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_SpawnMessage_m0D71FB9C170E816ACF4E3EBC16E46879410DD54D (void);
+// 0x0000005F System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.SpawnMessage(Mirror.NetworkWriter,Mirror.SpawnMessage)
+extern void GeneratedNetworkCode__Write_Mirror_SpawnMessage_m120DF5C3D70AF7CAC03A9B1B71A1D750855FC63F (void);
+// 0x00000060 Mirror.ObjectSpawnStartedMessage Mirror.GeneratedNetworkCode::_Read_Mirror.ObjectSpawnStartedMessage(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_ObjectSpawnStartedMessage_m1A942C48C1AD36497F615660819DDFFF94A7E8BC (void);
+// 0x00000061 System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.ObjectSpawnStartedMessage(Mirror.NetworkWriter,Mirror.ObjectSpawnStartedMessage)
+extern void GeneratedNetworkCode__Write_Mirror_ObjectSpawnStartedMessage_m18C3B11EA75E6E07BA4276D672BC308F6C70DBCC (void);
+// 0x00000062 Mirror.ObjectSpawnFinishedMessage Mirror.GeneratedNetworkCode::_Read_Mirror.ObjectSpawnFinishedMessage(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_ObjectSpawnFinishedMessage_mD66DDAA08193E60038E64A7591E721FEDEC01D98 (void);
+// 0x00000063 System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.ObjectSpawnFinishedMessage(Mirror.NetworkWriter,Mirror.ObjectSpawnFinishedMessage)
+extern void GeneratedNetworkCode__Write_Mirror_ObjectSpawnFinishedMessage_mABE494F3D8A5B0B219CB18CD2C95A83471D69379 (void);
+// 0x00000064 Mirror.ObjectDestroyMessage Mirror.GeneratedNetworkCode::_Read_Mirror.ObjectDestroyMessage(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_ObjectDestroyMessage_mB46A550FBEEB49F26CB04848B416F677B6E2E7B0 (void);
+// 0x00000065 System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.ObjectDestroyMessage(Mirror.NetworkWriter,Mirror.ObjectDestroyMessage)
+extern void GeneratedNetworkCode__Write_Mirror_ObjectDestroyMessage_m798663CBDB37A51E708B0223C9D6932C638B5BC1 (void);
+// 0x00000066 Mirror.ObjectHideMessage Mirror.GeneratedNetworkCode::_Read_Mirror.ObjectHideMessage(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_ObjectHideMessage_mCDAC423D887AAC3569960D3515E75B5DC232827C (void);
+// 0x00000067 System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.ObjectHideMessage(Mirror.NetworkWriter,Mirror.ObjectHideMessage)
+extern void GeneratedNetworkCode__Write_Mirror_ObjectHideMessage_m7C92F0E2C691EBF47E8E584F79AE49A6AF73E725 (void);
+// 0x00000068 Mirror.UpdateVarsMessage Mirror.GeneratedNetworkCode::_Read_Mirror.UpdateVarsMessage(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_UpdateVarsMessage_m70D2436AFDF1C7833A283CFDC728DE961B9028E5 (void);
+// 0x00000069 System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.UpdateVarsMessage(Mirror.NetworkWriter,Mirror.UpdateVarsMessage)
+extern void GeneratedNetworkCode__Write_Mirror_UpdateVarsMessage_m946DDE8BE43F74214A4D47A0E50D92529DEACDE1 (void);
+// 0x0000006A Mirror.NetworkPingMessage Mirror.GeneratedNetworkCode::_Read_Mirror.NetworkPingMessage(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_NetworkPingMessage_m89BE72A6656EEF0828DDF0543548D65C86236F61 (void);
+// 0x0000006B System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.NetworkPingMessage(Mirror.NetworkWriter,Mirror.NetworkPingMessage)
+extern void GeneratedNetworkCode__Write_Mirror_NetworkPingMessage_m8DE482DFE2A11E073A74341F32B2D45929CF9B0A (void);
+// 0x0000006C Mirror.NetworkPongMessage Mirror.GeneratedNetworkCode::_Read_Mirror.NetworkPongMessage(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Mirror_NetworkPongMessage_mC9E18537150A5D1B5D4A689047127A98BFFD77B3 (void);
+// 0x0000006D System.Void Mirror.GeneratedNetworkCode::_Write_Mirror.NetworkPongMessage(Mirror.NetworkWriter,Mirror.NetworkPongMessage)
+extern void GeneratedNetworkCode__Write_Mirror_NetworkPongMessage_mE52CB1D67E3B93C606E2FF6C45A28F4F5D0BA9C3 (void);
+// 0x0000006E System.Void Mirror.GeneratedNetworkCode::_Write_Nugget.Project.Scripts.Player.PlayerMotor/MotorData(Mirror.NetworkWriter,Nugget.Project.Scripts.Player.PlayerMotor/MotorData)
+extern void GeneratedNetworkCode__Write_Nugget_Project_Scripts_Player_PlayerMotor_MotorData_m7204BBEBFA89BC157038ADECF551A6CB7A2DAAE4 (void);
+// 0x0000006F Nugget.Project.Scripts.Player.PlayerMotor/MotorData Mirror.GeneratedNetworkCode::_Read_Nugget.Project.Scripts.Player.PlayerMotor/MotorData(Mirror.NetworkReader)
+extern void GeneratedNetworkCode__Read_Nugget_Project_Scripts_Player_PlayerMotor_MotorData_m682F8215D9E91BE982980E97AE7DBB5E8DBA6553 (void);
+// 0x00000070 System.Void Mirror.GeneratedNetworkCode::InitReadWriters()
+extern void GeneratedNetworkCode_InitReadWriters_mDE8C01F872899BEF5C62A4DBACEAADD5823ED41E (void);
+static Il2CppMethodPointer s_methodPointers[112] = 
+{
+	PlayerComponent__ctor_m1DB2C57B85B375723309FB193A71C86B3DAC0053,
+	NetworkInputHandler_get_ReceiveMouseInput_m992B19B9F6CADF6C9978E2F16C6FFF2F3620E5A2,
+	NetworkInputHandler_get_NewDataReceived_m66C11451EE3F7A15824F4EE199F42112A9EA6820,
+	NetworkInputHandler_set_NewDataReceived_m51C8DB022EE3D5E090F9DE4C3E4252C104BB8AE8,
+	NetworkInputHandler_get_ServerParentRotation_m165F758826411AFEBF567971270FD7BEBF1AC087,
+	NetworkInputHandler_set_ServerParentRotation_m61CE2B702EFAE8950E00DD7FE939004EA6716DE5,
+	NetworkInputHandler_get_ServerCameraRotation_m4A1656B0EF307F62E1FBB16DBA1AD33BCE32B853,
+	NetworkInputHandler_set_ServerCameraRotation_m36B1FF9E71526D48516A80883E073921EBA9E43C,
+	NetworkInputHandler_Construct_m63C8726D5C8A3CE761DE88F2AD5D1FDB691A9BD7,
+	NetworkInputHandler_Update_m069167E8BBB3B344417982BE804A2E0465977741,
+	NetworkInputHandler_FixedUpdate_m74A33FDCD0579425E254A4BFB8005B6FF9D4B04F,
+	NetworkInputHandler_LateUpdate_m2A8BF0619481C354C4B9C5843CCC755631A5C0D3,
+	NetworkInputHandler_InputMoveCommand_mB177E8DE269F510360651B615CCC288A55AFE22E,
+	NetworkInputHandler_ResetMotorToState_m4F5FF4562927F9A87F7580846AED53B1149A451A,
+	NetworkInputHandler__ctor_mEE9B97CA371337BD4A6694294E552AC12902FCAD,
+	NetworkInputHandler_MirrorProcessed_m7DEF75B51C80C40ED803A28C10EC169DFC2E0555,
+	NetworkInputHandler_UserCode_InputMoveCommand_m7BCCD688C76B016033203A1BD47BE26410DA9ACA,
+	NetworkInputHandler_InvokeUserCode_InputMoveCommand_m5438A884750910B9E1CB6FE6638CDA06313B7F0E,
+	NetworkInputHandler_UserCode_ResetMotorToState_mEF49C61AE0B30AEFF2BE1269763547179305D2BA,
+	NetworkInputHandler_InvokeUserCode_ResetMotorToState_mB3D84537A630A67950C935379ED14BB43D0A3C02,
+	NetworkInputHandler__cctor_m5CD7212F682A0CA711964720C1FC25E4385755EE,
+	PlayerCameraController_get_CameraEnabled_m0ECF2E61E60D371D222924B0E5A09758F2795B80,
+	PlayerCameraController_Construct_m6C4DB68BD5E550E4E09A19FB547D39585BA494B2,
+	PlayerCameraController_Awake_m3F802DD9024DE9E9A477B157FE97043183B10D92,
+	PlayerCameraController_SetCameraAxisArcClamp_m7C06164651744EF2A3DEEB3A0931ED9E01F51E06,
+	PlayerCameraController_RotateCameraPitch_m72CED4AD45110EBE309F4710E7BC1F2E5BDC17C6,
+	PlayerCameraController_RotateCameraYaw_m6D11538331D7650146208DD204F6BF1597BC8D22,
+	PlayerCameraController_RotateCameraRoll_m1445AAC50BA06FE17813C059670B5A8F384C45FB,
+	PlayerCameraController_RotateCamera_m45B0B495C77C10A751CA4DA83FA501C6E5DC247A,
+	PlayerCameraController_RotateCamera_m7C45643937D8B7F08D8C83351589C082A3FFC204,
+	PlayerCameraController_SetCameraPitch_m8158C4106D4ABB0EBCBB59E80D174C03B391DA1E,
+	PlayerCameraController_SetCameraYaw_m85BA7C21FD503B9D3007DB3110C546C898589B12,
+	PlayerCameraController_SetCameraRoll_mE2BC5A2BD99032C123D8FDCA8CCB237C7EDDB887,
+	PlayerCameraController_SetCameraRotation_m6FF49A94BBB1718A366079CC127A16E7AC200C06,
+	PlayerCameraController_SetCameraRotation_mFD3227E4F3D22F6581DB671E4266CBAFA7318232,
+	PlayerCameraController_ClampRotation_m8E7C20A8374F7E988488BE4D8C8709407B0448D5,
+	PlayerCameraController_ClampRotation_m7A641A17A7A9A3B7016AED1948703B7E5465760D,
+	PlayerCameraController_ClampRotation_m02BEA0E763DCC86E54B1941A7DEC2BB4C3069C0D,
+	PlayerCameraController_ClampRotation_m5371D121774BF6D90716149CFF570B924B6DDF6E,
+	PlayerCameraController__ctor_m917C4562CBDC548C789D1E12E67514BB9B0834D3,
+	PlayerController_Start_m8DB5AF43E8A639ACAB639DC1787D150231DBCFB4,
+	PlayerController_OnGUI_m6078E858026C2D011637C90375C285B8BF77DBB0,
+	PlayerController_OnStartClient_mAB8CB6B04E7420DC8CD9F6E513CAFDD81EAE76CC,
+	PlayerController_OnStartLocalPlayer_mD63CD0FE269E5834B22FE1504BD4D76C39E7A610,
+	PlayerController__ctor_mA1EEAEDFCFF50BB2C6643511930A8280588FC236,
+	PlayerController_MirrorProcessed_m96F0B3323B37F57EB695EF3C1180CDBE21C11BE9,
+	Factory__ctor_mCE5CE58FE03081818321BFD0E3C230B45DF5533C,
+	PlayerInputHandler_get_State_m843C095E0B8B721FA944EE8067BB3212B872623B,
+	PlayerInputHandler_get_Enabled_m8BFCD058532DFF40B58C7D5C41127B95FDEE0274,
+	PlayerInputHandler_set_Enabled_m8A5EA585EAD1A620E4B69100C609D98B7EE0E8E4,
+	PlayerInputHandler__ctor_m17797BB44CB6E98DDC3D8B527506DA4754836B0F,
+	PlayerInputHandler_OnLook_m8559BC67687D8E63157561DC6529300E823BAEF4,
+	PlayerInputHandler_OnMove_m8773AAECC719805CB075EB4F40D6C4A0012B4D20,
+	InputState_get_MoveDelta_m23428603CF05AA41C07120F06C0A921F6DA5FB47,
+	InputState_set_MoveDelta_m2EBC0AA8847118DFA44087B0CEB95B2793F45935,
+	InputState_get_LookDelta_mD05F7D4DB77BA3B27400F9C2B5946B397198ABA3,
+	InputState_set_LookDelta_m97F613CEE4B36DF83FED70ABEE3D98369ADBA588,
+	PlayerMotor_get_Data_m8660FCA73BD0941B08EFEDC4DC7DA627B7A5C246,
+	PlayerMotor_Start_mA446582FBE490C4917302C9DF6CDC7C47640EFA3,
+	PlayerMotor_Update_m882BE381C2E7990B9AEEC44F0679E53DCF02FBDC,
+	PlayerMotor_RotateMotor_m22136848B2C804A83D9C90382AAC00B550C55250,
+	PlayerMotor_MoveMotor_mD0CB55754E800FF0B5BDC436803150E71B0D7EE2,
+	PlayerMotor_ResetMotor_m6D397B09E46EBBED3C38DFC25708C5C10C46A9E4,
+	PlayerMotor_ResetMotor_m9E63EC0B4B94C821434928D9BF47C17DE5FDAB8D,
+	PlayerMotor__ctor_mAB639699E388B7A0FC7485AC529802712A04EC80,
+	MotorData_get_Position_mFF581197BB222EAA9755CD37A0C58ED74BF6DC6C,
+	MotorData_set_Position_mEBC1B1472C20D3A7D494559F7F8F4AD6BF3A3647,
+	MotorData_get_Rotation_m220AA476930C4450356C553BCB934C059859D430,
+	MotorData_set_Rotation_m7B71AF6052398A3E7C34AB27EDB14EFF830FB9C1,
+	MotorData_get_Velocity_mD6F2B02C836EAE72B34451E7EC01DD79029F94FB,
+	MotorData_set_Velocity_m4F6DD30B9479947E3A36B8A01281ED73A9445388,
+	PlayerVisuals_Construct_m2443FB6BA117507CDF375907640E339AA5E8F9E0,
+	PlayerVisuals__ctor_mCD732700DEF9D423E0E7D2926F21B0418797856C,
+	NULL,
+	NULL,
+	MotorState__ctor_mF86EE255B0F463AE663F8570C3C3C6EF7BB8403F,
+	MotorStateMachine_MoveMotor_m6ACED7937CD13602E01321C86D83246B2F6895CC,
+	MotorStateMachine_SetState_m12CFBE4E47D59A1BD0D4E7DB302E9D7CBDA45DE0,
+	MotorStateMachine__ctor_m53C7EFEF29B65F5A755733FEFA52ECF2F17691FB,
+	GeneratedNetworkCode__Read_Mirror_ReadyMessage_m9F2A069DB593B8C81402ED5C0F5881033EDB054E,
+	GeneratedNetworkCode__Write_Mirror_ReadyMessage_m5733C3FE4F33E7A988349C32924A68943F90092C,
+	GeneratedNetworkCode__Read_Mirror_NotReadyMessage_m9EA6FA145BD008EC6A1A185D4B76ADCFE2789A2D,
+	GeneratedNetworkCode__Write_Mirror_NotReadyMessage_m355BD32BBEC7B8C0C744EC3F1F259ECC4B025829,
+	GeneratedNetworkCode__Read_Mirror_AddPlayerMessage_m009488FE28250A243E88FFDCB6EAD10B02C6C4CE,
+	GeneratedNetworkCode__Write_Mirror_AddPlayerMessage_m067C8093F25E75802BD813075800D0E1034CE1EC,
+	GeneratedNetworkCode__Read_Mirror_SceneMessage_mB9BD3FA580778FEE290613FF5011B8BC2B3076A0,
+	GeneratedNetworkCode__Read_Mirror_SceneOperation_mB4ACC7B90EB04DB4C390E76499CF24FFC7806AB2,
+	GeneratedNetworkCode__Write_Mirror_SceneMessage_mF6F8B0DD96871D8D2F40CBA83A1E5739D1A06923,
+	GeneratedNetworkCode__Write_Mirror_SceneOperation_m8DB13E4DC4466CB1A08B245F8B687A44F17905CC,
+	GeneratedNetworkCode__Read_Mirror_CommandMessage_m137EF4BE0A4397BD7541833AB7176D8D46B97346,
+	GeneratedNetworkCode__Write_Mirror_CommandMessage_m0F70DB66113D6AE17FBD7A686B905DB595096FBE,
+	GeneratedNetworkCode__Read_Mirror_RpcMessage_m083E42738E7AE013E44A69AF633591993D90572E,
+	GeneratedNetworkCode__Write_Mirror_RpcMessage_m6513279CF4A47976BC00C2BE1C0D544B7EAECB63,
+	GeneratedNetworkCode__Read_Mirror_SpawnMessage_m0D71FB9C170E816ACF4E3EBC16E46879410DD54D,
+	GeneratedNetworkCode__Write_Mirror_SpawnMessage_m120DF5C3D70AF7CAC03A9B1B71A1D750855FC63F,
+	GeneratedNetworkCode__Read_Mirror_ObjectSpawnStartedMessage_m1A942C48C1AD36497F615660819DDFFF94A7E8BC,
+	GeneratedNetworkCode__Write_Mirror_ObjectSpawnStartedMessage_m18C3B11EA75E6E07BA4276D672BC308F6C70DBCC,
+	GeneratedNetworkCode__Read_Mirror_ObjectSpawnFinishedMessage_mD66DDAA08193E60038E64A7591E721FEDEC01D98,
+	GeneratedNetworkCode__Write_Mirror_ObjectSpawnFinishedMessage_mABE494F3D8A5B0B219CB18CD2C95A83471D69379,
+	GeneratedNetworkCode__Read_Mirror_ObjectDestroyMessage_mB46A550FBEEB49F26CB04848B416F677B6E2E7B0,
+	GeneratedNetworkCode__Write_Mirror_ObjectDestroyMessage_m798663CBDB37A51E708B0223C9D6932C638B5BC1,
+	GeneratedNetworkCode__Read_Mirror_ObjectHideMessage_mCDAC423D887AAC3569960D3515E75B5DC232827C,
+	GeneratedNetworkCode__Write_Mirror_ObjectHideMessage_m7C92F0E2C691EBF47E8E584F79AE49A6AF73E725,
+	GeneratedNetworkCode__Read_Mirror_UpdateVarsMessage_m70D2436AFDF1C7833A283CFDC728DE961B9028E5,
+	GeneratedNetworkCode__Write_Mirror_UpdateVarsMessage_m946DDE8BE43F74214A4D47A0E50D92529DEACDE1,
+	GeneratedNetworkCode__Read_Mirror_NetworkPingMessage_m89BE72A6656EEF0828DDF0543548D65C86236F61,
+	GeneratedNetworkCode__Write_Mirror_NetworkPingMessage_m8DE482DFE2A11E073A74341F32B2D45929CF9B0A,
+	GeneratedNetworkCode__Read_Mirror_NetworkPongMessage_mC9E18537150A5D1B5D4A689047127A98BFFD77B3,
+	GeneratedNetworkCode__Write_Mirror_NetworkPongMessage_mE52CB1D67E3B93C606E2FF6C45A28F4F5D0BA9C3,
+	GeneratedNetworkCode__Write_Nugget_Project_Scripts_Player_PlayerMotor_MotorData_m7204BBEBFA89BC157038ADECF551A6CB7A2DAAE4,
+	GeneratedNetworkCode__Read_Nugget_Project_Scripts_Player_PlayerMotor_MotorData_m682F8215D9E91BE982980E97AE7DBB5E8DBA6553,
+	GeneratedNetworkCode_InitReadWriters_mDE8C01F872899BEF5C62A4DBACEAADD5823ED41E,
+};
+extern void InputState_get_MoveDelta_m23428603CF05AA41C07120F06C0A921F6DA5FB47_AdjustorThunk (void);
+extern void InputState_set_MoveDelta_m2EBC0AA8847118DFA44087B0CEB95B2793F45935_AdjustorThunk (void);
+extern void InputState_get_LookDelta_mD05F7D4DB77BA3B27400F9C2B5946B397198ABA3_AdjustorThunk (void);
+extern void InputState_set_LookDelta_m97F613CEE4B36DF83FED70ABEE3D98369ADBA588_AdjustorThunk (void);
+extern void MotorData_get_Position_mFF581197BB222EAA9755CD37A0C58ED74BF6DC6C_AdjustorThunk (void);
+extern void MotorData_set_Position_mEBC1B1472C20D3A7D494559F7F8F4AD6BF3A3647_AdjustorThunk (void);
+extern void MotorData_get_Rotation_m220AA476930C4450356C553BCB934C059859D430_AdjustorThunk (void);
+extern void MotorData_set_Rotation_m7B71AF6052398A3E7C34AB27EDB14EFF830FB9C1_AdjustorThunk (void);
+extern void MotorData_get_Velocity_mD6F2B02C836EAE72B34451E7EC01DD79029F94FB_AdjustorThunk (void);
+extern void MotorData_set_Velocity_m4F6DD30B9479947E3A36B8A01281ED73A9445388_AdjustorThunk (void);
+static Il2CppTokenAdjustorThunkPair s_adjustorThunks[10] = 
+{
+	{ 0x06000036, InputState_get_MoveDelta_m23428603CF05AA41C07120F06C0A921F6DA5FB47_AdjustorThunk },
+	{ 0x06000037, InputState_set_MoveDelta_m2EBC0AA8847118DFA44087B0CEB95B2793F45935_AdjustorThunk },
+	{ 0x06000038, InputState_get_LookDelta_mD05F7D4DB77BA3B27400F9C2B5946B397198ABA3_AdjustorThunk },
+	{ 0x06000039, InputState_set_LookDelta_m97F613CEE4B36DF83FED70ABEE3D98369ADBA588_AdjustorThunk },
+	{ 0x06000042, MotorData_get_Position_mFF581197BB222EAA9755CD37A0C58ED74BF6DC6C_AdjustorThunk },
+	{ 0x06000043, MotorData_set_Position_mEBC1B1472C20D3A7D494559F7F8F4AD6BF3A3647_AdjustorThunk },
+	{ 0x06000044, MotorData_get_Rotation_m220AA476930C4450356C553BCB934C059859D430_AdjustorThunk },
+	{ 0x06000045, MotorData_set_Rotation_m7B71AF6052398A3E7C34AB27EDB14EFF830FB9C1_AdjustorThunk },
+	{ 0x06000046, MotorData_get_Velocity_mD6F2B02C836EAE72B34451E7EC01DD79029F94FB_AdjustorThunk },
+	{ 0x06000047, MotorData_set_Velocity_m4F6DD30B9479947E3A36B8A01281ED73A9445388_AdjustorThunk },
+};
+static const int32_t s_InvokerIndices[112] = 
+{
+	4927,
+	4869,
+	4869,
+	3948,
+	4844,
+	3927,
+	4844,
+	3927,
+	1099,
+	4927,
+	4927,
+	4927,
+	4000,
+	4098,
+	4927,
+	4927,
+	4000,
+	6387,
+	4098,
+	6387,
+	7685,
+	4869,
+	2106,
+	4927,
+	4000,
+	3965,
+	3965,
+	3965,
+	4000,
+	1158,
+	3965,
+	3965,
+	3965,
+	4000,
+	1158,
+	3907,
+	3037,
+	3652,
+	990,
+	4927,
+	4927,
+	4927,
+	4927,
+	4927,
+	4927,
+	4927,
+	4927,
+	5023,
+	4869,
+	3948,
+	4927,
+	4058,
+	4058,
+	4920,
+	4000,
+	4918,
+	3998,
+	5024,
+	4927,
+	4927,
+	3965,
+	4000,
+	4098,
+	1167,
+	4927,
+	4920,
+	4000,
+	4844,
+	3927,
+	4920,
+	4000,
+	3907,
+	4927,
+	4000,
+	4000,
+	4927,
+	4000,
+	3335,
+	4927,
+	7424,
+	6986,
+	7332,
+	6977,
+	7182,
+	6958,
+	7464,
+	7451,
+	6993,
+	6991,
+	7200,
+	6961,
+	7435,
+	6989,
+	7488,
+	6998,
+	7396,
+	6982,
+	7395,
+	6981,
+	7393,
+	6979,
+	7394,
+	6980,
+	7500,
+	6999,
+	7330,
+	6975,
+	7331,
+	6976,
+	7010,
+	7592,
+	7685,
+};
+extern const CustomAttributesCacheGenerator g_Project_Scripts_Player_AttributeGenerators[];
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_Project_Scripts_Player_CodeGenModule;
+const Il2CppCodeGenModule g_Project_Scripts_Player_CodeGenModule = 
+{
+	"Project.Scripts.Player.dll",
+	112,
+	s_methodPointers,
+	10,
+	s_adjustorThunks,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	g_Project_Scripts_Player_AttributeGenerators,
+	NULL, // module initializer,
+	NULL,
+	NULL,
+	NULL,
+};

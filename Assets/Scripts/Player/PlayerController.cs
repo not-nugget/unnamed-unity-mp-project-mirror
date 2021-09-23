@@ -1,8 +1,5 @@
-﻿using Cinemachine;
-using Mirror;
-using Nugget.Project.Scripts.Camera;
-using Sirenix.OdinInspector;
-using System;
+﻿using Mirror;
+using Nugget.Project.Plugins.Extensions;
 using UnityEngine;
 using Zenject;
 
@@ -37,18 +34,30 @@ namespace Nugget.Project.Scripts.Player
             modelTransform = GetComponentInChildren<PlayerVisuals>();
             cameraController = GetComponentInChildren<PlayerCameraController>();
 
-            //the motor information will be used to animate the player, etc, so it is still wise to have one on every player, local or otherwise
-            if (TryGetComponent(out PlayerMotor motor))
-            {
-                this.motor = motor;
-            }
-            else
-            {
-                this.motor = gameObject.AddComponent<PlayerMotor>();
-            }
+            //TODO just get the component, you apparently are not supposed to add components dynamically
+            motor = gameObject.GetOrAddComponent<PlayerMotor>();
+            networkInput = gameObject.GetOrAddComponent<NetworkInputHandler>();
 
-            modelTransform.Construct(this.motor);
-            cameraController.Construct(inputHandler, networkInput);
+            modelTransform.Construct(motor);
+            cameraController.Construct(networkInput, isLocalPlayer);
+            networkInput.Construct(inputHandler, cameraController, motor);
+        }
+
+        private void OnGUI()
+        {
+            if (!isLocalPlayer) return;
+
+            GUILayout.BeginVertical(GUILayout.ExpandHeight(true));
+            GUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
+
+            GUI.Label(new Rect(5f, 5f, 1f, 300f), "");
+
+            GUI.Label(new Rect(5f, 305f, 450f, 20f), $"pos(x:{transform.position.x:F4}  y:{transform.position.y:F4}  z:{transform.position.z:F4})");
+            GUI.Label(new Rect(5f, 325f, 450f, 20f), $"rot(x:{transform.GetChild(0).rotation.eulerAngles.x:F4}  y:{transform.GetChild(0).rotation.eulerAngles.y:F4}  z:{transform.GetChild(0).rotation.eulerAngles.z:F4})");
+            GUI.Label(new Rect(5f, 345f, 450f, 20f), $"vel(x:{motor.Data.Velocity.x:F4}  y:{motor.Data.Velocity.y:F4}  z:{motor.Data.Velocity.z:F4})");
+
+            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
         }
         #endregion
 
@@ -63,10 +72,6 @@ namespace Nugget.Project.Scripts.Player
         public override void OnStartLocalPlayer()
         {
             inputHandler = new PlayerInputHandler();
-
-            //after more thought, the network input only needs to be on the object that is predictively moving itself. this is the component that is effectively going to send corrections to itself while moving.
-            //the client will move its own motor indiscriminantly, but this has the ability to issue motor rests. the network transform and rigidbody will synchronize the player reliably otherwise
-            networkInput = gameObject.AddComponent<NetworkInputHandler>();
         }
         #endregion
 
