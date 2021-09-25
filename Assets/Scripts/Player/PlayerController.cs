@@ -1,5 +1,6 @@
 ﻿using Mirror;
 using Nugget.Project.Plugins.Extensions;
+using Nugget.Project.Scripts.Player.Motor;
 using UnityEngine;
 using Zenject;
 
@@ -30,17 +31,18 @@ namespace Nugget.Project.Scripts.Player
 
         #region Unity Messages
         private void Start()
-        {
+        { 
+            //TODO look and see if anything else can be converted into humble objects and further abstracted with interfaces
             modelTransform = GetComponentInChildren<PlayerVisuals>();
-            cameraController = GetComponentInChildren<PlayerCameraController>();
-
-            //TODO just get the component, you apparently are not supposed to add components dynamically
-            motor = gameObject.GetOrAddComponent<PlayerMotor>();
-            networkInput = gameObject.GetOrAddComponent<NetworkInputHandler>();
-
             modelTransform.Construct(motor);
+
+            cameraController = GetComponentInChildren<PlayerCameraController>();
             cameraController.Construct(networkInput, isLocalPlayer);
+
+            networkInput = GetComponent<NetworkInputHandler>();
             networkInput.Construct(inputHandler, cameraController, motor);
+
+            motor = new PlayerMotor(GetComponent<Rigidbody>());
         }
 
         private void OnGUI()
@@ -54,7 +56,7 @@ namespace Nugget.Project.Scripts.Player
 
             GUI.Label(new Rect(5f, 305f, 450f, 20f), $"pos(x:{transform.position.x:F4}  y:{transform.position.y:F4}  z:{transform.position.z:F4})");
             GUI.Label(new Rect(5f, 325f, 450f, 20f), $"rot(x:{transform.GetChild(0).rotation.eulerAngles.x:F4}  y:{transform.GetChild(0).rotation.eulerAngles.y:F4}  z:{transform.GetChild(0).rotation.eulerAngles.z:F4})");
-            GUI.Label(new Rect(5f, 345f, 450f, 20f), $"vel(x:{motor.Data.Velocity.x:F4}  y:{motor.Data.Velocity.y:F4}  z:{motor.Data.Velocity.z:F4})");
+            GUI.Label(new Rect(5f, 345f, 450f, 20f), $"vel(x:{motor.MotorState.Velocity.x:F4}  y:{motor.MotorState.Velocity.y:F4}  z:{motor.MotorState.Velocity.z:F4})");
 
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();

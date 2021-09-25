@@ -1,4 +1,6 @@
 using Mirror;
+using Nugget.Project.Scripts.Player.Interfaces;
+using Nugget.Project.Scripts.Player.Motor.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,12 +8,8 @@ namespace Nugget.Project.Scripts.Player
 {
     public class NetworkInputHandler : NetworkBehaviour
     {
-        //i could probably achieve the pitch dealio with a SyncVar
-        //the rest I might want to set up with Commands(client -> server) and RPCs(server -> client)
-        //or....just use a network transfrorm child?
-
         //we don't need to worry about the mouse movement, only the per-frame instructions to move the character
-        public struct SyncInput
+        public struct SyncInput //gross and needs to go. I think for now i decided on the updates only occuring every fixed timestep so we can roll with those punches for now
         {
             public Vector3 move;
             public float dt; // i dont need to send the delta time, as I can just calculate it based on the total number of frames elapsed and the send interval, but it might be smart to send it for undeniable determinism between the client and server
@@ -30,13 +28,13 @@ namespace Nugget.Project.Scripts.Player
 
         private PlayerInputHandler playerInput;
         private PlayerCameraController cameraController;
-        private PlayerMotor motor;
+        private IPlayerMotor motor;
 
         private readonly Queue<SyncInput> inputQueue = new Queue<SyncInput>();
         private float inputSendIntervalTimer = 0;
         private int framesSinceLastInputCommandSent = 0;
 
-        public void Construct(PlayerInputHandler playerInput, PlayerCameraController cameraController, PlayerMotor motor)
+        public void Construct(PlayerInputHandler playerInput, PlayerCameraController cameraController, IPlayerMotor motor)
         {
             this.playerInput = playerInput;
             this.cameraController = cameraController;
@@ -59,7 +57,7 @@ namespace Nugget.Project.Scripts.Player
             if (inputSendIntervalTimer <= 0f)
             {
                 print("Sending input queue command to server");
-                Cmd_InputQueue(framesSinceLastInputCommandSent, inputQueue.ToArray(), motor.transform.position);
+                Cmd_InputQueue(framesSinceLastInputCommandSent, inputQueue.ToArray(), motor.MotorState.Position);
 
                 inputSendIntervalTimer = inputSendInterval;
                 framesSinceLastInputCommandSent = 0;
@@ -79,12 +77,12 @@ namespace Nugget.Project.Scripts.Player
         public void Cmd_InputQueue(int totalInputFramesSinceLastCommand, SyncInput[] inputQueue, Vector3 currentBodyPosition)
         {
             print("Received input command");
-            print($"Current player position on server: {motor.transform.position}");
+            print($"Current player position on server: {motor.MotorState.Position}");
             print($"Current player position on client: {currentBodyPosition}");
 
             if (totalInputFramesSinceLastCommand > 0)
             {
-                Vector3 finalBodyPosition = motor.transform.position;
+                Vector3 finalBodyPosition = motor.MotorState.Position;
                 print($"Motor position on server: {finalBodyPosition}");
 
                 foreach (SyncInput input in inputQueue)
@@ -97,7 +95,7 @@ namespace Nugget.Project.Scripts.Player
                     print("Sending motor correction to client");
 
                     //issue a correction
-                    PlayerMotor.MotorData motorState = new PlayerMotor.MotorData { Position = finalBodyPosition, Velocity = motor.Data.Velocity };
+                    IMotorState motorState = new MotorState(finalBodyPosition, motor.MotorState.Rotation, motor.MotorState.Velocity, motor.MotorState.AngularVelocity);
                     Rpc_ResetMotorToState(motorState);
                     motor.ResetMotor(motorState);
                 }
@@ -105,7 +103,7 @@ namespace Nugget.Project.Scripts.Player
         }
 
         [ClientRpc]
-        public void Rpc_ResetMotorToState(PlayerMotor.MotorData resetState)
+        public void Rpc_ResetMotorToState(IMotorState resetState)
         {
             print("Motor correction received");
 
