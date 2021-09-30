@@ -26,6 +26,12 @@ namespace Nugget.Project.Scripts
         /// <param name="resetRotation">Motor's target reset rotation</param>
         void ResetMotor(Vector3 resetPosition, Quaternion resetRotation);
         /// <summary>
+        /// Reset the motor's velocity and angular velocity, leaving the rest of the motor's state intact
+        /// </summary>
+        /// <param name="velocity">Motor's target reset velocity</param>
+        /// <param name="angularVelocity">Motor's target reset angular velocity</param>
+        void ResetMotor(Vector3 velocity, Vector3 angularVelocity);
+        /// <summary>
         /// Reset the motor's entire state
         /// </summary>
         /// <param name="resetState">Motor's target reset state</param>

@@ -46,7 +46,7 @@ namespace Nugget.Project.Scripts.Player
         }
 
         private void OnGUI()
-        {
+        {   //TODO been wanting to do this for a while, but I want to make a nice debug output for Unity using the in-built GUI system that can display anything 
             if (!isLocalPlayer) return;
 
             GUILayout.BeginVertical(GUILayout.ExpandHeight(true));

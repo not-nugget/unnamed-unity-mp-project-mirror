@@ -45,24 +45,28 @@ namespace Nugget.Project.Scripts.Player
         {
             if (playerInput is null) return;
 
-            inputSendIntervalTimer -= Time.deltaTime;
-            framesSinceLastInputCommandSent++;
+            //NOTE Interval-based command send
+            //inputSendIntervalTimer -= Time.deltaTime;
+            //framesSinceLastInputCommandSent++;
 
-            if (playerInput.Data.MoveDelta.sqrMagnitude > 0f)
-                inputQueue.Enqueue(new SyncInput(playerInput.Data, Time.deltaTime));
+            //if (playerInput.Data.MoveDelta.sqrMagnitude > 0f)
+            //    inputQueue.Enqueue(new SyncInput(playerInput.Data, Time.deltaTime));
 
-            cameraController.RotateCameraPitch(playerInput.Data.LookDelta.x);
-            clientRotationTransform.Rotate(clientRotationTransform.up, -playerInput.Data.LookDelta.y);
+            //cameraController.RotateCameraPitch(playerInput.Data.LookDelta.x);
+            //clientRotationTransform.Rotate(clientRotationTransform.up, -playerInput.Data.LookDelta.y);
 
-            if (inputSendIntervalTimer <= 0f)
-            {
-                print("Sending input queue command to server");
-                Cmd_InputQueue(framesSinceLastInputCommandSent, inputQueue.ToArray(), motor.MotorState.Position);
+            //if (inputSendIntervalTimer <= 0f)
+            //{
+            //    print("Sending input queue command to server");
+            //    Cmd_InputQueue(framesSinceLastInputCommandSent, inputQueue.ToArray(), motor.MotorState.Position);
 
-                inputSendIntervalTimer = inputSendInterval;
-                framesSinceLastInputCommandSent = 0;
-                inputQueue.Clear();
-            }
+            //    inputSendIntervalTimer = inputSendInterval;
+            //    framesSinceLastInputCommandSent = 0;
+            //    inputQueue.Clear();
+            //}
+
+            //Per rame command send
+            Cmd_InputAction(playerInput.Data, motor.MotorState);
         }
 
         private void FixedUpdate()
@@ -70,7 +74,10 @@ namespace Nugget.Project.Scripts.Player
             if (playerInput is null) return;
 
             Vector3 moveDelta = 5f * Time.fixedDeltaTime * playerInput.Data.MoveDelta;
-            motor.MoveMotor(moveDelta); //Move the motor locally
+
+            //motor.MoveMotor(moveDelta); //Move the motor locally
+
+            motor.AddForce(moveDelta, ForceMode.VelocityChange, true); //Relative doesn't matter right now, as the motor's body is axis aligned, we can rotate the delta later
         }
 
         [Command]
@@ -100,6 +107,13 @@ namespace Nugget.Project.Scripts.Player
                     motor.ResetMotor(motorState);
                 }
             }
+        }
+
+        [Command]
+        public void Cmd_InputAction(PlayerInputHandler.InputData input, IMotorState clientMotorState)
+        {
+            //i just realized...there will likely be a desynchronization between the fixed update calls on the client and server, regardless if mirror synchronizes it or not...
+            //we might have to do some preemptive calculation on these inputs on the server when we get them or something...idk but this gets more complicated the more I look into it
         }
 
         [ClientRpc]
