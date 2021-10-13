@@ -1,5 +1,6 @@
 ﻿using Mirror;
 using Nugget.Project.Scripts.Player;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -16,6 +17,59 @@ namespace Nugget.Project.Scripts.Networking
     /// </summary>
     public class GameNetworkManager : NetworkManager
     {
+        #region Events
+        /// <summary>
+        /// Invoked whenever the running state of the manager changes. Will always be invoked first
+        /// </summary>
+        public event Action<bool> OnRunningStateChanged;
+
+        /// <summary>
+        /// Invoked whenever the server state of the manager changes. Will always be invoked after the Running state changes
+        /// </summary>
+        public event Action<bool> OnServerStateChanged;
+
+        /// <summary>
+        /// Invoked whenever the host state of the manager changes. Will always be invoked after the Sever state changes
+        /// </summary>
+        public event Action<bool> OnHostStateChanged;
+
+        /// <summary>
+        /// Invoked whenever the host state of the manager changes. Will always be invoked after the Host state changes if this client is acting as the host
+        /// </summary>
+        public event Action<bool> OnClientStateChanged;
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// Is this manager running?
+        /// </summary>
+        public bool IsRunning { get => isRunning; private set { isRunning = value; OnRunningStateChanged?.Invoke(value); } }
+        private bool isRunning = false;
+
+        /// <summary>
+        /// Is this running manager a server? Note: A manager can be a Server, Host and Client at the same time
+        /// </summary>
+        public bool IsServer { get => isServer; private set { isServer = value; OnServerStateChanged?.Invoke(value); } }
+        private bool isServer = false;
+
+        /// <summary>
+        /// Is this running manager a server and client? Note: A manager can be a Server, Host and Client at the same time
+        /// </summary>
+        public bool IsHost { get => isHost; private set { isHost = value; OnHostStateChanged?.Invoke(value); } }
+        private bool isHost = false;
+
+        /// <summary>
+        /// Is this running manager a client? Note: A manager can be a Server, Host and Client at the same time
+        /// </summary>
+        public bool IsClient { get => isClient; private set { isClient = value; OnClientStateChanged?.Invoke(value); } }
+        private bool isClient = false;
+
+        /// <summary>
+        /// The number of times per second the server will update
+        /// </summary>
+        public int ServerTickRate { get => serverTickRate; }
+        #endregion
+
         #region Private Fields
         private PlayerController.Factory playerFactory = null;
         #endregion
@@ -221,33 +275,53 @@ namespace Nugget.Project.Scripts.Networking
         /// This is invoked when a host is started.
         /// <para>StartHost has multiple signatures, but they all cause this hook to be called.</para>
         /// </summary>
-        public override void OnStartHost() { }
+        public override void OnStartHost()
+        {
+            SetIsRunning(true);
+            SetIsHost(true);
+        }
 
         /// <summary>
         /// This is invoked when a server is started - including when a host is started.
         /// <para>StartServer has multiple signatures, but they all cause this hook to be called.</para>
         /// </summary>
-        public override void OnStartServer() { }
+        public override void OnStartServer()
+        {
+            SetIsRunning(true);
+            SetIsServer(true);
+        }
 
         /// <summary>
         /// This is invoked when the client is started.
         /// </summary>
-        public override void OnStartClient() { }
+        public override void OnStartClient()
+        {
+            SetIsRunning(true);
+            SetIsClient(true);
+        }
 
         /// <summary>
         /// This is called when a host is stopped.
         /// </summary>
-        public override void OnStopHost() { }
+        public override void OnStopHost() => OnStop();
 
         /// <summary>
         /// This is called when a server is stopped - including when a host is stopped.
         /// </summary>
-        public override void OnStopServer() { }
+        public override void OnStopServer() => OnStop();
 
         /// <summary>
         /// This is called when a client is stopped.
         /// </summary>
-        public override void OnStopClient() { }
+        public override void OnStopClient() => OnStop();
+        #endregion
+
+        #region Private Methods
+        private void SetIsRunning(bool value) => IsRunning = value;
+        private void SetIsServer(bool value) => IsServer = value;
+        private void SetIsHost(bool value) => IsHost = value;
+        private void SetIsClient(bool value) => IsClient = value;
+        private void OnStop() { SetIsRunning(false); SetIsServer(false); SetIsHost(false); SetIsClient(false); }
         #endregion
     }
 }

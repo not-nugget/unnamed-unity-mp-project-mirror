@@ -65,7 +65,8 @@ namespace Nugget.Project.Scripts.Player
             //    inputQueue.Clear();
             //}
 
-            //Per rame command send
+            //Per frame command send
+            //Probably won't want to send the entire motor state every frame, but for now its a good testing point
             Cmd_InputAction(playerInput.Data, motor.MotorState);
         }
 
