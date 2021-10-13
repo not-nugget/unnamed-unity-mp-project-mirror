@@ -125,12 +125,18 @@ namespace Nugget.Project.Scripts.Networking
 
         #region Start & Stop
         /// <summary>
-        /// Set the frame rate for a headless server.
-        /// <para>Override if you wish to disable the behavior or set your own tick rate.</para>
+        /// Disable physics auto-simulation and match the physics timestep to the server tickrate for any server. Additionally sets the target application framerate for a headless server
         /// </summary>
         public override void ConfigureServerFrameRate()
         {
-            base.ConfigureServerFrameRate();
+            if (isServer) //If this network manager is acting as a server, we need to disable auto-simulation and make sure the physics timestep matches the tick rate. Otherwise, do nothing.
+            {
+#if UNITY_SERVER
+            Application.targetFrameRate = serverTickRate;
+#endif
+                Time.fixedDeltaTime = 1 / serverTickRate;
+                Physics.autoSimulation = false;
+            }
         }
 
         /// <summary>
@@ -300,6 +306,7 @@ namespace Nugget.Project.Scripts.Networking
             SetIsClient(true);
         }
 
+        //TODO this is dumb, hosts can potentially stop while server remains...rething this OnStop approach
         /// <summary>
         /// This is called when a host is stopped.
         /// </summary>

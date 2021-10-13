@@ -1,5 +1,4 @@
 ﻿using Mirror;
-using Nugget.Project.Plugins.Extensions;
 using Nugget.Project.Scripts.Player.Motor;
 using UnityEngine;
 using Zenject;
@@ -12,7 +11,8 @@ namespace Nugget.Project.Scripts.Player
     /// </summary>
     public class PlayerController : NetworkBehaviour
     {
-        #region Private Fields
+        #region Private Fields 
+        //TODO Is there a way I can move these into injections instead of GetComponent calls?
         private PlayerVisuals modelTransform;
         private PlayerCameraController cameraController;
         private PlayerInputHandler inputHandler;
@@ -31,7 +31,7 @@ namespace Nugget.Project.Scripts.Player
 
         #region Unity Messages
         private void Start()
-        { 
+        {
             //TODO look and see if anything else can be converted into humble objects and further abstracted with interfaces
             modelTransform = GetComponentInChildren<PlayerVisuals>();
             modelTransform.Construct(motor);
@@ -66,9 +66,7 @@ namespace Nugget.Project.Scripts.Player
         #region Mirror overrides
         public override void OnStartClient()
         {
-            //Might not need to do this because of the network transform, however the clients should still not directly move their character's transform in a non-predictive context (meaning their movements should be aesthetic, not physical)
-            //motor = GetComponent<PlayerMotor>(); //The server should do motor calculations too and correct the client if the client diverges...need to look for a way to send client inputs to the host
-            //motor.OnMotorStateChanged += OnMotorStateChanged;
+            base.OnStartClient();
         }
 
         public override void OnStartLocalPlayer()

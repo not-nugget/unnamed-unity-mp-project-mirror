@@ -7,6 +7,21 @@ namespace Nugget.Project.Scripts.Player
 {
     public class PlayerInputHandler : IDefaultControlsActions
     {
+        #region InputState Enum
+        /// <summary>
+        /// An enum whos purpose is to completely reconstruct <see cref="InputData"/> based on the flags set within
+        /// </summary>
+        [Flags]
+        public enum InputState //Remeber, we don't care about look here, only the stuff that will move the motor
+        {
+            Empty = 0,
+            KeyForward = 1,
+            KeyBack = ~KeyForward,
+            KeyLeft = 2,
+            KeyRight = ~KeyLeft,
+        }
+        #endregion
+
         #region InputState Scruct
         /// <summary>
         /// Container for easy transfer of input data from object to object
@@ -40,9 +55,14 @@ namespace Nugget.Project.Scripts.Player
 
         #region Public Properties
         /// <summary>
-        /// Get the current state of the input system
+        /// Get the current raw data of the input system
         /// </summary>
         public InputData Data => inputData;
+
+        /// <summary>
+        /// Get the current input state of the input system
+        /// </summary>
+        public InputState State => inputState;
 
         /// <summary>
         /// Get or set the enabled state of the underlying <see cref="InputActionAsset"/>
@@ -66,6 +86,7 @@ namespace Nugget.Project.Scripts.Player
         #region Private Fields
         private readonly InputControls controls;
         private InputData inputData;
+        private InputState inputState;
         #endregion
 
         public PlayerInputHandler()
@@ -79,7 +100,25 @@ namespace Nugget.Project.Scripts.Player
         #region Interface Implementation
         public void OnLook(InputAction.CallbackContext context) => inputData.LookDelta = context.ReadValue<Vector2>();
 
-        public void OnMove(InputAction.CallbackContext context) => inputData.MoveDelta = context.ReadValue<Vector2>();
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            Vector2 moveDelta = context.ReadValue<Vector2>();
+
+            //inputState &= ~(InputState.KeyForward & InputState.KeyBack);
+            //if (moveDelta.x != 0f)
+            //{
+            //    if (moveDelta.x > 0f)
+            //        if (moveDelta.x < 0f) { }
+            //}
+
+            //if (moveDelta.y != 0f)
+            //{
+            //    if (moveDelta.y > 0f) { }
+            //    if (moveDelta.y < 0f) { }
+            //}
+
+            inputData.MoveDelta = moveDelta;
+        }
         #endregion
     }
 }

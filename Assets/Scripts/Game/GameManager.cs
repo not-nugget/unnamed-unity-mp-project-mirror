@@ -50,14 +50,16 @@ namespace Nugget.Project.Scripts.Game
         #endregion
 
         #region Private Methods
-        private void OnNetworkManagerServerStateChanged(bool newState)
-        {   //TODO this needs to be tested
-            Physics.autoSimulation = !newState && networkManager.IsRunning;
-            if (newState)
-            {
-                //If the state of the network manager was set to true, configure physics to process at the same rate as the tick rate. That way every physics simulation occurs and then the update is sent immediately after
-                Time.fixedDeltaTime = 1 / networkManager.ServerTickRate;
-            }
+        private void OnNetworkManagerServerStateChanged(bool newState) //Event subscription can be removed or repurposed i.e. can dynamically disable/enable this object when the state is alterred
+        {
+            //This is done in GameNetworkManager.ConfigureServerFramerate instead of here
+            //TODO this needs to be tested
+            //Physics.autoSimulation = !newState && networkManager.IsRunning;
+            //if (newState)
+            //{
+            //    //If the state of the network manager was set to true, configure physics to process at the same rate as the tick rate. That way every physics simulation occurs and then the update is sent immediately after
+            //    Time.fixedDeltaTime = 1 / networkManager.ServerTickRate;
+            //}
         }
         #endregion
     }
