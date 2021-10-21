@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 327695354}
   - component: {fileID: 327695353}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,9 +176,9 @@ GameObject:
   m_Component:
   - component: {fileID: 362100692}
   - component: {fileID: 362100691}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GameDIContainer
-  m_TagString: Untagged
+  m_TagString: InjectionContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 623908066}
   - component: {fileID: 623908065}
   - component: {fileID: 623908064}
+  - component: {fileID: 623908069}
   m_Layer: 0
   m_Name: RootCamera
   m_TagString: MainCamera
@@ -331,9 +332,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 1000
-  field of view: 88.69148
+  field of view: 73.73979
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -359,13 +360,47 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 623908063}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.635, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1810199002}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &623908069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623908063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 0
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 0
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &695937541
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 695937543}
   - component: {fileID: 695937542}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DebugSceneLoadOnStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 962992820}
   - component: {fileID: 962992819}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GameInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,8 +506,9 @@ GameObject:
   - component: {fileID: 1323336996}
   - component: {fileID: 1323336995}
   - component: {fileID: 1323336994}
+  - component: {fileID: 1323336998}
   - component: {fileID: 1323336993}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: NetworkManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,7 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b149f511061407fb54895c057b7736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wrap: {fileID: 1323336995}
+  wrap: {fileID: 1323336998}
   latencySpikeMultiplier: 0.2
   latencySpikeSpeedMultiplier: 1
   reliableLatency: 0.055
@@ -565,7 +601,8 @@ MonoBehaviour:
   playerPrefab: {fileID: 0}
   autoCreatePlayer: 0
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 5419793007366406950, guid: 242eab9aadc366047b5dee1045e03793, type: 3}
 --- !u!4 &1323336997
 Transform:
   m_ObjectHideFlags: 0
@@ -580,6 +617,30 @@ Transform:
   m_Father: {fileID: 1649269867}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1323336998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323336992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7424c1070fad4ba2a7a96b02fbeb4bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  port: 7777
+  NoDelay: 1
+  SendTimeout: 5000
+  ReceiveTimeout: 30000
+  serverMaxMessageSize: 16384
+  serverMaxReceivesPerTick: 10000
+  serverSendQueueLimitPerConnection: 10000
+  serverReceiveQueueLimitPerConnection: 10000
+  clientMaxMessageSize: 16384
+  clientMaxReceivesPerTick: 1000
+  clientSendQueueLimit: 10000
+  clientReceiveQueueLimit: 10000
 --- !u!1 &1613643261
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +651,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1613643263}
   - component: {fileID: 1613643262}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,9 +694,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1649269867}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Managers
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -697,9 +758,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 1000
-  field of view: 88.69148
+  field of view: 73.73979
   orthographic: 0
   orthographic size: 5
   m_Depth: 0

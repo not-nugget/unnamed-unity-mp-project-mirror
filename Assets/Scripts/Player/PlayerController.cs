@@ -1,6 +1,5 @@
 ﻿using Mirror;
-using Nugget.Project.Scripts.Camera;
-using Sirenix.OdinInspector;
+using Nugget.Project.Scripts.Player.Motor;
 using UnityEngine;
 using Zenject;
 
@@ -12,107 +11,71 @@ namespace Nugget.Project.Scripts.Player
     /// </summary>
     public class PlayerController : NetworkBehaviour
     {
-        #region Public Properties
-        /// <summary>
-        /// Instace of this player's 3D motor
-        /// </summary>
-        public PlayerMotor Motor { get => motor; }
-        /// <summary>
-        /// Instace of this player's controls input handler, should one exist
-        /// </summary>
-        public PlayerInputHandler InputHandler { get; private set; }
-        /// <summary>
-        /// Instace of this player's camera controller, should one exist
-        /// </summary>
-        public CameraController CameraController { get => cameraController; }
-        /// <summary>
-        /// Instace of this player's animation controller for first person animations, should one exist
-        /// </summary>
-        public PlayerAnimationController FirstPersonAnimationController { get => firstPersonAnimationController; }
-        /// <summary>
-        /// Instace of this player's animation controller for third person animations
-        /// </summary>
-        public PlayerAnimationController ThirdPersonAnimationController { get => thirdPersonAnimationController; }
+        #region Private Fields 
+        //TODO Is there a way I can move these into injections instead of GetComponent calls?
+        private PlayerVisuals modelTransform;
+        private PlayerCameraController cameraController;
+        private PlayerInputHandler inputHandler;
+        private NetworkInputHandler networkInput;
+        private PlayerMotor motor;
         #endregion
 
-        #region Serialized Fields
-        [Tooltip("Instace of this player's 3D motor. Does not need to be set in the inspector when the motor exists on the same object as the controller")]
-        [SerializeField] private PlayerMotor motor = null;
-
-        [Tooltip("The camera target transform"), Required]
-        [HorizontalGroup("camera_group", 0, 5, 5)]
-        [SerializeField] private Transform cameraTarget = null;
-
-        [Tooltip("Total number of degrees the player is allowed to look on the positive and negative X an Y axis respectively")]
-        [HorizontalGroup("camera_group", 0, 5, 5)]
-        [SerializeField] private Vector2 rotationClamp = Vector2.zero;
-
-        [Tooltip("The camera controller instance this player will set the target transform of")]
-        [HorizontalGroup("camera_group", 0, 5, 5), ReadOnly]
-        [SerializeField] private CameraController cameraController = null;
-
-        [Tooltip("Instace of this player's animation controller for first person animations")]
-        [SerializeField] private PlayerAnimationController firstPersonAnimationController = null;
-
-        [Tooltip("Instace of this player's animation controller for third person animations")]
-        [SerializeField] private PlayerAnimationController thirdPersonAnimationController = null;
-        #endregion
-
-        #region Private Fields
-        private InputData inputData;
-        private PlayerMotor.MotorState motorState;
-        #endregion
-
-        #region Injection
-        [Inject]
-        public void Inject(CameraController cameraController)
-        {
-            this.cameraController = cameraController;
-        }
-        #endregion
+        //Currently I removed the dependency, but there will no doubt be other injections in the future so it is smart to keep this bad boy around
+        //#region Injection
+        //[Inject]
+        //public void Inject()
+        //{
+        //    //this.cameraController = cameraController;
+        //}
+        //#endregion
 
         #region Unity Messages
-        private void Update()
+        private void Start()
         {
-            if (!cameraController) { Debug.LogError("camera controller not injected!"); return; }
+            //TODO look and see if anything else can be converted into humble objects and further abstracted with interfaces
+            modelTransform = GetComponentInChildren<PlayerVisuals>();
+            modelTransform.Construct(motor);
 
-            if (isLocalPlayer)
-            {
-                Motor.MoveMotor(inputData.MoveDelta);
-                Motor.RotateMotor(inputData.LookDelta.y);
-                cameraController.Pitch(inputData.LookDelta.x);
-            }
+            cameraController = GetComponentInChildren<PlayerCameraController>();
+            cameraController.Construct(networkInput, isLocalPlayer);
+
+            networkInput = GetComponent<NetworkInputHandler>();
+            networkInput.Construct(inputHandler, cameraController, motor);
+
+            motor = new PlayerMotor(GetComponent<Rigidbody>());
         }
-        #endregion
 
-        #region Public Methods
+        private void OnGUI()
+        {   //TODO been wanting to do this for a while, but I want to make a nice debug output for Unity using the in-built GUI system that can display anything 
+            if (!isLocalPlayer) return;
 
-        #endregion
+            GUILayout.BeginVertical(GUILayout.ExpandHeight(true));
+            GUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
 
-        #region Private Methods
-        [Command]
-        private void SendCumulativeMovementInputs()
-        {
+            GUI.Label(new Rect(5f, 5f, 1f, 300f), "");
 
+            GUI.Label(new Rect(5f, 305f, 450f, 20f), $"pos(x:{transform.position.x:F4}  y:{transform.position.y:F4}  z:{transform.position.z:F4})");
+            GUI.Label(new Rect(5f, 325f, 450f, 20f), $"rot(x:{transform.GetChild(0).rotation.eulerAngles.x:F4}  y:{transform.GetChild(0).rotation.eulerAngles.y:F4}  z:{transform.GetChild(0).rotation.eulerAngles.z:F4})");
+            GUI.Label(new Rect(5f, 345f, 450f, 20f), $"vel(x:{motor.MotorState.Velocity.x:F4}  y:{motor.MotorState.Velocity.y:F4}  z:{motor.MotorState.Velocity.z:F4})");
+
+            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
         }
         #endregion
 
         #region Mirror overrides
         public override void OnStartClient()
         {
-            motor = GetComponent<PlayerMotor>(); //The server should do motor calculations too and correct the client if the client diverges...need to look for a way to send client inputs to the host
-            motorState = motor.MotorStateReference;
+            base.OnStartClient();
         }
 
         public override void OnStartLocalPlayer()
         {
-            inputData = (InputHandler = new PlayerInputHandler()).InputDataReference;
-            cameraController.SetCameraTargetTransform(cameraTarget);
-            cameraController.SetRotationDegreeClamp(rotationClamp);
+            inputHandler = new PlayerInputHandler();
         }
         #endregion
 
-        #region Factory Subclass (Necessary for runtime creation injection)
+        #region Factory Subclass (Necessary for runtime injection)
         public class Factory : PlaceholderFactory<PlayerController> { }
         #endregion
     }

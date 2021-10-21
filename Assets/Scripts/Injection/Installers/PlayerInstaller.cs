@@ -6,7 +6,7 @@ namespace Nugget.Project.Scripts
 {
     public class PlayerInstaller : MonoInstaller
     {
-        #region Private fields
+        #region Serialized Fields
         [Tooltip("Player prefab which will be created dynamically. This prefab must have attached to it a PlayerController component")]
         [SerializeField] private GameObject playerPrefab = null;
         #endregion
@@ -18,10 +18,10 @@ namespace Nugget.Project.Scripts
         }
         #endregion
 
-        #region PrivateMethods
+        #region Private Methods
         private void InstallPlayerFactory()
         {
-            Container.BindFactory<PlayerController, PlayerController.Factory>().FromComponentInNewPrefab(playerPrefab).AsCached().CopyIntoAllSubContainers().NonLazy();
+            Container.BindFactory<PlayerController, PlayerController.Factory>().FromComponentInNewPrefab(playerPrefab).AsSingle().CopyIntoAllSubContainers().NonLazy().IfNotBound();
         }
         #endregion
     }

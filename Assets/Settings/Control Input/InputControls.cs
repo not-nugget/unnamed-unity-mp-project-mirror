@@ -96,7 +96,7 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""id"": ""7ada9632-5f6d-4940-9fe8-153b08ff8b22"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""ScaleVector2(x=0.4,y=0.4)"",
                     ""groups"": ""KBM"",
                     ""action"": ""Look"",
                     ""isComposite"": false,

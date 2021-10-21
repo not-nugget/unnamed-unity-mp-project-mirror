@@ -1,4 +1,6 @@
+using Cinemachine;
 using Sirenix.OdinInspector;
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -29,7 +31,8 @@ namespace Nugget.Project.Scripts.Camera
             children = GetComponentsInChildren<UnityEngine.Camera>(true).Where(cam => cam != main).ToArray();
         }
 
-#if UNITY_EDITOR //If we are in the editor, we want to ensure the children are completely up to date. In a build, it is safe to assume that all children will be assigned to this object on awake. This is not the case in the editor
+        //If we are in the editor, we want to ensure the children are completely up to date. In a build, it is safe to assume that all children will be assigned to this object on awake. This is not the case in the editor
+#if UNITY_EDITOR
         private void Update()
         {
             children = GetComponentsInChildren<UnityEngine.Camera>(true).Where(cam => cam != main).ToArray();

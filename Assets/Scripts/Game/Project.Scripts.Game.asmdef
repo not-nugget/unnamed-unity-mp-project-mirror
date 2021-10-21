@@ -1,7 +1,9 @@
 {
     "name": "Project.Scripts.Game",
     "rootNamespace": "Nugget.Project.Scripts",
-    "references": [],
+    "references": [
+        "GUID:50c3bb150ff0a7b498b3fad0f2df126c"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
