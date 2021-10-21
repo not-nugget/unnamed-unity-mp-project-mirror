@@ -69,7 +69,7 @@ namespace Nugget.Project.Scripts.Player.Motor
             UpdateState();
         }
 
-        public void AddForce(Vector3 force, ForceMode forceMode = ForceMode.Force, bool relative = true)
+        public void AddForce(Vector3 force, ForceMode forceMode = ForceMode.Force, bool relative = false)
         {
             if (relative)
             {
@@ -82,7 +82,7 @@ namespace Nugget.Project.Scripts.Player.Motor
             UpdateState();
         }
 
-        public void AddTorque(Vector3 torque, ForceMode forceMode = ForceMode.Force, bool relative = true)
+        public void AddTorque(Vector3 torque, ForceMode forceMode = ForceMode.Force, bool relative = false)
         {
             if (relative)
             {

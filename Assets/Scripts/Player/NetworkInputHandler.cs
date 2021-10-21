@@ -41,83 +41,84 @@ namespace Nugget.Project.Scripts.Player
             this.motor = motor;
         }
 
-        private void Update()
-        {
-            if (playerInput is null) return;
+        //private void Update()
+        //{
+        //    if (playerInput is null) return;
 
-            //NOTE Interval-based command send
-            //inputSendIntervalTimer -= Time.deltaTime;
-            //framesSinceLastInputCommandSent++;
+        //    //NOTE Interval-based command send
+        //    //inputSendIntervalTimer -= Time.deltaTime;
+        //    //framesSinceLastInputCommandSent++;
 
-            //if (playerInput.Data.MoveDelta.sqrMagnitude > 0f)
-            //    inputQueue.Enqueue(new SyncInput(playerInput.Data, Time.deltaTime));
+        //    //if (playerInput.Data.MoveDelta.sqrMagnitude > 0f)
+        //    //    inputQueue.Enqueue(new SyncInput(playerInput.Data, Time.deltaTime));
 
-            //cameraController.RotateCameraPitch(playerInput.Data.LookDelta.x);
-            //clientRotationTransform.Rotate(clientRotationTransform.up, -playerInput.Data.LookDelta.y);
+        //    //cameraController.RotateCameraPitch(playerInput.Data.LookDelta.x);
+        //    //clientRotationTransform.Rotate(clientRotationTransform.up, -playerInput.Data.LookDelta.y);
 
-            //if (inputSendIntervalTimer <= 0f)
-            //{
-            //    print("Sending input queue command to server");
-            //    Cmd_InputQueue(framesSinceLastInputCommandSent, inputQueue.ToArray(), motor.MotorState.Position);
+        //    //if (inputSendIntervalTimer <= 0f)
+        //    //{
+        //    //    print("Sending input queue command to server");
+        //    //    Cmd_InputQueue(framesSinceLastInputCommandSent, inputQueue.ToArray(), motor.MotorState.Position);
 
-            //    inputSendIntervalTimer = inputSendInterval;
-            //    framesSinceLastInputCommandSent = 0;
-            //    inputQueue.Clear();
-            //}
+        //    //    inputSendIntervalTimer = inputSendInterval;
+        //    //    framesSinceLastInputCommandSent = 0;
+        //    //    inputQueue.Clear();
+        //    //}
 
-            //Per frame command send
-            //Probably won't want to send the entire motor state every frame, but for now its a good testing point
-            Cmd_InputAction(playerInput.Data, motor.MotorState);
-        }
+        //    //Per frame command send
+        //    //Probably won't want to send the entire motor state every frame, but for now its a good testing point
+        //}
 
         private void FixedUpdate()
         {
             if (playerInput is null) return;
 
-            Vector3 moveDelta = 5f * Time.fixedDeltaTime * playerInput.Data.MoveDelta;
+            Vector3 moveDelta = clientRotationTransform.TransformDirection(5f * Time.fixedDeltaTime * playerInput.Data.MoveDelta);
 
-            //motor.MoveMotor(moveDelta); //Move the motor locally
+            motor.AddForce(moveDelta, ForceMode.VelocityChange);
 
-            motor.AddForce(moveDelta, ForceMode.VelocityChange, true); //Relative doesn't matter right now, as the motor's body is axis aligned, we can rotate the delta later
+            Cmd_InputAction(playerInput.Data, motor.MotorState);
         }
 
-        [Command]
-        public void Cmd_InputQueue(int totalInputFramesSinceLastCommand, SyncInput[] inputQueue, Vector3 currentBodyPosition)
-        {
-            print("Received input command");
-            print($"Current player position on server: {motor.MotorState.Position}");
-            print($"Current player position on client: {currentBodyPosition}");
+        //[Command]
+        //public void Cmd_InputQueue(int totalInputFramesSinceLastCommand, SyncInput[] inputQueue, Vector3 currentBodyPosition)
+        //{
+        //    print("Received input command");
+        //    print($"Current player position on server: {motor.MotorState.Position}");
+        //    print($"Current player position on client: {currentBodyPosition}");
 
-            if (totalInputFramesSinceLastCommand > 0)
-            {
-                Vector3 finalBodyPosition = motor.MotorState.Position;
-                print($"Motor position on server: {finalBodyPosition}");
+        //    if (totalInputFramesSinceLastCommand > 0)
+        //    {
+        //        Vector3 finalBodyPosition = motor.MotorState.Position;
+        //        print($"Motor position on server: {finalBodyPosition}");
 
-                foreach (SyncInput input in inputQueue)
-                {
-                    finalBodyPosition += (5f * input.dt * input.move);
-                }
+        //        foreach (SyncInput input in inputQueue)
+        //        {
+        //            finalBodyPosition += (5f * input.dt * input.move);
+        //        }
 
-                if (Vector3.Distance(finalBodyPosition, currentBodyPosition) > .3f)
-                {
-                    print("Sending motor correction to client");
+        //        if (Vector3.Distance(finalBodyPosition, currentBodyPosition) > .3f)
+        //        {
+        //            print("Sending motor correction to client");
 
-                    //issue a correction
-                    IMotorState motorState = new MotorState(finalBodyPosition, motor.MotorState.Rotation, motor.MotorState.Velocity, motor.MotorState.AngularVelocity);
-                    Rpc_ResetMotorToState(motorState);
-                    motor.ResetMotor(motorState);
-                }
-            }
-        }
+        //            //issue a correction
+        //            IMotorState motorState = new MotorState(finalBodyPosition, motor.MotorState.Rotation, motor.MotorState.Velocity, motor.MotorState.AngularVelocity);
+        //            Rpc_ResetMotorToState(motorState);
+        //            motor.ResetMotor(motorState);
+        //        }
+        //    }
+        //}
 
         [Command]
         public void Cmd_InputAction(PlayerInputHandler.InputData input, IMotorState clientMotorState)
         {
             //i just realized...there will likely be a desynchronization between the fixed update calls on the client and server, regardless if mirror synchronizes it or not...
             //we might have to do some preemptive calculation on these inputs on the server when we get them or something...idk but this gets more complicated the more I look into it
+
+            
         }
 
-        [ClientRpc]
+        [TargetRpc]
         public void Rpc_ResetMotorToState(IMotorState resetState)
         {
             print("Motor correction received");

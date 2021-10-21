@@ -13,14 +13,14 @@ namespace Nugget.Project.Scripts.Player.Motor.Interfaces
         /// <param name="force">Force to add</param>
         /// <param name="forceMode">Method of applying the force</param>
         /// <param name="relative">Should the force be applied relative to the motor</param>
-        void AddForce(Vector3 force, ForceMode forceMode = ForceMode.Force, bool relative = true);
+        void AddForce(Vector3 force, ForceMode forceMode = ForceMode.Force, bool relative = false);
         /// <summary>
         /// Adds a torque to the motor
         /// </summary>
         /// <param name="torque">Torque to add</param>
         /// <param name="forceMode">Method of applying the force</param>
         /// <param name="relative">Should the force be applied relative to the motor</param>
-        void AddTorque(Vector3 torque, ForceMode forceMode = ForceMode.Force, bool relative = true);
+        void AddTorque(Vector3 torque, ForceMode forceMode = ForceMode.Force, bool relative = false);
 
         /// <summary>
         /// Adds a force and torque to the motor originating from a given position
