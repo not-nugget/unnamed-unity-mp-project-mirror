@@ -13,10 +13,12 @@ namespace Nugget.Project.Scripts.Player
     {
         #region Private Fields 
         //TODO Is there a way I can move these into injections instead of GetComponent calls?
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "NYI")]
         private PlayerVisuals modelTransform;
         private PlayerCameraController cameraController;
         private PlayerInputHandler inputHandler;
         private NetworkInputHandler networkInput;
+        private PlayerCharacterController characterController;
         private PlayerMotor motor;
         #endregion
 
@@ -33,20 +35,16 @@ namespace Nugget.Project.Scripts.Player
         private void Start()
         {
             //TODO look and see if anything else can be converted into humble objects and further abstracted with interfaces
-            modelTransform = GetComponentInChildren<PlayerVisuals>();
-            modelTransform.Construct(motor);
-
-            cameraController = GetComponentInChildren<PlayerCameraController>();
-            cameraController.Construct(networkInput, isLocalPlayer);
-
-            networkInput = GetComponent<NetworkInputHandler>();
-            networkInput.Construct(inputHandler, cameraController, motor);
-
             motor = new PlayerMotor(GetComponent<Rigidbody>());
+
+            (modelTransform = GetComponentInChildren<PlayerVisuals>()).Construct(motor);
+            (characterController = GetComponent<PlayerCharacterController>()).Construct(motor);
+            (networkInput = GetComponent<NetworkInputHandler>()).Construct(inputHandler, cameraController, characterController);
+            (cameraController = GetComponentInChildren<PlayerCameraController>()).Construct(isLocalPlayer);
         }
 
         private void OnGUI()
-        {   //TODO been wanting to do this for a while, but I want to make a nice debug output for Unity using the in-built GUI system that can display anything 
+        {   //TODO been wanting to do this for a while, but I want to make a nice debug output for Unity using the in-built GUI system that can display anything (not in this repo, probably in UnityAdditions or its own package)
             if (!isLocalPlayer) return;
 
             GUILayout.BeginVertical(GUILayout.ExpandHeight(true));

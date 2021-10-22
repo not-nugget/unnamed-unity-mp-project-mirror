@@ -13,19 +13,31 @@ namespace Nugget.Project.Scripts.Player
         /// Is the <see cref="CinemachineVirtualCamera"/> enabled
         /// </summary>
         public bool CameraEnabled { get => virtualCamera.enabled; }
+
+        /// <summary>
+        /// Get or set the ArcClamp value
+        /// </summary>
+        public Vector3 ArcClamp
+        {
+            get => arcClamp; 
+            set
+            {
+                arcClamp.x = Mathf.Min(value.x < 0 ? -value.x : value.x, 360);
+                arcClamp.y = Mathf.Min(value.y < 0 ? -value.y : value.y, 360);
+                arcClamp.z = Mathf.Min(value.z < 0 ? -value.z : value.z, 360);
+            }
+        }
         #endregion
 
         #region Private Fields
         private CinemachineVirtualCamera virtualCamera;
-        private NetworkInputHandler networkInput; //likely dont need this dependency...the network handler will need the camera controller instead
-
         private Vector3 arcClamp = Vector3.zero;
         #endregion
 
         #region Manual Dependency Construction
-        public void Construct(NetworkInputHandler networkInput, bool isLocalPlayer = false)
+        public void Construct(bool isLocalPlayer = false)
         {
-            this.networkInput = networkInput;
+            //this.networkInput = networkInput;
             virtualCamera.enabled = isLocalPlayer;
         }
         #endregion
@@ -41,25 +53,6 @@ namespace Nugget.Project.Scripts.Player
             Gizmos.color = CameraEnabled ? Color.green : Color.yellow;
             Gizmos.DrawLine(transform.position, transform.position + transform.forward);
         }
-
-        //This will be done within the network input handler
-        //private void Update()
-        //{
-        //    if (networkInput.ReceiveMouseInput && networkInput.NewDataReceived)
-        //    {
-        //        //rotate based on network input
-        //        transform.parent.rotation = networkInput.ServerParentRotation; //might not need to do this as the net transform/rb will handle it
-        //        transform.rotation = networkInput.ServerCameraRotation;
-
-        //        return;
-        //    }
-
-        //    //rotate based on local player input
-        //    Vector2 lookDelta = inputHandler.State.LookDelta;
-
-        //    transform.parent.Rotate(transform.parent.up, lookDelta.x); //might want to do this elsewhere (like the player motor)
-        //    transform.Rotate(transform.right, lookDelta.y);
-        //}
         #endregion
 
         #region Public Methods
@@ -71,16 +64,7 @@ namespace Nugget.Project.Scripts.Player
         /// and no clamping will be done on these axes
         /// </summary>
         /// <param name="arcClampInDegrees">Per axis range of motion</param>
-        public void SetCameraAxisArcClamp(Vector3 arcClampInDegrees)
-        {
-            Vector3 arcClamp = Vector3.zero;
-
-            arcClamp.x = Mathf.Min(arcClampInDegrees.x < 0 ? -arcClampInDegrees.x : arcClampInDegrees.x, 360);
-            arcClamp.y = Mathf.Min(arcClampInDegrees.y < 0 ? -arcClampInDegrees.y : arcClampInDegrees.y, 360);
-            arcClamp.z = Mathf.Min(arcClampInDegrees.z < 0 ? -arcClampInDegrees.z : arcClampInDegrees.z, 360);
-
-            this.arcClamp = arcClamp;
-        }
+        public void SetCameraAxisArcClamp(Vector3 arcClampInDegrees) => ArcClamp = arcClampInDegrees;
 
         /// <summary>
         /// Rotate the virtual camera's transform by the provided degree delta in local space
@@ -198,28 +182,30 @@ namespace Nugget.Project.Scripts.Player
         #region Private Methods
         //TEST clamp functions don't normalize the rotation...make sure this doesnt affect the clamping functionality
 
-        private void ClampRotation(Transform transform)
-        {
-            transform.rotation = ClampRotation(transform.rotation);
-        }
-        private Quaternion ClampRotation(Quaternion rotation)
-        {
-            return Quaternion.Euler(ClampRotation(rotation.eulerAngles));
-        }
+        private void ClampRotation(Transform transform) => transform.rotation = ClampRotation(transform.rotation);
+        private Quaternion ClampRotation(Quaternion rotation) => Quaternion.Euler(ClampRotation(rotation.eulerAngles));
         private Vector3 ClampRotation(Vector3 euler)
         {
-            if (arcClamp.x > 0 && euler.x != 0) euler.x = Mathf.Clamp(euler.x, -arcClamp.x, arcClamp.x);
-            if (arcClamp.y > 0 && euler.y != 0) euler.y = Mathf.Clamp(euler.y, -arcClamp.y, arcClamp.y);
-            if (arcClamp.z > 0 && euler.z != 0) euler.z = Mathf.Clamp(euler.z, -arcClamp.z, arcClamp.z);
-
+            ClampRotation(ref euler.x, ref euler.y, ref euler.z);
             return euler;
+
+            //Above should function the same as this
+            //if (arcClamp.x > 0 && euler.x != 0) euler.x = Mathf.Clamp(euler.x, -arcClamp.x, arcClamp.x);
+            //if (arcClamp.y > 0 && euler.y != 0) euler.y = Mathf.Clamp(euler.y, -arcClamp.y, arcClamp.y);
+            //if (arcClamp.z > 0 && euler.z != 0) euler.z = Mathf.Clamp(euler.z, -arcClamp.z, arcClamp.z);
+
+            //return euler;
         }
 
         private void ClampRotation(ref float x, ref float y, ref float z)
         {
-            if (arcClamp.x > 0 && x != 0) x = Mathf.Clamp(x, -arcClamp.x, arcClamp.x);
-            if (arcClamp.y > 0 && y != 0) y = Mathf.Clamp(y, -arcClamp.y, arcClamp.y);
-            if (arcClamp.z > 0 && z != 0) z = Mathf.Clamp(z, -arcClamp.z, arcClamp.z);
+            //These if checks might be redundant...is there any negligible performance loss for just executing the clamps if no clamp was set?
+            /*if (arcClamp.x > 0 && x != 0) */
+            x = Mathf.Clamp(x, -arcClamp.x, arcClamp.x);
+            /*if (arcClamp.y > 0 && y != 0) */
+            y = Mathf.Clamp(y, -arcClamp.y, arcClamp.y);
+            /*if (arcClamp.z > 0 && z != 0) */
+            z = Mathf.Clamp(z, -arcClamp.z, arcClamp.z);
         }
         #endregion
     }
