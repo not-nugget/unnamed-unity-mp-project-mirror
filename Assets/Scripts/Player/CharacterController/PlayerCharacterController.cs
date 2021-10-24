@@ -19,22 +19,26 @@ namespace Nugget.Project.Scripts.Player
         /// <param name="moveDelta">Delta direction to move the character</param>
         public void Move(Vector3 moveDelta)
         {
-
+            
         }
 
+        /// <summary>
+        /// Rotate the controller by the provided rotation
+        /// </summary>
+        /// <param name="rotation">Rotation used to effect the controller</param>
         public void Rotate(Quaternion rotation)
         {
 
         }
     }
 
-    [CreateAssetMenu(fileName = "PlayerCharacterControllerSettings", menuName = "")]
+    [CreateAssetMenu(fileName = "PlayerCharacterControllerSettings", menuName = "NuggetProd/Character Controller Settings")]
     public class PlayerCharacterControllerSettings : ScriptableObject
     {
 
     }
 
-    [CreateAssetMenu(fileName = "PlayerCharacterControllerModifier", menuName = "")]
+    [CreateAssetMenu(fileName = "PlayerCharacterControllerModifier", menuName = "NuggetProd/Character Controller Modifier")]
     public class PlayerCharacterControllerModifier : ScriptableObject
     {
 
