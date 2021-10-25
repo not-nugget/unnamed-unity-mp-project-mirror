@@ -1,9 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using static InputControls;
+using Nugget.Settings.Input;
+using static Nugget.Settings.Input.InputControls;
 
-namespace Nugget.Project.Scripts.Player
+namespace Nugget.Scripts.Player
 {
     public class PlayerInputHandler : IDefaultControlsActions
     {

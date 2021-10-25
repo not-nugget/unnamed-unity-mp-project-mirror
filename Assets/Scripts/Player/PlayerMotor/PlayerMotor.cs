@@ -1,8 +1,7 @@
-﻿using Nugget.Project.Scripts.Player.Interfaces;
-using Nugget.Project.Scripts.Player.Motor.Interfaces;
+﻿using Nugget.Scripts.Player.Interfaces;
 using UnityEngine;
 
-namespace Nugget.Project.Scripts.Player.Motor
+namespace Nugget.Scripts.Player
 {
     //NOTE The following is NOT the motor's responsibility. The motor should ONLY move the player character in 3D space based on the provided parameters
     //TODO will likely develop a complete overhaul that maintains a state machine depending on parameters

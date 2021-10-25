@@ -1,8 +1,7 @@
-using Nugget.Project;
-using Nugget.Project.Scripts.Player.Motor.Interfaces;
+using Nugget.Scripts.Player.Interfaces;
 using UnityEngine;
 
-namespace Nugget.Project.Scripts.Player
+namespace Nugget.Scripts.Player
 {
     public class PlayerCharacterController : MonoBehaviour
     {
@@ -19,7 +18,7 @@ namespace Nugget.Project.Scripts.Player
         /// <param name="moveDelta">Delta direction to move the character</param>
         public void Move(Vector3 moveDelta)
         {
-            
+
         }
 
         /// <summary>

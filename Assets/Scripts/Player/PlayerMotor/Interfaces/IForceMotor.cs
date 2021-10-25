@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Nugget.Project.Scripts.Player.Motor.Interfaces
+namespace Nugget.Scripts.Player.Interfaces
 {
     /// <summary>
     /// An instance of <see cref="IMotor"/> which can additionally have forces applied to them

@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace Nugget.Project.Scripts.Player.Interfaces
+namespace Nugget.Scripts.Player.Interfaces
 {
     public interface IMotorState : IEquatable<IMotorState>
     { 

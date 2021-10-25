@@ -2,11 +2,10 @@
 // This means even though Unity does not auto simulate physics, the game will still run on a fixed timestep
 #pragma warning disable UNT0004
 
-using Nugget.Project.Scripts.Networking;
 using UnityEngine;
 using Zenject;
 
-namespace Nugget.Project.Scripts.Game
+namespace Nugget.Scripts.Game
 {
     public class GameManager : MonoBehaviour
     {

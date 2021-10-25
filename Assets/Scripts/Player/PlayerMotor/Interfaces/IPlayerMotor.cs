@@ -1,4 +1,4 @@
-namespace Nugget.Project.Scripts.Player.Motor.Interfaces
+namespace Nugget.Scripts.Player.Interfaces
 {
     public interface IPlayerMotor : IMovableMotor, IForceMotor, IResettableMotor { }
 }

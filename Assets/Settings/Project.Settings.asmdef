@@ -1,0 +1,17 @@
+{
+    "name": "Project.Settings",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1e19222cd882f32459379cb575e4192d",
+        "GUID:7d893cff6da637444ba33d39279520fc"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,8 +1,8 @@
 using Mirror;
-using Nugget.Project.Scripts.Player.Motor.Interfaces;
+using Nugget.Scripts.Camera;
 using UnityEngine;
 
-namespace Nugget.Project.Scripts.Player
+namespace Nugget.Scripts.Player
 {
     public class NetworkInputHandler : NetworkBehaviour
     {

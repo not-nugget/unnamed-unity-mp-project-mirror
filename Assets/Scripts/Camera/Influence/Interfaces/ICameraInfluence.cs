@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Nugget.Project.Scripts
+namespace Nugget.Scripts.Camera
 {
     //TODO
     public interface ICameraInfluence

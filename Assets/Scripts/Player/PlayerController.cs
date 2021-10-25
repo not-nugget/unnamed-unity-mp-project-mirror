@@ -1,9 +1,10 @@
 ﻿using Mirror;
-using Nugget.Project.Scripts.Player.Motor;
+using Nugget.Project.Scripts.Player;
+using Nugget.Scripts.Camera;
 using UnityEngine;
 using Zenject;
 
-namespace Nugget.Project.Scripts.Player
+namespace Nugget.Scripts.Player
 {
     /// <summary>
     /// Responsible for controlling the player in the world. Stores all necessary information and ensures the local controller instances are in sync with the

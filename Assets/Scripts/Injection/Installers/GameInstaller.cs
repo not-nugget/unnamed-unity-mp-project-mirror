@@ -1,9 +1,8 @@
-using Nugget.Project.Scripts.Camera;
-using Nugget.Project.Scripts.Game;
-using Nugget.Project.Scripts.Networking;
+using Nugget.Scripts.Game;
+using Nugget.Scripts.Camera;
 using Zenject;
 
-namespace Nugget.Project.Scripts.Injection
+namespace Nugget.Scripts.Injection
 {
     public class GameInstaller : MonoInstaller
     {

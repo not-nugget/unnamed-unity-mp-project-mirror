@@ -1,8 +1,6 @@
-using Nugget.Project.Scripts.Player.Interfaces;
-using Nugget.Project.Scripts.Player.Motor.Interfaces;
 using UnityEngine;
 
-namespace Nugget.Project.Scripts
+namespace Nugget.Scripts.Player.Interfaces
 {
     /// <summary>
     /// Instance of <see cref="IMotor"/> which can reset itself in 3D space based on provided parameters

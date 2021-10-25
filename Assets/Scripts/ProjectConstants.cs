@@ -1,4 +1,4 @@
-namespace Nugget.Project
+namespace Nugget.Scripts
 {
     public static class ProjectConstants
     {
