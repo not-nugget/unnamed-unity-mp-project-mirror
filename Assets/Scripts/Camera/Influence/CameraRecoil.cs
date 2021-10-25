@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Nugget.Project.Scripts.Camera
+namespace Nugget.Scripts.Camera
 {
     public class CameraRecoil : MonoBehaviour
     {

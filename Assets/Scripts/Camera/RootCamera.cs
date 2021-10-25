@@ -1,10 +1,8 @@
-using Cinemachine;
 using Sirenix.OdinInspector;
-using System;
 using System.Linq;
 using UnityEngine;
 
-namespace Nugget.Project.Scripts.Camera
+namespace Nugget.Scripts.Camera
 {
     [RequireComponent(typeof(UnityEngine.Camera)), ExecuteAlways]
     public class RootCamera : MonoBehaviour

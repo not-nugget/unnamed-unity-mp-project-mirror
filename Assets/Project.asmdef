@@ -1,0 +1,18 @@
+{
+    "name": "Project",
+    "rootNamespace": "Nugget",
+    "references": [
+        "GUID:810b2ad87adba3646affd5fc899db3f2",
+        "GUID:ae263fa1b756d6746b1d2cd2c2c032e9",
+        "GUID:077d0544eb3b50a4aa676f5b5c752d3e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

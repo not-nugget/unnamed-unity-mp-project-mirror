@@ -1,8 +1,8 @@
-using Nugget.Project.Scripts.Player;
+using Nugget.Scripts.Player;
 using UnityEngine;
 using Zenject;
 
-namespace Nugget.Project.Scripts
+namespace Nugget.Scripts.Injection
 {
     public class PlayerInstaller : MonoInstaller
     {

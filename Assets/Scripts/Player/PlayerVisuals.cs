@@ -1,7 +1,7 @@
-using Nugget.Project.Scripts.Player.Motor.Interfaces;
+using Nugget.Scripts.Player.Interfaces;
 using UnityEngine;
 
-namespace Nugget.Project.Scripts.Player
+namespace Nugget.Scripts.Player
 {
     public class PlayerVisuals : MonoBehaviour
     {

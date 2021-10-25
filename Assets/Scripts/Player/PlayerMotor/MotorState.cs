@@ -1,7 +1,6 @@
-﻿using Nugget.Project.Scripts.Player.Interfaces;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Nugget.Project.Scripts.Player.Motor.Interfaces
+namespace Nugget.Scripts.Player.Interfaces
 {
     /// <summary>
     /// Structure defining the state of a motor

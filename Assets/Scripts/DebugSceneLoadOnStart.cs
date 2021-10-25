@@ -1,25 +1,28 @@
-using Nugget.Project.Scripts.Scenes;
+using Nugget.Scripts.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DebugSceneLoadOnStart : MonoBehaviour
+namespace Nugget.Scripts
 {
-    public SceneField[] toLoad;
-
-    void Start()
+    public class DebugSceneLoadOnStart : MonoBehaviour
     {
-        foreach (SceneField scene in toLoad)
-        {
-            if (scene is null || string.IsNullOrWhiteSpace(scene.SceneName)) continue; 
+        public SceneField[] toLoad;
 
-            SceneManager.LoadSceneAsync(scene.SceneName, LoadSceneMode.Additive);
+        void Start()
+        {
+            foreach (SceneField scene in toLoad)
+            {
+                if (scene is null || string.IsNullOrWhiteSpace(scene.SceneName)) continue;
+
+                SceneManager.LoadSceneAsync(scene.SceneName, LoadSceneMode.Additive);
+            }
+
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
-    }
-
-    private void OnValidate()
-    {
-        gameObject.name = nameof(DebugSceneLoadOnStart);
+        private void OnValidate()
+        {
+            gameObject.name = nameof(DebugSceneLoadOnStart);
+        }
     }
 }

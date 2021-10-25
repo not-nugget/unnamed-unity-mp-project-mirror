@@ -1,7 +1,4 @@
-using Nugget.Project.Scripts.Player.Interfaces;
-using UnityEngine;
-
-namespace Nugget.Project.Scripts.Player.Motor.Interfaces
+namespace Nugget.Scripts.Player.Interfaces
 {
     /// <summary>
     /// Motor which contains a state used to define itself

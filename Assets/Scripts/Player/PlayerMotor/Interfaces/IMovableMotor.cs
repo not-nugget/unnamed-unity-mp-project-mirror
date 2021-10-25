@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Nugget.Project.Scripts.Player.Motor.Interfaces
+namespace Nugget.Scripts.Player.Interfaces
 {
     /// <summary>
     /// Instance of <see cref="IMotor"/> which can be moved in 3D space
