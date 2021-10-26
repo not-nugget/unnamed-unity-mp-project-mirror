@@ -1,5 +1,4 @@
 ﻿using Mirror;
-using Nugget.Project.Scripts.Player;
 using Nugget.Scripts.Camera;
 using UnityEngine;
 using Zenject;
@@ -17,8 +16,7 @@ namespace Nugget.Scripts.Player
         [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "NYI")]
         private PlayerVisuals modelTransform;
         private PlayerCameraController cameraController;
-        private PlayerInputHandler inputHandler;
-        private NetworkInputHandler networkInput;
+        private PlayerInputMiddleware inputHandler;
         private PlayerCharacterController characterController;
         private PlayerMotor motor;
         #endregion
@@ -40,7 +38,6 @@ namespace Nugget.Scripts.Player
 
             (modelTransform = GetComponentInChildren<PlayerVisuals>()).Construct(motor);
             (characterController = GetComponent<PlayerCharacterController>()).Construct(motor);
-            (networkInput = GetComponent<NetworkInputHandler>()).Construct(inputHandler, cameraController, characterController);
             (cameraController = GetComponentInChildren<PlayerCameraController>()).Construct(isLocalPlayer);
         }
 
@@ -70,7 +67,7 @@ namespace Nugget.Scripts.Player
 
         public override void OnStartLocalPlayer()
         {
-            inputHandler = new PlayerInputHandler();
+            inputHandler = new PlayerInputMiddleware();
         }
         #endregion
 

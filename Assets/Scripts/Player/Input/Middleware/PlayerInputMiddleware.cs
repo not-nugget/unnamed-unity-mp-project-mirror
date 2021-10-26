@@ -1,17 +1,16 @@
-﻿using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using Nugget.Scripts.Player.Input.Interfaces;
 using Nugget.Settings.Input;
+using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
 using static Nugget.Settings.Input.InputControls;
 
 namespace Nugget.Scripts.Player
 {
-    public class PlayerInputHandler : IDefaultControlsActions
+    public class PlayerInputMiddleware : IDefaultControlsActions, IInputMiddleware
     {
         #region InputData Scruct
-        /// <summary>
-        /// Container for easy transfer of input data from object to object
-        /// </summary>
-        public struct InputData
+        private struct InputData
         {
             private Vector3 moveDelta;
             public Vector3 MoveDelta
@@ -40,11 +39,6 @@ namespace Nugget.Scripts.Player
 
         #region Public Properties
         /// <summary>
-        /// Get the current raw data of the input system
-        /// </summary>
-        public InputData Data => inputData;
-
-        /// <summary>
         /// Get or set the enabled state of the underlying <see cref="InputActionAsset"/>
         /// </summary>
         public bool Enabled
@@ -68,7 +62,7 @@ namespace Nugget.Scripts.Player
         private InputData inputData;
         #endregion
 
-        public PlayerInputHandler()
+        public PlayerInputMiddleware()
         {
             inputData = new InputData();
 
@@ -79,9 +73,16 @@ namespace Nugget.Scripts.Player
         public void Enable() => controls?.Enable();
         public void Disable() => controls?.Disable();
 
-        #region Interface Implementation
+        #region Controls Interface Implementation
         public void OnLook(InputAction.CallbackContext context) => inputData.LookDelta = context.ReadValue<Vector2>();
         public void OnMove(InputAction.CallbackContext context) => inputData.MoveDelta = context.ReadValue<Vector2>();
+        #endregion
+
+        #region Middleware Implementation
+        public InputState Process(InputState inputState)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

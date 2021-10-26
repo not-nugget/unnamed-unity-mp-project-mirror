@@ -1,0 +1,14 @@
+{
+    "name": "Project.Scripts.Common",
+    "rootNamespace": "Nugget.Scripts.Common",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
