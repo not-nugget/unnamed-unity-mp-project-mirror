@@ -12,7 +12,7 @@ namespace Nugget.Scripts.Camera
         /// <summary>
         /// Is the <see cref="CinemachineVirtualCamera"/> enabled
         /// </summary>
-        public bool CameraEnabled { get => virtualCamera.enabled; }
+        public bool CameraEnabled { get => virtualCamera != null && virtualCamera.enabled; }
 
         /// <summary>
         /// Get or set the ArcClamp value
