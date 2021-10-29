@@ -1,0 +1,24 @@
+{
+    "name": "Project.Editor",
+    "rootNamespace": "Nugget.Editor",
+    "references": [
+        "GUID:b3e563f4a253f9843a3b6151ce7fab6f",
+        "GUID:e04e362abf716bc429569c4624b776f5",
+        "GUID:8c3ce32c6e5cd554fbea42d61005d99f",
+        "GUID:8fc63c81d6ef7594b8cf59e29333ee41",
+        "GUID:f881f429174c276408ecc0591cfaf32b",
+        "GUID:158c5f40b4c6cb54a9d5ad8ba3f0557f",
+        "GUID:29dcf3a8608eff246ace94faa82ba7ef"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

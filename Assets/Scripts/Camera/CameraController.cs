@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace Nugget.Project.Scripts.Camera
+namespace Nugget.Scripts.Camera
 {
     //TODO refactor this such that it is functional without a camera target transform, as the camera should be allowed to independently rotate without a target camera position. Additionally, this controller
     //should allow the camera to be moved to specific world coordinates, or to another transform without any trouble, and when a camera target is not specified

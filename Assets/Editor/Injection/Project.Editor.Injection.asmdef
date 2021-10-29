@@ -1,0 +1,18 @@
+{
+    "name": "Project.Editor.Injection",
+    "rootNamespace": "Nugget.Editor.Injection",
+    "references": [
+        "GUID:8afce1899f66cb44280725c094b7e8ca"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

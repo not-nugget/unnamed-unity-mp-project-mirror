@@ -1,0 +1,22 @@
+{
+    "name": "Project.Scripts",
+    "rootNamespace": "Nugget.Scripts",
+    "references": [
+        "GUID:eb3f1ee5919268b4d82526c445640e02",
+        "GUID:e3988f781aa5de14187b84275b5e9b89",
+        "GUID:8afce1899f66cb44280725c094b7e8ca",
+        "GUID:8290445ef3fb9074096d716a7446c07f",
+        "GUID:9ce57a1635b7c3649b0b513dbafe6e38",
+        "GUID:5dc367df8ca7eeb4295adeae4528e1df",
+        "GUID:4b911cb819968d44e98c8cb7e306791b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

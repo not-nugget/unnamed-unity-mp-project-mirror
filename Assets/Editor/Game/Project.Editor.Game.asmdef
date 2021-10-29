@@ -1,0 +1,18 @@
+{
+    "name": "Project.Editor.Game",
+    "rootNamespace": "Nugget.Editor.Game",
+    "references": [
+        "GUID:e3988f781aa5de14187b84275b5e9b89"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

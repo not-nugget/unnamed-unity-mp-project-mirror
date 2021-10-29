@@ -1,20 +1,26 @@
-using Nugget.Project.Scripts.Camera;
-using Nugget.Project.Scripts.Game;
+using Nugget.Scripts.Game;
+using Nugget.Scripts.Camera;
 using Zenject;
 
-namespace Nugget.Project.Scripts.Injection
+namespace Nugget.Scripts.Injection
 {
     public class GameInstaller : MonoInstaller
     {
         #region Overrides
         public override void InstallBindings()
         {
+            InstallGameNetworkManager();
             InstallGameManager();
             InstallRootCamera();
         }
         #endregion
 
         #region Private methods
+        private void InstallGameNetworkManager()
+        {
+            Container.Bind<GameNetworkManager>().FromComponentInHierarchy().AsSingle().CopyIntoAllSubContainers().NonLazy().IfNotBound();
+        }
+
         private void InstallGameManager()
         {
             Container.Bind<GameManager>().FromComponentInHierarchy().AsSingle().CopyIntoAllSubContainers().NonLazy().IfNotBound();
@@ -24,11 +30,6 @@ namespace Nugget.Project.Scripts.Injection
         {
             Container.Bind<RootCamera>().FromComponentInHierarchy().AsSingle().CopyIntoAllSubContainers().NonLazy().IfNotBound();
         }
-
-        //private void InstallCameraController()
-        //{
-        //    Container.Bind<CameraController>().FromNewComponentOnNewGameObject().AsCached().CopyIntoAllSubContainers().NonLazy().IfNotBound();
-        //}
         #endregion
     }
 }
