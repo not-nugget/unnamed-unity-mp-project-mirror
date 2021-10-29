@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Nugget.Scripts.Player
 {
-    public class PlayerCharacterController : MonoBehaviour
+    public class CharacterController : MonoBehaviour
     {
         private IPlayerMotor motor;
 

@@ -1,10 +1,11 @@
+using Nugget.Scripts.Common;
 using Nugget.Scripts.Player.Input.Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Nugget.Scripts.Player.Input
 {
-    [CreateAssetMenu(fileName = "PlayerInputChainProvider", menuName = "Nugget/Input/Player Input Provider (Chain of Responsibility)")]
+    [CreateAssetMenu(fileName = nameof(PlayerInputChainProvider), menuName = ProjectConstants.COMPANY_NAME + "/Input/" + nameof(PlayerInputChainProvider))]
     public class PlayerInputChainProvider : InputProviderBase
     {
         public IEnumerable<IInputMiddleware> RegisterredMiddleware => middleware;
