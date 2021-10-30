@@ -1,13 +1,14 @@
-﻿using Nugget.Scripts.Player.Input.Interfaces;
+﻿using Nugget.Scripts.Common;
 using Nugget.Settings.Input;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static Nugget.Settings.Input.InputControls;
 
-namespace Nugget.Scripts.Player
+namespace Nugget.Scripts.Player.Input
 {
-    public class PlayerInputMiddleware : IDefaultControlsActions, IInputMiddleware
+    [CreateAssetMenu(fileName = nameof(PlayerInputMiddleware), menuName = ProjectConstants.COMPANY_NAME + "/Input/Middleware/" + nameof(PlayerInputMiddleware))]
+    public class PlayerInputMiddleware : InputMiddlewareBase, IDefaultControlsActions
     {
         #region InputData Scruct
         private struct InputData
@@ -34,6 +35,11 @@ namespace Nugget.Scripts.Player
                     lookDelta = -lookDelta;
                 }
             }
+
+            public InputState Process(InputState inputState)
+            {
+                throw new NotImplementedException("InputState struct is not yet implemented");
+            }
         }
         #endregion
 
@@ -58,20 +64,28 @@ namespace Nugget.Scripts.Player
         #endregion
 
         #region Private Fields
-        private readonly InputControls controls;
+        private InputControls controls;
         private InputData inputData;
+
+        private bool initialized = false;
         #endregion
 
-        public PlayerInputMiddleware()
+        #region Unity Messages
+        private void OnEnable()
         {
-            inputData = new InputData();
+            if (initialized)
+            {
+                controls.Enable();
+                return;
+            }
 
-            (controls = new InputControls()).DefaultControls.SetCallbacks(this);
-            Enable();
+            Initialize();
         }
-
-        public void Enable() => controls?.Enable();
-        public void Disable() => controls?.Disable();
+        private void OnDisable()
+        {
+            controls?.Disable();
+        }
+        #endregion
 
         #region Controls Interface Implementation
         public void OnLook(InputAction.CallbackContext context) => inputData.LookDelta = context.ReadValue<Vector2>();
@@ -79,9 +93,16 @@ namespace Nugget.Scripts.Player
         #endregion
 
         #region Middleware Implementation
-        public InputState Process(InputState inputState)
+        public override InputState Process(InputState inputState) => inputData.Process(inputState);
+        #endregion
+
+        #region Private Methods
+        private void Initialize()
         {
-            throw new NotImplementedException();
+            inputData = new InputData();
+            (controls = new InputControls()).DefaultControls.SetCallbacks(this);
+            controls.Enable();
+            initialized = true;
         }
         #endregion
     }

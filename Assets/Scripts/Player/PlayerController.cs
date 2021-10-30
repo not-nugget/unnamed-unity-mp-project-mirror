@@ -1,7 +1,6 @@
 ﻿using Mirror;
 using Nugget.Scripts.Camera;
 using Nugget.Scripts.Player.Input;
-using Nugget.Scripts.Player.Input.Interfaces;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -23,7 +22,6 @@ namespace Nugget.Scripts.Player
         //private PlayerVisuals modelTransform;
         private PlayerCameraController cameraController;
         private CharacterController characterController;
-        //private PlayerMotor motor;
         #endregion
 
         //Currently I removed the dependency, but there will no doubt be other injections in the future so it is smart to keep this bad boy around
@@ -36,21 +34,10 @@ namespace Nugget.Scripts.Player
         //#endregion
 
         #region Unity Messages
-        private void OnGUI()
-        {   //TODO been wanting to do this for a while, but I want to make a nice debug output for Unity using the in-built GUI system that can display anything (not in this repo, probably in UnityAdditions or its own package)
-            if (!isLocalPlayer) return;
-
-            GUILayout.BeginVertical(GUILayout.ExpandHeight(true));
-            GUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
-
-            GUI.Label(new Rect(5f, 5f, 1f, 300f), "");
-
-            GUI.Label(new Rect(5f, 305f, 450f, 20f), $"pos(x:{transform.position.x:F4}  y:{transform.position.y:F4}  z:{transform.position.z:F4})");
-            GUI.Label(new Rect(5f, 325f, 450f, 20f), $"rot(x:{transform.GetChild(0).rotation.eulerAngles.x:F4}  y:{transform.GetChild(0).rotation.eulerAngles.y:F4}  z:{transform.GetChild(0).rotation.eulerAngles.z:F4})");
-            //GUI.Label(new Rect(5f, 345f, 450f, 20f), $"vel(x:{motor.MotorState.Velocity.x:F4}  y:{motor.MotorState.Velocity.y:F4}  z:{motor.MotorState.Velocity.z:F4})");
-
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
+        private void Awake()
+        {
+            cameraController = GetComponentInChildren<PlayerCameraController>();
+            characterController = GetComponent<CharacterController>();
         }
         #endregion
 

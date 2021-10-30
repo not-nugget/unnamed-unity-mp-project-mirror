@@ -283,7 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  inputProviderAsset: {fileID: 0}
+  inputProviderAsset: {fileID: 11400000, guid: cd21c35db8c50664babe5c19104a005a, type: 2}
 --- !u!114 &915861637574033646
 MonoBehaviour:
   m_ObjectHideFlags: 0
