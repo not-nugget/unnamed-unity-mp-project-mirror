@@ -5,6 +5,11 @@ namespace Nugget.Scripts.Player
 {
     public class CharacterController : MonoBehaviour
     {
+        /// <summary>
+        /// The current state of the Motor
+        /// </summary>
+        public IMotorState MotorState { get => motor.MotorState; }
+
         private IPlayerMotor motor;
 
         public void Construct(IPlayerMotor motor)
@@ -26,6 +31,15 @@ namespace Nugget.Scripts.Player
         /// </summary>
         /// <param name="rotation">Rotation used to effect the controller</param>
         public void Rotate(Quaternion rotation)
+        {
+
+        }
+
+        /// <summary>
+        /// Reset the motor to the provided state
+        /// </summary>
+        /// <param name="resetState">State to reset the motor to</param>
+        public void ResetMotor(IMotorState resetState)
         {
 
         }

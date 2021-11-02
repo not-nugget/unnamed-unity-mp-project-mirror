@@ -38,7 +38,10 @@ namespace Nugget.Scripts.Player.Input
 
             public InputState Process(InputState inputState)
             {
-                throw new NotImplementedException("InputState struct is not yet implemented");
+                inputState.MoveDelta = moveDelta;
+                inputState.LookDelta = lookDelta;
+
+                return inputState;
             }
         }
         #endregion
@@ -93,7 +96,15 @@ namespace Nugget.Scripts.Player.Input
         #endregion
 
         #region Middleware Implementation
-        public override InputState Process(InputState inputState) => inputData.Process(inputState);
+        public override InputState Process(InputState inputState)
+        {
+            //This isnt particularly important right now, but this will be important if we have different input control states that can be transitioned between, such as Infantry, Vehicle, Etc.
+            //It will be a good practice to do this check in every independent process method for the different classes implementing a different controls interface. Do note that each different
+            //controls class should use the same instance of InputControls and should NOT create their own (this can be achieved using zenject or some other method if needed, but figure that out later)
+            if (controls.asset.enabled && controls.DefaultControls.enabled) return inputData.Process(inputState);
+
+            return inputState;
+        }
         #endregion
 
         #region Private Methods
