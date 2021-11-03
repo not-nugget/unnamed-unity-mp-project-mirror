@@ -1,5 +1,6 @@
 ﻿using Mirror;
 using Nugget.Scripts.Camera;
+using Nugget.Scripts.Common;
 using Nugget.Scripts.Player.Input;
 using Nugget.Scripts.Player.Interfaces;
 using Sirenix.OdinInspector;
@@ -23,6 +24,8 @@ namespace Nugget.Scripts.Player
         //private PlayerVisuals modelTransform;
         private PlayerCameraController cameraController;
         private CharacterController characterController;
+
+        private Optional<IMotorState> queuedReset;
         #endregion
 
         //Currently I removed the dependency, but there will no doubt be other injections in the future so it is smart to keep this bad boy around
@@ -38,7 +41,7 @@ namespace Nugget.Scripts.Player
         private void Awake()
         {
             cameraController = GetComponentInChildren<PlayerCameraController>();
-            characterController = GetComponent<CharacterController>();
+            (characterController = GetComponent<CharacterController>()).Construct(new PlayerMotor(GetComponent<Rigidbody>()));
         }
 
         private void Update()
@@ -54,9 +57,15 @@ namespace Nugget.Scripts.Player
         {
             if (isLocalPlayer)
             {
+                if (queuedReset.Enabled)
+                {
+                    characterController.ResetMotor(queuedReset.Value);
+                    queuedReset = Optional<IMotorState>.Empty;
+                }
+
                 InputState inputState = inputProvider.GetState();
                 characterController.Move(inputState.MoveDelta);
-                Cmd_MovePlayer(inputState.MoveDelta, characterController.MotorState);
+                //Cmd_ValidateClientMotorState(characterController.MotorState); //when the time for authorative movement implementation comes in, we can uncomment this line out
             }
         }
         #endregion
@@ -68,21 +77,23 @@ namespace Nugget.Scripts.Player
         //}
 
         [Command]
-        public void Cmd_MovePlayer(Vector3 moveDelta, IMotorState postMoveState)
+        public void Cmd_ValidateClientMotorState(IMotorState postMoveState) //only executed on the server
         {
-            //only executed on the server
+            //check if the client and server are out of sync at all and corrects them
+            //Rpc_ResetPlayer(characterController.MotorState);
         }
 
-        [TargetRpc]
-        public void Rpc_ResetPlayer(IMotorState resetState)
+        //TODO this should be better implemented to optimize network traffic
+        public void Rpc_ResetPlayer(IMotorState resetState) //only executed on the client
         {
-            //only executed on the client
+            queuedReset = new Optional<IMotorState>(resetState);
         }
         #endregion
 
         #region Private Methods
-
+        //bool Approximately(Vector3 a, Vector3 b, float maxDifference) => Mathf.Approximately(a.x, b.x) && Mathf.Approximately(a.y, b.y) && Mathf.Approximately(a.z, b.z);
         #endregion
+
 
         #region Factory Subclass (Necessary for runtime injection)
         public class Factory : PlaceholderFactory<PlayerController> { }

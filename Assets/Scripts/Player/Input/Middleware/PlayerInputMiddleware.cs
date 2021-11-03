@@ -76,13 +76,9 @@ namespace Nugget.Scripts.Player.Input
         #region Unity Messages
         private void OnEnable()
         {
-            if (initialized)
-            {
-                controls.Enable();
-                return;
-            }
+            if (!initialized) Initialize();
 
-            Initialize();
+            controls?.Enable();
         }
         private void OnDisable()
         {
