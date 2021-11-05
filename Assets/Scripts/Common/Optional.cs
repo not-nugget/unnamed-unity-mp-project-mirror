@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Nugget.Scripts.Common
 {
@@ -16,7 +17,10 @@ namespace Nugget.Scripts.Common
         public T Value => value;
 
 #pragma warning disable IDE0044 // Add readonly modifier; Fields need not be readonly so they can be alterred in the Unity editor
+        [SerializeField, HideInInspector]
         private bool enabled;
+
+        [SerializeField, HideInInspector]
         private T value;
 #pragma warning restore IDE0044 // Add readonly modifier
 

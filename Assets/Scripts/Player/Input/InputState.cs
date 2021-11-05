@@ -6,6 +6,8 @@ namespace Nugget.Scripts.Player
     public struct InputState
     {
         public Vector3 MoveDelta { get; set; }
+        public bool MoveDeltaCanceled { get; set; }
+
         public Vector3 LookDelta { get; set; }
     }
 }

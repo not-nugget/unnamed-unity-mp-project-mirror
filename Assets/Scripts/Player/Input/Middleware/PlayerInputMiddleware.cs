@@ -23,6 +23,7 @@ namespace Nugget.Scripts.Player.Input
                     moveDelta.z = value.y;
                 }
             }
+            public bool MoveDeltaCancelled { get; set; }
 
             private Vector2 lookDelta;
             public Vector2 LookDelta
@@ -39,6 +40,8 @@ namespace Nugget.Scripts.Player.Input
             public InputState Process(InputState inputState)
             {
                 inputState.MoveDelta = moveDelta;
+                inputState.MoveDeltaCanceled = MoveDeltaCancelled;
+
                 inputState.LookDelta = lookDelta;
 
                 return inputState;
@@ -87,7 +90,11 @@ namespace Nugget.Scripts.Player.Input
         #endregion
 
         #region Controls Interface Implementation
-        public void OnLook(InputAction.CallbackContext context) => inputData.LookDelta = context.ReadValue<Vector2>();
+        public void OnLook(InputAction.CallbackContext context)
+        {
+            inputData.LookDelta = context.ReadValue<Vector2>();
+            inputData.MoveDeltaCancelled = context.canceled;
+        }
         public void OnMove(InputAction.CallbackContext context) => inputData.MoveDelta = context.ReadValue<Vector2>();
         #endregion
 

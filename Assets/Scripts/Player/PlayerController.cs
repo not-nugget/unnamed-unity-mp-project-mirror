@@ -64,7 +64,7 @@ namespace Nugget.Scripts.Player
                 }
 
                 InputState inputState = inputProvider.GetState();
-                characterController.Move(inputState.MoveDelta);
+                characterController.Move(inputState.MoveDelta, inputState.MoveDeltaCanceled, Time.fixedDeltaTime);
                 //Cmd_ValidateClientMotorState(characterController.MotorState); //when the time for authorative movement implementation comes in, we can uncomment this line out
             }
         }

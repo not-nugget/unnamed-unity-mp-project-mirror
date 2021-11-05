@@ -1,5 +1,6 @@
 using Nugget.Scripts.Common;
 using Nugget.Scripts.Player.Interfaces;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Nugget.Scripts.Player
@@ -7,8 +8,8 @@ namespace Nugget.Scripts.Player
     public class CharacterController : MonoBehaviour
     {
         #region Serialized Fields
-        [SerializeField, Tooltip("Character controller settings object")]
-        private PlayerCharacterControllerSettings settings = null;
+        [SerializeField, Tooltip("Character controller settings object"), Required("A character controller cannot function without a valid settings asset")]
+        private CharacterControllerSettings settings = null;
         #endregion
 
         #region Public Properties
@@ -20,6 +21,8 @@ namespace Nugget.Scripts.Player
 
         #region Private Fields
         private IPlayerMotor motor;
+
+        private float inputExecutionDuration = 0f;
         #endregion
 
         public void Construct(IPlayerMotor motor)
@@ -31,18 +34,25 @@ namespace Nugget.Scripts.Player
         /// Moves the controller in the delta direction based on the configured parameters of the controller
         /// </summary>
         /// <param name="moveDelta">Delta direction to move the character</param>
-        public void Move(Vector3 moveDelta)
+        /// <param name="moveDeltaCancelled">Indicates when movement was cancelled, allowing time-based force modulation to be tracked</param>
+        /// <param name="timeStep">Time step since last move event</param>
+        public void Move(Vector3 moveDelta, bool moveDeltaCancelled, float timeStep)
         {
-            
-        }
+            float forceMultiplier = 1;
 
-        /// <summary>
-        /// Rotate the controller by the provided rotation
-        /// </summary>
-        /// <param name="rotation">Rotation used to effect the controller</param>
-        public void Rotate(Quaternion rotation)
-        {
-            
+            Vector3 lateralVelocity = motor.MotorState.Velocity;
+            lateralVelocity.y = 0;
+
+            forceMultiplier *= settings.inputTimeForceMultiplierCurve.Value.Evaluate(inputExecutionDuration);
+            inputExecutionDuration += moveDeltaCancelled ? -inputExecutionDuration : timeStep;
+
+            float inputDotVelocity = Vector3.Dot(moveDelta, lateralVelocity);
+            forceMultiplier *= settings.inputDirectionDifferenceForceMultiplierCurve.Value.Evaluate(inputDotVelocity);
+
+            float normalizedSqrMagnitude = 1 - (lateralVelocity.sqrMagnitude / settings.lateralVelocitySqrMagnitudecSalar);
+            forceMultiplier *= settings.lateralVelocityInputForceMultiplierCurve.Value.Evaluate(normalizedSqrMagnitude);
+
+            //apply motion to the body using the force multiplier
         }
 
         /// <summary>
@@ -53,12 +63,6 @@ namespace Nugget.Scripts.Player
         {
             motor.ResetMotor(resetState);
         }
-    }
-
-    [CreateAssetMenu(fileName = nameof(PlayerCharacterControllerSettings), menuName = ProjectConstants.COMPANY_NAME + "/Player/" + nameof(PlayerCharacterControllerSettings))]
-    public class PlayerCharacterControllerSettings : ScriptableObject
-    {
-
     }
 
     //This is an extra thing that will basically mirror a settings object that can be dynamically applied to a character during runtime, like a potion effect

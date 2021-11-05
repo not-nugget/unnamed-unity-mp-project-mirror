@@ -17,7 +17,7 @@ namespace Nugget.Editor.Common
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var hasValueProperty = property.FindPropertyRelative("hasValue");
+            var hasValueProperty = property.FindPropertyRelative("enabled");
             var valueProperty = property.FindPropertyRelative("value");
 
             position.width -= 24;
